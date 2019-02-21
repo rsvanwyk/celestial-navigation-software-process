@@ -20,7 +20,8 @@ def adjust(values = None):
     minuteY = float(values['observation'].split('d')[1])
     if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
         values['error'] = 'observation is invalid'
-      
+    print(degreeX)
+    print(minuteY)  
       
      # parse values['height']
 # to pass test200_940
