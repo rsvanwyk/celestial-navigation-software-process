@@ -92,13 +92,12 @@ class adjustTest(unittest.TestCase):
 
 
 # ----------------> failed ----------------
-#     def test200_920AltitudeAlreadyExistReturnValuesWithErrorKey(self):
-#         self.setParm('altitude', '13d42.3')
-#         self.setParm('observation', '30d1.5')        
-#         result = self.microservice()
-#         resultDict = self.string2dict(result)
-#         #self.assertTrue(resultDict.has_key('error'), True)
-#         #self.assertEqual(resultDict['error'], 'altitude already exists in the input')
+    def test200_920AltitudeAlreadyExistReturnValuesWithErrorKey(self):
+        self.setParm('altitude', '13d42.3')
+        self.setParm('observation', '30d1.5')        
+        resultDict = nav.adjust(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'altitude already exists in the input')
   
 # -----------------> failed ------------------      
 #     def test200_930InvalidObservationReturnValuesWithErrorKey(self):    
