@@ -22,7 +22,7 @@ def adjust(values = None):
         values['error'] = 'observation is invalid'
     
       
-     # parse values['height']
+    # parse values['height']
 # to pass test200_940
 #     if ('height' in values):
 #         heightValue = values['height'] 
