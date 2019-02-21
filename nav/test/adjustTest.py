@@ -1,11 +1,6 @@
 import unittest
-# import httplib
-# from urllib import urlencode
-import json
-
-#import math
 import nav.adjust as nav
-
+#import math
 
 class adjustTest(unittest.TestCase):
 
@@ -14,86 +9,19 @@ class adjustTest(unittest.TestCase):
         self.errorKey = "error"
         self.errorValue = "error msg" 
         self.solutionKey = "altitude"
-#         self.BX_PATH = '/nav?'
-#         self.BX_PORT = 5000
-#         self.BX_URL = 'localhost'
-            #self.BX_PORT = 5000
-            #self.BX_URL = 'www.ibmcloud.com'
 
     def tearDown(self):
         self.inputDictionary = {}
 
 
     def setParm(self, key, value):
-        self.inputDictionary[key]  = value
-
-#     def microservice(self):
-#         try:
-#             theParm = urlencode(self.inputDictionary)
-#             theConnection = httplib.HTTPConnection(self.BX_URL, self.BX_PORT)
-#             theConnection.request("GET", self.BX_PATH + theParm)
-#             theStringResponse = theConnection.getresponse().read()
-#             return theStringResponse
-#         except Exception as e:
-#             return "error encountered during transaction"
-
-    def string2dict(self, httpResponse):
-        '''Convert JSON string to dictionary'''
-        result = {}
-        try:
-            jsonString = httpResponse.replace("'", "\"")
-            unicodeDictionary = json.loads(jsonString)
-            for element in unicodeDictionary:
-                if(isinstance(unicodeDictionary[element],unicode)):
-                    result[str(element)] = str(unicodeDictionary[element])
-                else:
-                    result[str(element)] = unicodeDictionary[element]
-        except Exception as e:
-            result['diagnostic'] = str(e)
-        return result
+        self.inputDictionary[key] = value
 
 
-    # ---------DELETE after unit tests done----------------
-    #<--  unit tests for supporting functions of 'adjust' operation
-#     def test200_310CalculateDip(self):        
-#         values = {'observation':'13d51.6',
-#                   'height':'33',
-#                   'temperature':'72',
-#                   'pressure':'1010',
-#                   'horizon':'natural'}
-#          
-#         if (values['horizon'].lower() == 'natural'):  
-#             heightValue = float(values['height'])          
-#             dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
-#         else:
-#             dip = 0
-#  
-#         expectedDip = -0.092870429    
-#         self.assertAlmostEqual(dip, expectedDip, places=3)
-#         
-#     def test200_320CalculateRefraction(self):
-#         values = {'observation':'13d51.6',
-#                   'height':'33',
-#                   'temperature':'72',
-#                   'pressure':'1010',
-#                   'horizon':'natural'}
-#         
-#         degreeX = int(values['observation'].split('d')[0])
-#         minuteY = float(values['observation'].split('d')[1])
-#         angleDegrees = degreeX + ( minuteY / 60.0)
-#         angleRadians = math.radians(angleDegrees)
-#         tanObservation = math.tan(angleRadians)
-#         temperatureF = int( values['temperature'] )
-#         temperatureC = (temperatureF - 32) * 5.0 / 9.0
-#         pressureValue = int( values['pressure'] )
-#         refraction = (-0.00452*pressureValue) / (273+temperatureC) / tanObservation           
-# 
-#         expectedRefraction = -0.062673129    
-#         self.assertAlmostEqual(refraction, expectedRefraction, places=3)
+    def testName(self):
+        pass  #<--  unit tests for adjust go here
 
-    
-    
-    
+
     
     
     
@@ -157,10 +85,10 @@ class adjustTest(unittest.TestCase):
     
     
     
-    # Sad path tests
+# Sad path tests
     def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
-        result = self.microservice()
-        resultDict = self.string2dict(result)
+        resultDict = nav.adjust(self.inputDictionary)
+        
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
@@ -201,7 +129,47 @@ class adjustTest(unittest.TestCase):
     
     
     
-    
-    
+
+
+
+
+#<--  unit tests for supporting functions of 'adjust' operation    
+# ---------DELETE after unit tests done----------------
+#     def test200_310CalculateDip(self):        
+#         values = {'observation':'13d51.6',
+#                   'height':'33',
+#                   'temperature':'72',
+#                   'pressure':'1010',
+#                   'horizon':'natural'}
+#          
+#         if (values['horizon'].lower() == 'natural'):  
+#             heightValue = float(values['height'])          
+#             dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
+#         else:
+#             dip = 0
+#  
+#         expectedDip = -0.092870429    
+#         self.assertAlmostEqual(dip, expectedDip, places=3)
+#         
+#     def test200_320CalculateRefraction(self):
+#         values = {'observation':'13d51.6',
+#                   'height':'33',
+#                   'temperature':'72',
+#                   'pressure':'1010',
+#                   'horizon':'natural'}
+#         
+#         degreeX = int(values['observation'].split('d')[0])
+#         minuteY = float(values['observation'].split('d')[1])
+#         angleDegrees = degreeX + ( minuteY / 60.0)
+#         angleRadians = math.radians(angleDegrees)
+#         tanObservation = math.tan(angleRadians)
+#         temperatureF = int( values['temperature'] )
+#         temperatureC = (temperatureF - 32) * 5.0 / 9.0
+#         pressureValue = int( values['pressure'] )
+#         refraction = (-0.00452*pressureValue) / (273+temperatureC) / tanObservation           
+# 
+#         expectedRefraction = -0.062673129    
+#         self.assertAlmostEqual(refraction, expectedRefraction, places=3)
+
     
     
