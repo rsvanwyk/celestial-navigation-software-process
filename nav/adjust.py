@@ -9,9 +9,9 @@ import math
 def adjust(values = None):
     
     # Validate input values
-    if (not('observation' in values)):
-        values['error'] = 'mandatory information is missing'
-        return values
+#     if (not('observation' in values)):
+#         values['error'] = 'mandatory information is missing'
+#         return values
     
     
 # --------> to pass 920 ??? should pass -------------  
@@ -21,7 +21,7 @@ def adjust(values = None):
        
        
 # -------->to pass 930 ??? same problem with 920 assertTrue ------------
-    # parse values['observation']  
+    # parse values['observation']  ---> extract to support function: parseObservation()
 #     degreeX = int(values['observation'].split('d')[0])
 #     minuteY = float(values['observation'].split('d')[1])
 #     if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
@@ -41,7 +41,7 @@ def adjust(values = None):
     # Perform operation adjust
     # ------------------------------
     
-    # step 1 ---> extract to support function: calculateDip()
+    # step 1: tested ---> extract to support function: calculateDip()
 #     if (values['horizon'].lower() == 'natural'):  
 #         heightValue = float(values['height'])          
 #         dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
@@ -49,13 +49,33 @@ def adjust(values = None):
 #         dip = 0
 
     
-    # step 2
     
-    # refraction=(-0.00452*pressure) / (273+convert_to_celsius(temperature))/tangent(observation)            
+    # step 2: tested ---> extract to support function: calculateRefraction()
     
-    #refraction = (-0.00452*values["pressure"]) / ( 273+convertToCelsius(values["temperature"])) / tangent(values["observation"])            
-    #---> support function: tangent(obervation)    
+#     # parse values['observation']  ---> extract to support function: parseObservation()
+#     degreeX = int(values['observation'].split('d')[0])
+#     minuteY = float(values['observation'].split('d')[1])
+#     # calculate tangent of observation angle ---> extract to support function
+#     angleDegrees = degreeX + ( minuteY / 60.0)
+#     angleRadians = math.radians(angleDegrees)
+#     tanObservation = math.tan(angleRadians)
+#     
+#     # convertToCelcius()
+#     temperatureF = int( values['temperature'] )
+#     temperatureC = (temperatureF - 32) * 5.0 / 9.0
+#     
+#     pressureValue = int( values['pressure'] )
+#       
+#     refraction = (-0.00452*pressureValue) / (273+temperatureC) / tanObservation           
+       
 
+      
+    # step 3:  
+      
+      
+      
+      
+      
       
     
     #return values
