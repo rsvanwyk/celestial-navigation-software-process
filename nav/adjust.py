@@ -9,9 +9,9 @@ import math
 def adjust(values = None):
     
     # Validate input values
-#     if (not('observation' in values)):
-#         values['error'] = 'mandatory information is missing'
-#         return values
+    if (not('observation' in values)):
+        values['error'] = 'mandatory information is missing'
+        return values
     
     
 # --------> to pass 920 ??? should pass -------------  
