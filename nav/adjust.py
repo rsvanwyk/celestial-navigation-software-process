@@ -9,7 +9,9 @@ Created on Feb 19, 2019
 def adjust(values = None):
     
     values = {'op':'adjust'}
-    #if 'observation' in values:
+    if (not('observation' in values)):
+        values['error'] = 'mandatory information is missing'
+        
         
     
     
