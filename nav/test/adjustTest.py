@@ -130,7 +130,8 @@ class adjustTest(unittest.TestCase):
         values = resultDict
         degreeX = int(values['observation'].split('d')[0])
         minuteY = float(values['observation'].split('d')[1])
-        #if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
+        if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
+            print('Error')
         #    values['error'] = 'observation is invalid'
         print(resultDict)
         self.assertTrue(resultDict.has_key('error'), True)
