@@ -38,37 +38,36 @@ def adjust(values = None):
     # ------------------------------
     
     # step 1: tested ---> extract to support function: calculateDip()
-#     if (values['horizon'].lower() == 'natural'):  
-#         heightValue = float(values['height'])          
-#         dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
-#     else:
-#         dip = 0
+    if (values['horizon'].lower() == 'natural'):  
+        heightValue = float(values['height'])          
+        dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
+    else:
+        dip = 0
 
-    
     
     # step 2: tested ---> extract to support function: calculateRefraction()
     
-#     # parse values['observation']  ---> extract to support function: parseObservation()
-#     degreeX = int(values['observation'].split('d')[0])
-#     minuteY = float(values['observation'].split('d')[1])
-#     # calculate tangent of observation angle ---> extract to support function
-#     angleDegrees = degreeX + ( minuteY / 60.0)
-#     angleRadians = math.radians(angleDegrees)
-#     tanObservation = math.tan(angleRadians)
-#     
-#     # convertToCelcius()
-#     temperatureF = int( values['temperature'] )
-#     temperatureC = (temperatureF - 32) * 5.0 / 9.0
-#     
-#     pressureValue = int( values['pressure'] )
-#       
-#     refraction = (-0.00452*pressureValue) / (273+temperatureC) / tanObservation           
+    # parse values['observation']  ---> extract to support function: parseObservation()
+    degreeX = int(values['observation'].split('d')[0])
+    minuteY = float(values['observation'].split('d')[1])
+    # calculate tangent of observation angle ---> extract to support function
+    observationDegrees = degreeX + ( minuteY / 60.0)
+    observationRadians = math.radians(observationDegrees)
+    observationTan = math.tan(observationRadians)
+     
+    # convertToCelcius()
+    temperatureF = int( values['temperature'] )
+    temperatureC = (temperatureF - 32) * 5.0 / 9.0
+     
+    pressureValue = int( values['pressure'] )
+       
+    refraction = (-0.00452*pressureValue) / (273+temperatureC) / observationTan           
        
 
-      
     # step 3:  
+    #altitudeDegrees = observationDegrees + dip + refraction
       
-      
+     
       
       
       
