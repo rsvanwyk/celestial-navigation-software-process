@@ -64,22 +64,21 @@ class adjustTest(unittest.TestCase):
     #
     #
     # Happy path tests
-#     def test200_010NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
-#         self.setParm('observation', '30d1.5')
-#         self.setParm('height', '19.0')
-#         self.setParm('pressure', '1000')
-#         self.setParm('horizon', 'artificial')
-#         self.setParm('temperature', '85')
-#         result = self.microservice()
-#         resultDict = self.string2dict(result)
-#         expectedResultDict = {'altitude':'29d59.9', 
-#                               'observation': '30d1.5', 
-#                               'height': '19.0', 
-#                               'pressure': '1000', 
-#                               'horizon': 'artificial', 
-#                               'op': 'adjust', 
-#                               'temperature': '85'}
-#         #self.assertDictEqual(resultDict, expectedResultDict)
+    def test200_010NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
+        self.setParm('observation', '30d1.5')
+        self.setParm('height', '19.0')
+        self.setParm('pressure', '1000')
+        self.setParm('horizon', 'artificial')
+        self.setParm('temperature', '85')
+        resultDict = nav.adjust(self.inputDictionary)
+        expectedResultDict = {'altitude':'29d59.9', 
+                              'observation': '30d1.5', 
+                              'height': '19.0', 
+                              'pressure': '1000', 
+                              'horizon': 'artificial', 
+                              'op': 'adjust', 
+                              'temperature': '85'}
+        self.assertDictEqual(resultDict, expectedResultDict)
     
     
     
