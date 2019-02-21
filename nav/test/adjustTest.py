@@ -4,7 +4,7 @@ from urllib import urlencode
 import json
 
 import nav.adjust as nav
-from unittest import result
+#from unittest import result
 
 class adjustTest(unittest.TestCase):
 
@@ -88,15 +88,14 @@ class adjustTest(unittest.TestCase):
     #        input extra elements, ignore
     #
     #    Sad path analysis:
-    #        missing mandatory information 'observation'
-    #        'altitude' already exists in the input dictionary
+    #        910    missing mandatory information 'observation'
+    #        920    'altitude' already exists in the input dictionary
     #        invalid 'observation'
     #        invalid 'height'
     #        invalid 'temperature' (add later)
     #        invalid 'pressure' (add later)
     #        invalid 'horizon'
-    #        
-    #        'observation is .LT. 1d00.0
+    #        'observation is .LT. 1d00.0 (invalid 'observation')
     #
     #
     # Happy path tests
@@ -106,37 +105,37 @@ class adjustTest(unittest.TestCase):
     
     
     # Sad path tests
-    def test200_910MissingMandatoryInfoReturnValuesWithError(self):
+    def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
-    def test200_920AltitudeAlreadyExistReturnValuesWithError(self):
-        self.setParm('altitude', '13d42.3')
-        result = self.microservice()
-        resultDict = self.string2dict(result)
-        self.assertTrue(resultDict.has_key('error'), True)
-        #self.assertEqual(resultDict['error'], 'altitude already exists in the input')
-        
-    def test200_930InvalidObservationReturnValuesWithError(self):    
-        self.setParm('observation', '101d15.2')
-        self.setParm('height', '6')
-        self.setParm('pressure', '1010')
-        self.setParm('horizon', 'natural')
-        self.setParm('temperature', '71')
-        result = self.microservice()
-        resultDict = self.string2dict(result)
-        values = resultDict
-        degreeX = int(values['observation'].split('d')[0])
-        minuteY = float(values['observation'].split('d')[1])
-        if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
-            print('Error')
-            values['error'] = 'observation is invalid'
-        print(values)
-        print(resultDict)
-        self.assertTrue(resultDict.has_key('error'), True)
-        #self.assertEqual(resultDict['error'], 'observation is invalid')
+#     def test200_920AltitudeAlreadyExistReturnValuesWithError(self):
+#         self.setParm('altitude', '13d42.3')
+#         result = self.microservice()
+#         resultDict = self.string2dict(result)
+#         self.assertTrue(resultDict.has_key('error'), True)
+#         #self.assertEqual(resultDict['error'], 'altitude already exists in the input')
+#         
+#     def test200_930InvalidObservationReturnValuesWithError(self):    
+#         self.setParm('observation', '101d15.2')
+#         self.setParm('height', '6')
+#         self.setParm('pressure', '1010')
+#         self.setParm('horizon', 'natural')
+#         self.setParm('temperature', '71')
+#         result = self.microservice()
+#         resultDict = self.string2dict(result)
+#         values = resultDict
+#         degreeX = int(values['observation'].split('d')[0])
+#         minuteY = float(values['observation'].split('d')[1])
+#         if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
+#             print('Error')
+#             values['error'] = 'observation is invalid'
+#         print(values)
+#         print(resultDict)
+#         self.assertTrue(resultDict.has_key('error'), True)
+#         #self.assertEqual(resultDict['error'], 'observation is invalid')
          
    
 #     def test200_940InvalidHeightReturnValuesWithError(self):
