@@ -14,10 +14,10 @@ def adjust(values = None):
         return values
     
     
-# --------> to pass 920 ??? should pass -------------  
-#     if ('altitude' in values):
-#         values['error'] = 'altitude already exists in the input'
-#         return values
+# --------> failed 920 ??? should pass -------------  
+    if ('altitude' in values):
+        values['error'] = 'altitude already exists in the input'
+        return values
        
        
 # -------->to pass 930 ??? same problem with 920 assertTrue ------------
