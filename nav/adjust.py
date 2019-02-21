@@ -14,9 +14,9 @@ def adjust(values = None):
         return values
     
 # --------> to pass 920 ??? should pass   
-#    if ('altitude' in values):
-#        values['error'] = 'altitude already exists in the input'
-    
+    if ('altitude' in values):
+        values['error'] = 'altitude already exists in the input'
+        return values
        
 # -------->to pass 930 ??? should pass, same problem with 920 assertTrue
     # parse values['observation']  
