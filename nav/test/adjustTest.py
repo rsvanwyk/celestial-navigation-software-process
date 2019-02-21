@@ -1,4 +1,8 @@
 import unittest
+import httplib
+from urllib import urlencode
+import json
+
 import nav.adjust as nav
 
 class adjustTest(unittest.TestCase):
@@ -6,7 +10,8 @@ class adjustTest(unittest.TestCase):
     def setUp(self):
         self.inputDictionary = {}
         self.errorKey = "error"
-        # self.errorValue = "diagnostic string" ?
+        self.errorValue = "error msg" 
+        self.solutionKey = "altitude"
         self.BX_PATH = '/nav?'
         self.BX_PORT = 5000
         self.BX_URL = 'localhost'
@@ -16,16 +21,40 @@ class adjustTest(unittest.TestCase):
     def tearDown(self):
         self.inputDictionary = {}
 
+
     def setParm(self, key, value):
         self.inputDictionary[key]  = value
 
-    # def microservice(self):
-    #     pass
+    def microservice(self):
+        try:
+            theParm = urlencode(self.inputDictionary)
+            theConnection = httplib.HTTPConnection(self.BX_URL, self.BX_PORT)
+            theConnection.request("GET", self.BX_PATH + theParm)
+            theStringResponse = theConnection.getresponse().read()
+            return theStringResponse
+        except Exception as e:
+            return "error encountered during transaction"
+
+    def string2dict(self, httpResponse):
+        '''Convert JSON string to dictionary'''
+        result = {}
+        try:
+            jsonString = httpResponse.replace("'", "\"")
+            unicodeDictionary = json.loads(jsonString)
+            for element in unicodeDictionary:
+                if(isinstance(unicodeDictionary[element],unicode)):
+                    result[str(element)] = str(unicodeDictionary[element])
+                else:
+                    result[str(element)] = unicodeDictionary[element]
+        except Exception as e:
+            result['diagnostic'] = str(e)
+        return result
 
 
 
     #def testName(self):
     #    pass  #<--  unit tests for adjust go here
+    
     
     
     # --------------------------------------------
@@ -78,15 +107,14 @@ class adjustTest(unittest.TestCase):
     
     # Sad path tests
     def test200_910MissingMandatoryInfoReturnError(self):
-        #self.setParm('op', 'adjust')
-        #result = self.microservice()
-        #resultDict = self.string2dict(result)
+        self.setParm('op', 'adjust')
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        self.assertTrue(resultDict.has_key('error'), True)
         
-        inputValues = {'op':'adjust'}
-        expectedResult = {'error':'mandatory information is missing',
-                          'op':'adjust'}
-        actualResult = nav.adjust(inputValues)
-        self.assertDictEqual(expectedResult, actualResult)
+        
+        
+  
     
      
     
