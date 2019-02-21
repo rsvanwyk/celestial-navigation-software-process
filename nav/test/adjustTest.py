@@ -8,7 +8,7 @@ import nav.adjust as nav
 class adjustTest(unittest.TestCase):
 
     def setUp(self):
-        self.inputDictionary = {}
+        self.inputDictionary = {'op':'adjust'}
         self.errorKey = "error"
         self.errorValue = "error msg" 
         self.solutionKey = "altitude"
@@ -102,19 +102,16 @@ class adjustTest(unittest.TestCase):
     
     
     
-    
-    
-    
     # Sad path tests
     def test200_910MissingMandatoryInfoReturnError(self):
-        self.setParm('op', 'adjust')
+        #self.setParm('op', 'adjust')
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
         
-        
-        
-  
+#     def test200_920InvalidObservationReturnError(self):    
+#         self.setParm(key, value)
+#   
     
      
     
