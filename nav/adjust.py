@@ -42,16 +42,16 @@ def adjust(values = None):
     # ------------------------------
     
     # step 1 ---> extract to support function: calculateDip()
-    if (values['horizon'].lower() == 'natural'):  
-        heightValue = float(values['height'])          
-        dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
-    else:
-        dip = 0
+#     if (values['horizon'].lower() == 'natural'):  
+#         heightValue = float(values['height'])          
+#         dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
+#     else:
+#         dip = 0
 
     
     # step 2
     
-    # • refraction=(-0.00452*pressure) / (273+convert_to_celsius(temperature))/tangent(observation)            
+    # refraction=(-0.00452*pressure) / (273+convert_to_celsius(temperature))/tangent(observation)            
     
     #refraction = (-0.00452*values["pressure"]) / ( 273+convertToCelsius(values["temperature"])) / tangent(values["observation"])            
     #---> support function: tangent(obervation)    
