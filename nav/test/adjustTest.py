@@ -21,12 +21,10 @@ class adjustTest(unittest.TestCase):
 #     def testName(self):
 #         pass  #<--  unit tests for adjust go here
 
-
-    
     
     
     # --------------------------------------------
-    # Acceptance Tests
+    # Acceptance Tests -----> move to dispatchTest.py
     # --------------------------------------------
     # 200 adjust operation
     #    Desired level of confidence: boundary value analysis
@@ -85,10 +83,9 @@ class adjustTest(unittest.TestCase):
     
     
     
-# Sad path tests
+    # Sad path tests
     def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
         resultDict = nav.adjust(self.inputDictionary)
-        
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
