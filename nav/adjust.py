@@ -13,8 +13,6 @@ def adjust(values = None):
         values['error'] = 'mandatory information is missing'
         return values
     
-    
-# --------> failed 920 ??? should pass -------------  
     if ('altitude' in values):
         values['error'] = 'altitude already exists in the input'
         return values
