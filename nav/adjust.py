@@ -17,14 +17,12 @@ def adjust(values = None):
         values['error'] = 'altitude already exists in the input'
         return values
        
-       
-# -------->to pass 930 ??? same problem with 920 assertTrue ------------
     # parse values['observation']  ---> extract to support function: parseObservation()
-#     degreeX = int(values['observation'].split('d')[0])
-#     minuteY = float(values['observation'].split('d')[1])
-#     if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
-#         values['error'] = 'observation is invalid'
-#         return values   
+    degreeX = int(values['observation'].split('d')[0])
+    minuteY = float(values['observation'].split('d')[1])
+    if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
+        values['error'] = 'observation is invalid'
+        return values   
 
 
 # -------->to pass 940, production code not finish --------------
