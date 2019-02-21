@@ -114,6 +114,7 @@ class adjustTest(unittest.TestCase):
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
     def test200_920AltitudeAlreadyExistReturnError(self):
+        self.setParm('altitude', '13d42.3')
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
