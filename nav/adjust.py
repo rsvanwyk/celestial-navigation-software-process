@@ -15,11 +15,18 @@ def adjust(values = None):
         values['error'] = 'altitude already exists in the input'
     
     # parse values['observation']   
-# test200_930  
+# to pass test200_930  
 #     degreeX = int(values['observation'].split('d')[0])
 #     minuteY = float(values['observation'].split('d')[1])
 #     if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
 #         values['error'] = 'observation is invalid'
+      
+      
+     # parse values['height']
+# to pass test200_940
+#     if ('height' in values):
+#         heightValue = values['height'] 
+      
       
     
     return values

@@ -110,7 +110,7 @@ class adjustTest(unittest.TestCase):
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
-        #self.assertEqual(resultDict['error'], 'mandatory information is missing')
+        self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
     def test200_920AltitudeAlreadyExistReturnValuesWithError(self):
         self.setParm('altitude', '13d42.3')
@@ -131,16 +131,16 @@ class adjustTest(unittest.TestCase):
 #         #self.assertEqual(resultDict['error'], 'observation is invalid')
          
    
-    def test200_940InvalidHeightReturnValuesWithError(self):
-        self.setParm('observation', '45d15.2')
-        self.setParm('height', 'a')
-        self.setParm('pressure', '1010')
-        self.setParm('horizon', 'natural')
-        self.setParm('temperature', '71')
-        result = self.microservice()
-        resultDict = self.string2dict(result)
-        self.assertTrue(resultDict.has_key('error'), True)        
-        #self.assertEqual(resultDict['error'], 'height is invalid')
+#     def test200_940InvalidHeightReturnValuesWithError(self):
+#         self.setParm('observation', '45d15.2')
+#         self.setParm('height', 'a')
+#         self.setParm('pressure', '1010')
+#         self.setParm('horizon', 'natural')
+#         self.setParm('temperature', '71')
+#         result = self.microservice()
+#         resultDict = self.string2dict(result)
+#         self.assertTrue(resultDict.has_key('error'), True)        
+#         #self.assertEqual(resultDict['error'], 'height is invalid')
     
     
     
