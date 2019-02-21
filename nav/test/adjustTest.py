@@ -90,7 +90,7 @@ class adjustTest(unittest.TestCase):
     #    Sad path analysis:
     #        910    missing mandatory information 'observation'
     #        920    'altitude' already exists in the input dictionary
-    #        invalid 'observation'
+    #        930    invalid 'observation'
     #        invalid 'height'
     #        invalid 'temperature' (add later)
     #        invalid 'pressure' (add later)
@@ -119,24 +119,16 @@ class adjustTest(unittest.TestCase):
         #self.assertTrue(resultDict.has_key('error'), True)
         #self.assertEqual(resultDict['error'], 'altitude already exists in the input')
          
-#     def test200_930InvalidObservationReturnValuesWithError(self):    
-#         self.setParm('observation', '101d15.2')
-#         self.setParm('height', '6')
-#         self.setParm('pressure', '1010')
-#         self.setParm('horizon', 'natural')
-#         self.setParm('temperature', '71')
-#         result = self.microservice()
-#         resultDict = self.string2dict(result)
-#         values = resultDict
-#         degreeX = int(values['observation'].split('d')[0])
-#         minuteY = float(values['observation'].split('d')[1])
-#         if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
-#             print('Error')
-#             values['error'] = 'observation is invalid'
-#         print(values)
-#         print(resultDict)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         #self.assertEqual(resultDict['error'], 'observation is invalid')
+    def test200_930InvalidObservationReturnValuesWithErrorKey(self):    
+        self.setParm('observation', '101d15.2')
+        self.setParm('height', '6')
+        self.setParm('pressure', '1010')
+        self.setParm('horizon', 'natural')
+        self.setParm('temperature', '71')
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'observation is invalid')
          
    
 #     def test200_940InvalidHeightReturnValuesWithError(self):
