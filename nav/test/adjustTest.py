@@ -4,6 +4,7 @@ from urllib import urlencode
 import json
 
 import nav.adjust as nav
+from unittest import result
 
 class adjustTest(unittest.TestCase):
 
@@ -104,17 +105,25 @@ class adjustTest(unittest.TestCase):
     
     # Sad path tests
     def test200_910MissingMandatoryInfoReturnError(self):
-        #self.setParm('op', 'adjust')
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'mandatory information is missing')
+
         
-#     def test200_920InvalidObservationReturnError(self):    
-#         self.setParm(key, value)
-#   
-    
-     
-    
+    def test200_920InvalidObservationReturnError(self):    
+        self.setParm('observation', '101d15.2')
+        self.setParm('height', '6')
+        self.setParm('pressure', '1010')
+        self.setParm('horizon', 'natural')
+        self.setParm('temperature', '71')
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'observation is invalid')
+        
+   
+
     
     
     
