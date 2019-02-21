@@ -18,8 +18,8 @@ class adjustTest(unittest.TestCase):
         self.inputDictionary[key] = value
 
 
-    def testName(self):
-        pass  #<--  unit tests for adjust go here
+#     def testName(self):
+#         pass  #<--  unit tests for adjust go here
 
 
     
