@@ -83,8 +83,7 @@ class adjustTest(unittest.TestCase):
     #
     #    Happy path analysis:
     #        nominal input values
-    #        'observation' x: low bound
-    #        'observation' y.y: low bound
+    #        'observation': low bound (add later)
     #        optional elements missing, set to default 
     #        input extra elements, ignore
     #
@@ -93,8 +92,8 @@ class adjustTest(unittest.TestCase):
     #        'altitude' already exists in the input dictionary
     #        invalid 'observation'
     #        invalid 'height'
-    #        invalid 'temperature'
-    #        invalid 'pressure'
+    #        invalid 'temperature' (add later)
+    #        invalid 'pressure' (add later)
     #        invalid 'horizon'
     #        
     #        'observation is .LT. 1d00.0
@@ -107,20 +106,20 @@ class adjustTest(unittest.TestCase):
     
     
     # Sad path tests
-    def test200_910MissingMandatoryInfoReturnError(self):
+    def test200_910MissingMandatoryInfoReturnValuesWithError(self):
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
         #self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
-    def test200_920AltitudeAlreadyExistReturnError(self):
+    def test200_920AltitudeAlreadyExistReturnValuesWithError(self):
         self.setParm('altitude', '13d42.3')
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
         #self.assertEqual(resultDict['error'], 'altitude already exists in the input')
         
-    def test200_930InvalidObservationReturnError(self):    
+    def test200_930InvalidObservationReturnValuesWithError(self):    
         self.setParm('observation', '101d15.2')
         self.setParm('height', '6')
         self.setParm('pressure', '1010')

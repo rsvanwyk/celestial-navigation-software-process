@@ -11,11 +11,15 @@ def adjust(values = None):
     # Validate input values
     if (not('observation' in values)):
         values['error'] = 'mandatory information is missing'
-    elif ('altitude' in values):
+    if ('altitude' in values):
         values['error'] = 'altitude already exists in the input'
     
-    # function to parse values['observation']     
-    #  
+    # parse values['observation']     
+    degreeX = int(values['observation'].split('d')[0])
+    minuteY = float(values['observation'].split('d')[1])
+    if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
+        values['error'] = 'observation is invalid'
+      
     
     return values
 
