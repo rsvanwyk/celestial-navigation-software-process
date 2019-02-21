@@ -11,8 +11,8 @@ def adjust(values = None):
     # Validate input values
     if (not('observation' in values)):
         values['error'] = 'mandatory information is missing'
-#     if ('altitude' in values):
-#         values['error'] = 'altitude already exists in the input'
+    if ('altitude' in values):
+        values['error'] = 'altitude already exists in the input'
     
     # parse values['observation']   
 # to pass test200_930  
