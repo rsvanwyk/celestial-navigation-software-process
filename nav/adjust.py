@@ -24,14 +24,14 @@ def adjust(values = None):
         values['error'] = 'observation is invalid'
         return values   
 
-
-# -------->to pass 940, production code not finish --------------
     # parse values['height']
-#     if ('height' in values):
-#         heightValue = values['height'] 
-#
-#         return values
-  
+    if ('height' in values):
+        try:
+            heightValue = float(values['height']) 
+        except Exception as e:
+            values['error'] = 'height is invalid'    
+        return values
+   
   
     # ------------------------------
     # Perform operation adjust
