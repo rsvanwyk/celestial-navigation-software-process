@@ -80,6 +80,7 @@ class adjustTest(unittest.TestCase):
     def test200_910MissingMandatoryInfoReturnError(self):
         #self.setParm('op', 'adjust')
         #result = self.microservice()
+        #resultDict = self.string2dict(result)
         
         inputValues = {'op':'adjust'}
         expectedResult = {'error':'mandatory information is missing',
