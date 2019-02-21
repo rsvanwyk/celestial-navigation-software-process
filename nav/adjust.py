@@ -11,7 +11,8 @@ def adjust(values = None):
     # Validate input values
     if (not('observation' in values)):
         values['error'] = 'mandatory information is missing'
-
+        return values
+    
 # --------> to pass 920 ??? should pass   
 #    if ('altitude' in values):
 #        values['error'] = 'altitude already exists in the input'
@@ -36,10 +37,16 @@ def adjust(values = None):
     # Perform operation adjust
     # ------------------------------
     
+    # step 1
+#     if (values["horizon"].lower() == "natural"):
+#         dip = ( -0.97 * math.sqrt(values["height"]) ) / 60
+#     else:
+#         dip = 0
+
     
       
     
-    return values
+    #return values
 
 
 
