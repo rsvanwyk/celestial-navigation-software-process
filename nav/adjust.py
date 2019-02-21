@@ -7,4 +7,10 @@ Created on Feb 19, 2019
 
 
 def adjust(values = None):
+    
+    values = {'op':'adjust'}
+    #if 'observation' in values:
+        
+    
+    
     return values
