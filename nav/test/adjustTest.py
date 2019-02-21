@@ -116,7 +116,7 @@ class adjustTest(unittest.TestCase):
         self.setParm('observation', '30d1.5')        
         result = self.microservice()
         resultDict = self.string2dict(result)
-        #self.assertTrue(resultDict.has_key('error'), True)
+        self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'altitude already exists in the input')
          
 #     def test200_930InvalidObservationReturnValuesWithError(self):    
