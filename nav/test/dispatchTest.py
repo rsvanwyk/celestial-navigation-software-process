@@ -80,37 +80,37 @@ class DispatchTest(unittest.TestCase):
         result = self.microservice()
         resultDictionary = self.string2dict(result)
         self.assertDictEqual(self.inputDictionary, resultDictionary)
-
+ 
     def test100_020ShouldReturnUnchangedValuesWithOperationPredict(self):
         self.setParm('op','predict')
         result = self.microservice()
         resultDictionary = self.string2dict(result)
         self.assertDictEqual(self.inputDictionary, resultDictionary)
- 
+  
     def test100_030ShouldReturnUnchangedValuesWithOperationCorrect(self):
         self.setParm('op','correct')
         result = self.microservice()
         resultDictionary = self.string2dict(result)
         self.assertDictEqual(self.inputDictionary, resultDictionary)
-        
+         
     def test100_040ShouldReturnUnchangedValuesWithOperationLocate(self):
         self.setParm('op','locate')
         result = self.microservice()
         resultDictionary = self.string2dict(result)
         self.assertDictEqual(self.inputDictionary, resultDictionary)
- 
+  
     # Sad path
     def test100_910_ShouldReturnValuesWithErrorKeyWhenNoOpSpecified(self):
         result = self.microservice()
         resultDictionary = self.string2dict(result)
         self.assertTrue(resultDictionary.has_key("error"), True)
- 
+  
     def test100_920ShouldReturnValuesWithErrorWhenParameterIsNotALegalOperation(self):
         self.setParm('op','unknown')        
         result = self.microservice()
         resultDictionary = self.string2dict(result)
         self.assertTrue(resultDictionary.has_key("error"), True)
- 
+  
     def test100_930ShouldReturnValuesWithErrorWhenOpIsBlank(self):
         self.setParm('op','')        
         result = self.microservice()
@@ -120,4 +120,13 @@ class DispatchTest(unittest.TestCase):
    
 
 
+    
+#     def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
+#         self.setParm('op', 'adjust')    
+#         result = self.microservice()
+#         resultDict = self.string2dict(result)
+#         self.assertTrue(resultDict.has_key('error'), True)
+        
+        
+        
 

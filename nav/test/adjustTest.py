@@ -23,9 +23,9 @@ class adjustTest(unittest.TestCase):
 
     
     
-    # --------------------------------------------
-    # Acceptance Tests -----> move to dispatchTest.py
-    # --------------------------------------------
+    # -----------------------------------------------------------
+    # Acceptance Tests -----> move to dispatchTest.py and modify
+    # -----------------------------------------------------------
     # 200 adjust operation
     #    Desired level of confidence: boundary value analysis
     #    Input Analysis
