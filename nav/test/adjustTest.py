@@ -127,6 +127,11 @@ class adjustTest(unittest.TestCase):
         self.setParm('temperature', '71')
         result = self.microservice()
         resultDict = self.string2dict(result)
+        values = resultDict
+        degreeX = int(values['observation'].split('d')[0])
+        minuteY = float(values['observation'].split('d')[1])
+        #if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
+        #    values['error'] = 'observation is invalid'
         print(resultDict)
         self.assertTrue(resultDict.has_key('error'), True)
         #self.assertEqual(resultDict['error'], 'observation is invalid')
