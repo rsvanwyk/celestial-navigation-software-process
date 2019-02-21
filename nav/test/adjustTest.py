@@ -90,11 +90,14 @@ class adjustTest(unittest.TestCase):
     #
     #    Sad path analysis:
     #        missing mandatory information 'observation'
+    #        'altitude' already exists in the input dictionary
     #        invalid 'observation'
     #        invalid 'height'
     #        invalid 'temperature'
     #        invalid 'pressure'
     #        invalid 'horizon'
+    #        
+    #        'observation is .LT. 1d00.0
     #
     #
     # Happy path tests
@@ -110,18 +113,24 @@ class adjustTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
-        
-    def test200_920InvalidObservationReturnError(self):    
-        self.setParm('observation', '101d15.2')
-        self.setParm('height', '6')
-        self.setParm('pressure', '1010')
-        self.setParm('horizon', 'natural')
-        self.setParm('temperature', '71')
+    def test200_920AltitudeAlreadyExistReturnError(self):
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
-        self.assertEqual(resultDict['error'], 'observation is invalid')
+        self.assertEqual(resultDict['error'], 'altitude already exists in the input')
+
         
+#     def test200_930InvalidObservationReturnError(self):    
+#         self.setParm('observation', '101d15.2')
+#         self.setParm('height', '6')
+#         self.setParm('pressure', '1010')
+#         self.setParm('horizon', 'natural')
+#         self.setParm('temperature', '71')
+#         result = self.microservice()
+#         resultDict = self.string2dict(result)
+#         self.assertTrue(resultDict.has_key('error'), True)
+#         self.assertEqual(resultDict['error'], 'observation is invalid')
+#         
    
 
     
