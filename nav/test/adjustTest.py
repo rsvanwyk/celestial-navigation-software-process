@@ -82,7 +82,7 @@ class adjustTest(unittest.TestCase):
     #                        'artificial' or 'natural', default='natural' if missing, unvalidated
     #
     #    Happy path analysis:
-    #        nominal input values
+    #        010    nominal input values
     #        'observation': low bound (add later)
     #        optional elements missing, set to default 
     #        input extra elements, ignore
@@ -91,7 +91,7 @@ class adjustTest(unittest.TestCase):
     #        910    missing mandatory information 'observation'
     #        920    'altitude' already exists in the input dictionary
     #        930    invalid 'observation'
-    #        invalid 'height'
+    #        940    invalid 'height'
     #        invalid 'temperature' (add later)
     #        invalid 'pressure' (add later)
     #        invalid 'horizon'
@@ -99,9 +99,22 @@ class adjustTest(unittest.TestCase):
     #
     #
     # Happy path tests
-    #def test200_010NominalInputValues(self):
-        
-    
+    def test200_010NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
+        self.setParm('observation', '30d1.5')
+        self.setParm('height', '19.0')
+        self.setParm('pressure', '1000')
+        self.setParm('horizon', 'artificial')
+        self.setParm('temperature', '85')
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        expectedResultDict = {'altitude':'29d59.9', 
+                              'observation': '30d1.5', 
+                              'height': '19.0', 
+                              'pressure': '1000', 
+                              'horizon': 'artificial', 
+                              'op': 'adjust', 
+                              'temperature': '85'}
+        self.assertDictEqual(resultDict, expectedResultDict)
     
     
     # Sad path tests
@@ -131,7 +144,7 @@ class adjustTest(unittest.TestCase):
         #self.assertEqual(resultDict['error'], 'observation is invalid')
          
    
-#     def test200_940InvalidHeightReturnValuesWithError(self):
+#     def test200_940InvalidHeightReturnValuesWithErrorKey(self):
 #         self.setParm('observation', '45d15.2')
 #         self.setParm('height', 'a')
 #         self.setParm('pressure', '1010')
@@ -140,7 +153,7 @@ class adjustTest(unittest.TestCase):
 #         result = self.microservice()
 #         resultDict = self.string2dict(result)
 #         self.assertTrue(resultDict.has_key('error'), True)        
-#         #self.assertEqual(resultDict['error'], 'height is invalid')
+#         self.assertEqual(resultDict['error'], 'height is invalid')
     
     
     
