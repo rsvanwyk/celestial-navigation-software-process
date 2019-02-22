@@ -72,13 +72,13 @@ class adjustTest(unittest.TestCase):
         self.setParm('horizon', 'natural')
         self.setParm('temperature', '72')
         resultDict = nav.adjust(self.inputDictionary)
-        expectedResultDict = {'altitude':'13d42.3', 
+        expectedResultDict = {'op': 'adjust',
                               'observation': '13d51.6', 
                               'height': '33', 
                               'pressure': '1010', 
-                              'horizon': 'natural', 
-                              'op': 'adjust', 
-                              'temperature': '72'}
+                              'horizon': 'natural',  
+                              'temperature': '72',
+                              'altitude':'13d42.3',}
         self.assertDictEqual(resultDict, expectedResultDict)
     
     

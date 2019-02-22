@@ -76,7 +76,7 @@ def adjust(values = None):
     altitudeString = str(degreePortion) + 'd' + str(minutePortion)
 
     # step 5
-    values["altitude"] = altitudeString
+    values['altitude'] = altitudeString
     
     return values
 
