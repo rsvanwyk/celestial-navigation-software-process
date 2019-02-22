@@ -59,7 +59,7 @@ class adjustTest(unittest.TestCase):
     #        940    invalid 'height'
     #        950    invalid 'horizon'
     #        960    invalid 'temperature'
-    #        invalid 'pressure' (add later)
+    #        970    invalid 'pressure'
     #        'observation is .LT. 1d00.0 (invalid 'observation')
     #
     #
@@ -153,7 +153,16 @@ class adjustTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)        
         self.assertEqual(resultDict['error'], 'temperature is invalid')
     
-
+    def test200_970InvalidPressureReturnValuesWithErrorKey(self):
+        self.setParm('observation', '45d15.2')
+        self.setParm('height', '6')
+        self.setParm('horizon', 'natural')
+        self.setParm('pressure', '50')
+        self.setParm('temperature', '71')
+        resultDict = nav.adjust(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)        
+        self.assertEqual(resultDict['error'], 'pressure is invalid')
+    
     
 
 
