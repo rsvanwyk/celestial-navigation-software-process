@@ -49,7 +49,7 @@ class adjustTest(unittest.TestCase):
     #    Happy path analysis:
     #        010    nominal input values
     #        020    optional elements missing, set to default 
-    #        input extra elements, ignore
+    #        030    input extra elements, ignore
     #        'observation': low bound (add later)
     #
     #    Sad path analysis:
@@ -86,9 +86,12 @@ class adjustTest(unittest.TestCase):
         expectedResultDict = {'altitude': '41d59.0', 
                               'observation': '42d0.0',  
                               'op': 'adjust'}
+#         print(resultDict)
+#         print(expectedResultDict)
         self.assertDictEqual(resultDict, expectedResultDict)
     
-    
+    #def test200_030InputExtraElementsToIgnore(self):
+           
     
     
     

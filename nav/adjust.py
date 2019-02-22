@@ -18,16 +18,7 @@ def adjust(values = None):
         return values
      
      
-     
-    # optional elements set to default when missing
-    if (not('height' in values)):
-        values['height'] = '0'
-    if (not('temperature' in values)):
-        values['temperature'] = '72'
-    if (not('pressure' in values)):
-        values['pressure'] = '1010'
-    if (not('horizon' in values)):
-        values['horizon'] = 'natural'
+
        
     # parse values['observation']  ---> extract to support function: parseObservation()
     degreeX = int(values['observation'].split('d')[0])
@@ -50,8 +41,16 @@ def adjust(values = None):
     # ------------------------------
     
     # step 1: tested ---> extract to support function: calculateDip()
-    if (values['horizon'].lower() == 'natural'):  
-        heightValue = float(values['height'])          
+    if (not('horizon' in values)):
+        horizonValue = 'natural'
+    else:
+        horizonValue = values['horizon'].lower()  
+    
+    if (horizonValue == 'natural'): 
+        if (not('height' in values)):
+            heightValue = 0
+        else: 
+            heightValue = float(values['height'])          
         dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
     else:
         dip = 0
@@ -68,10 +67,16 @@ def adjust(values = None):
     observationTan = math.tan(observationRadians)
      
     # convertToCelcius()
-    temperatureF = int( values['temperature'] )
+    if (not('temperature' in values)):
+        temperatureF = 72
+    else:
+        temperatureF = int( values['temperature'] )
     temperatureC = (temperatureF - 32) * 5.0 / 9.0
-     
-    pressureValue = int( values['pressure'] )
+    
+    if (not('pressure' in values)):
+        pressureValue = 1010
+    else: 
+        pressureValue = int( values['pressure'] )
        
     refraction = (-0.00452*pressureValue) / (273+temperatureC) / observationTan           
        
