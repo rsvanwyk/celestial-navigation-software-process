@@ -77,8 +77,7 @@ def adjust(values = None):
 
     # step 5
     values['altitude'] = altitudeString
-    print(type(values))
-    print('rr')
+    
     
     return values
 

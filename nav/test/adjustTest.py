@@ -79,10 +79,8 @@ class adjustTest(unittest.TestCase):
                               'horizon': 'natural',  
                               'temperature': '72',
                               'altitude':'13d42.3',}
-        print(expectedResultDict)
-        print(resultDict)
         
-        #self.assertDictEqual(resultDict, expectedResultDict)
+        self.assertDictEqual(resultDict, expectedResultDict)
     
     
     
