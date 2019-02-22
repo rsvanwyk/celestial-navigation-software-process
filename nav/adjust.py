@@ -28,9 +28,9 @@ def adjust(values = None):
     if ('height' in values):
         try:
             heightValue = float(values['height']) 
-        except Exception as e:
+        except Exception:
             values['error'] = 'height is invalid'    
-        return values
+            return values
    
   
     # ------------------------------
@@ -77,6 +77,8 @@ def adjust(values = None):
 
     # step 5
     values['altitude'] = altitudeString
+    print(type(values))
+    print('rr')
     
     return values
 
