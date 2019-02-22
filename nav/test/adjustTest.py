@@ -86,8 +86,6 @@ class adjustTest(unittest.TestCase):
         expectedResultDict = {'altitude': '41d59.0', 
                               'observation': '42d0.0',  
                               'op': 'adjust'}
-#         print(resultDict)
-#         print(expectedResultDict)
         self.assertDictEqual(resultDict, expectedResultDict)
     
     #def test200_030InputExtraElementsToIgnore(self):
