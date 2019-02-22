@@ -65,19 +65,20 @@ class adjustTest(unittest.TestCase):
     #
     # Happy path tests
     def test200_010NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
-        self.setParm('observation', '30d1.5')
-        self.setParm('height', '19.0')
-        self.setParm('pressure', '1000')
-        self.setParm('horizon', 'artificial')
-        self.setParm('temperature', '85')
+        #self.setParm('observation', '30d1.5')
+        self.setParm('observation', '13d51.6')
+        self.setParm('height', '33')
+        self.setParm('pressure', '1010')
+        self.setParm('horizon', 'natural')
+        self.setParm('temperature', '72')
         resultDict = nav.adjust(self.inputDictionary)
-        expectedResultDict = {'altitude':'29d59.9', 
-                              'observation': '30d1.5', 
-                              'height': '19.0', 
-                              'pressure': '1000', 
-                              'horizon': 'artificial', 
+        expectedResultDict = {'altitude':'13d42.3', 
+                              'observation': '13d51.6', 
+                              'height': '33', 
+                              'pressure': '1010', 
+                              'horizon': 'natural', 
                               'op': 'adjust', 
-                              'temperature': '85'}
+                              'temperature': '72'}
         self.assertDictEqual(resultDict, expectedResultDict)
     
     
