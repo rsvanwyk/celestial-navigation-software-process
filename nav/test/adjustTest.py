@@ -56,11 +56,12 @@ class adjustTest(unittest.TestCase):
     #        910    missing mandatory information 'observation'
     #        920    'altitude' already exists in the input dictionary
     #        930    invalid 'observation'
+    #        935    invalid 'observation' .LT. 1d00.0
     #        940    invalid 'height'
     #        950    invalid 'horizon'
     #        960    invalid 'temperature'
     #        970    invalid 'pressure'
-    #        'observation is .LT. 1d00.0 (invalid 'observation')
+    #
     #
     #
     # Happy path tests
@@ -122,6 +123,18 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
+    
+    #935    invalid 'observation' .LT. 1d00.0
+    def test200_935InvalidObservationReturnValueWithErrorKey2(self):
+        self.setParm('observation', '0d15.2')
+        self.setParm('height', '6')
+        self.setParm('pressure', '1010')
+        self.setParm('horizon', 'natural')
+        self.setParm('temperature', '71')
+        resultDict = nav.adjust(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'observation is invalid')
+
          
     def test200_940InvalidHeightReturnValuesWithErrorKey(self):
         self.setParm('observation', '45d15.2')
