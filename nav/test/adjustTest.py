@@ -50,7 +50,7 @@ class adjustTest(unittest.TestCase):
     #        010    nominal input values
     #        020    optional elements missing, set to default 
     #        030    input extra elements, ignore
-    #        'observation': low bound (add later)
+    #        040    'observation': low bound
     #
     #    Sad path analysis:
     #        910    missing mandatory information 'observation'
@@ -99,7 +99,23 @@ class adjustTest(unittest.TestCase):
                               'extraKey':'ignore'}
         self.assertDictEqual(resultDict, expectedResultDict)
     
-    
+    def test200_040ObservationLowBound(self):
+        self.setParm('observation', '1d0.0')
+        self.setParm('height', '19.0')
+        self.setParm('pressure', '1000')
+        self.setParm('horizon', 'artificial')
+        self.setParm('temperature', '85')
+        resultDict = nav.adjust(self.inputDictionary)
+        expectedResultDict =  {'altitude': '0d8.6', 
+                               'observation': '1d0.0', 
+                               'height': '19.0', 
+                               'pressure': '1000', 
+                               'horizon': 'artificial', 
+                               'op': 'adjust', 
+                               'temperature': '85'}
+        self.assertDictEqual(resultDict, expectedResultDict)
+        
+        
     
     # Sad path tests
     def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
