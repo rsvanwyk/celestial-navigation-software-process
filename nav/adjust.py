@@ -64,14 +64,19 @@ def adjust(values = None):
     refraction = (-0.00452*pressureValue) / (273+temperatureC) / observationTan           
        
 
-    # step 3:  
-    #altitudeDegrees = observationDegrees + dip + refraction
+    # step 3: tested  
+    altitudeDegrees = observationDegrees + dip + refraction
       
      
-      
-      
-      
-      
+    # step 4:    ---> extract to support function
+    # round altitude to the nearest 0.1 arc-minute
+    degreePortion = int(math.modf(altitudeDegrees)[1])
+    minutePortion = round(math.modf(altitudeDegrees)[0] * 60.0, 1)
+    # convert altitude to a string with the format xdyy.y     
+    altitudeString = str(degreePortion) + 'd' + str(minutePortion)
+
+    # step 5
+    values["altitude"] = altitudeString
     
     return values
 

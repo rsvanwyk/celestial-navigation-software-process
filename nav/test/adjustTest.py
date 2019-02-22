@@ -78,7 +78,7 @@ class adjustTest(unittest.TestCase):
                               'horizon': 'artificial', 
                               'op': 'adjust', 
                               'temperature': '85'}
-        #self.assertDictEqual(resultDict, expectedResultDict)
+        self.assertDictEqual(resultDict, expectedResultDict)
     
     
     
@@ -160,6 +160,7 @@ class adjustTest(unittest.TestCase):
         self.assertAlmostEqual(refraction, expectedRefraction, places=3)
 
 
+        
 
 
 
