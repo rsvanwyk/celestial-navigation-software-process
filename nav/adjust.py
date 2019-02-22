@@ -57,8 +57,17 @@ def adjust(values = None):
             values['error'] = 'temperature is invalid'
             return values
                 
-         
-         
+    # parse values['pressure']
+    if ('pressure' in values):
+        try:
+            pressureValue = int(values['pressure'])
+            if (pressureValue<100 or pressureValue>1100):
+                values['error'] = 'pressure is invalid'
+                return values
+        except Exception:
+            values['error'] = 'pressure is invalid'
+            return values
+        
          
                 
     # -----------------------------
