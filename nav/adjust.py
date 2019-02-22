@@ -17,9 +17,6 @@ def adjust(values = None):
         values['error'] = 'altitude already exists in the input'
         return values
      
-     
-
-       
     # parse values['observation']  ---> extract to support function: parseObservation()
     degreeX = int(values['observation'].split('d')[0])
     minuteY = float(values['observation'].split('d')[1])
@@ -45,6 +42,21 @@ def adjust(values = None):
         except Exception:
             values['error'] = 'horizon is invalid'
             return values
+         
+    # parse values['temperature']
+    if ('temperature' in values):
+        try:
+            temperatureF = int(values['temperature'])
+            if (temperatureF<-20 or temperatureF>120):
+                values['error'] = 'temperature is invalid'
+                return values
+        except Exception:
+            values['error'] = 'temperature is invalid'
+            return values
+                
+         
+         
+         
                 
     # -----------------------------
     # Perform operation adjust
