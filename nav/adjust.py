@@ -35,8 +35,18 @@ def adjust(values = None):
             values['error'] = 'height is invalid'    
             return values
    
-  
-    # ------------------------------
+    # parse values['horizon']
+    if ('horizon' in values):
+        try:
+            horizonValue = values['horizon'].lower()
+            if (horizonValue != 'natural' and horizonValue != 'artificial'):
+                values['error'] = 'horizon is invalid'
+                return values
+        except Exception:
+            values['error'] = 'horizon is invalid'
+            return values
+                
+    # -----------------------------
     # Perform operation adjust
     # ------------------------------
     
