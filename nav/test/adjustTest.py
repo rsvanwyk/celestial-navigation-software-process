@@ -88,10 +88,15 @@ class adjustTest(unittest.TestCase):
                               'op': 'adjust'}
         self.assertDictEqual(resultDict, expectedResultDict)
     
-    #def test200_030InputExtraElementsToIgnore(self):
-           
-    
-    
+    def test200_030IgnoreExtraInputElements(self):
+        self.setParm('observation', '42d0.0')
+        self.setParm('extraKey', 'ignore')
+        resultDict = nav.adjust(self.inputDictionary)
+        expectedResultDict = {'altitude':'41d59.0', 
+                              'observation': '42d0.0',  
+                              'op': 'adjust', 
+                              'extraKey':'ignore'}
+        self.assertDictEqual(resultDict, expectedResultDict)
     
     
     # Sad path tests
