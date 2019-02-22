@@ -48,9 +48,9 @@ class adjustTest(unittest.TestCase):
     #
     #    Happy path analysis:
     #        010    nominal input values
-    #        'observation': low bound (add later)
-    #        optional elements missing, set to default 
+    #        020    optional elements missing, set to default 
     #        input extra elements, ignore
+    #        'observation': low bound (add later)
     #
     #    Sad path analysis:
     #        910    missing mandatory information 'observation'
@@ -79,6 +79,15 @@ class adjustTest(unittest.TestCase):
                               'temperature': '85',
                               'altitude':'29d59.9',}
         self.assertDictEqual(resultDict, expectedResultDict)
+    
+    def test200_020OptionalElementsMissingSetToDefaul(self):
+        self.setParm('observation', '42d0.0')
+        resultDict = nav.adjust(self.inputDictionary)
+        expectedResultDict = {'altitude':'41d59.0', 
+                              'observation': '42d0.0',  
+                              'op': 'adjust'}
+        self.assertDictEqual(resultDict, expectedResultDict)
+    
     
     
     
