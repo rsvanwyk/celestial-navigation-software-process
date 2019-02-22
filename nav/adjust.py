@@ -16,6 +16,18 @@ def adjust(values = None):
     if ('altitude' in values):
         values['error'] = 'altitude already exists in the input'
         return values
+     
+     
+     
+    # optional elements set to default when missing
+    if (not('height' in values)):
+        values['height'] = '0'
+    if (not('temperature' in values)):
+        values['temperature'] = '72'
+    if (not('pressure' in values)):
+        values['pressure'] = '1010'
+    if (not('horizon' in values)):
+        values['horizon'] = 'natural'
        
     # parse values['observation']  ---> extract to support function: parseObservation()
     degreeX = int(values['observation'].split('d')[0])

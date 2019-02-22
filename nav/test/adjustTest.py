@@ -83,7 +83,7 @@ class adjustTest(unittest.TestCase):
     def test200_020OptionalElementsMissingSetToDefaul(self):
         self.setParm('observation', '42d0.0')
         resultDict = nav.adjust(self.inputDictionary)
-        expectedResultDict = {'altitude':'41d59.0', 
+        expectedResultDict = {'altitude': '41d59.0', 
                               'observation': '42d0.0',  
                               'op': 'adjust'}
         self.assertDictEqual(resultDict, expectedResultDict)
