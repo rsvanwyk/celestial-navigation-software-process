@@ -6,7 +6,7 @@ for assignment 6
 
 import math
 
-def adjust(values = None):
+def adjust(values = {'op':'adjust'}):
     
     # Validate input values
     if (not('observation' in values)):
