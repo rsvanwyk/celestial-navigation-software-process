@@ -191,8 +191,32 @@ class predictTest(unittest.TestCase):
         self.assertAlmostEqual(angle, expectedAngle, places = 3)
     
     
-    
-    
+    def test300_330findIndexOfStarTest(self):
+        starName = 'ada'
+        expectedIndex = -1
+        actualIndex = nav.findIndexOfStar(starName)
         
+        self.assertEqual(expectedIndex, actualIndex)
+    
+    def test300_340findStarSHATest(self):
+        starIndex = 2
+        expectedSHA = '255d10.8'
+        actualSHA = nav.findStarSHA(starIndex)    
+        
+        self.assertEqual(expectedSHA, actualSHA)
 
-
+    def test300_350findStarDecTest(self):
+        starIndex = 2
+        expectedDec = '-28d59.9'
+        actualDec = nav.findStarDec(starIndex)
+        
+        self.assertEqual(expectedDec, actualDec)
+        
+        
+        
+        
+        
+        
+        
+        
+        
