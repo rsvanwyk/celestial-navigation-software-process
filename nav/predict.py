@@ -115,7 +115,7 @@ def predict(values = None):
 #     latitude = declination
 #     
 #     
-#     # B. Calculate the ariesGHA for the date and time of the observation. 
+#     # B. Calculate the ariesGHA for the date and time of the observation. 
 #     
 #     # B.1. Establish a reference angle based on a known ariesGHA.            
 #     baseYear = 2001
@@ -167,7 +167,7 @@ def predict(values = None):
 #     leapProgMinute = 0
 #     #leapProgDegrees = dailyROtaDegrees * leapYearNum
 #     
-#     # B.2.c. Calculate how far the prime meridian has rotated since the beginning of the observation year.            
+#     # B.2.c.Calculate how far the prime meridian has rotated since the beginning of the observation year.            
 #     beginningOfObservAriesGHAdegree = baseAriesGHAdegree + cumProgDegree + leapProgDegree
 #     beginningOfObservAriesGHAminute = baseAriesGHAminute + cumProgMinute + leapProgMinute
 #     #beginningOfObservAriesGHAdegrees = baseAriesGHAdegrees + cumProg + leapProgDegrees
@@ -199,7 +199,7 @@ def predict(values = None):
 #     observAriesGHAminute = beginningOfObservAriesGHAminute + rotationMinute
 #     # need to adjust minute part to degree part
 #     
-#     # C.  Calculate the star's GHA
+#     # C.Calculate the star's GHA
 #     # C.1
 #     starGHAdegree = observAriesGHAdegree + starSHAdegree
 #     starGHAminute = observAriesGHAminute + starSHAminute
