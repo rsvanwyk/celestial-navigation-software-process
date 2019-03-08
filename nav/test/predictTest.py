@@ -71,7 +71,7 @@ class predictTest(unittest.TestCase):
         self.setParm('time', '03:15:42')
         resultDict = nav.predict(self.inputDictionary)
         expectedResultDict = {'op':'predict', 
-                              'body': 'Betelgeuse', 
+                              'body': 'Aldebaran', 
                               'date': '2016-01-17', 
                               'time': '03:15:42', 
                               'long':'95d41.6', 
