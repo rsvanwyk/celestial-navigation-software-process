@@ -18,6 +18,7 @@ def adjust(values = None):
         return values
      
     # parse values['observation']  ---> extract to support function: parseObservation()
+    # ---------> use try except to check if observation in format 'xdy.y'
     degreeX = int(values['observation'].split('d')[0])
     minuteY = float(values['observation'].split('d')[1])
     if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
