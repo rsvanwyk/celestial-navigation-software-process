@@ -93,7 +93,13 @@ class predictTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid date')
     
-    
+    def test300_940InvalidTimeReturnValuesWithErrorKey(self): 
+        self.setParm('body', 'Betelgeuse')
+        self.setParm('date', '2016-01-17')
+        self.setParm('time', '03:15:99')
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid time')    
     
     
     
