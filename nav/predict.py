@@ -77,7 +77,7 @@ def predict(values = None):
     # --------------------------------------
     
 #     # A. Find the angular displacement of the star relative to Aries.           
-#     starIndex = starsList.index(values['body']) 
+#     starIndex = starsList.index(values['body'].lower()) 
 #     
 #     starsSHAlist = ['335d25.5', '173d07.2', '255d10.8', '152d57.8', '290d47.1', 
 #                     '166d19.4', '27d42.0',  '275d44.3', '217d54.1', '126d09.9', 
