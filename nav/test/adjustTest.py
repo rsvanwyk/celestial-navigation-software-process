@@ -1,6 +1,6 @@
 '''
 Created on Feb 16, 2019
-
+assignment 6 - tests for adjust()
 @author: rs
 '''
 
@@ -9,12 +9,13 @@ import unittest
 import nav.adjust as nav
 import math
 
+
 class adjustTest(unittest.TestCase):
 
     def setUp(self):
         self.inputDictionary = {'op':'adjust'}
         self.errorKey = "error"
-        self.errorValue = "error msg" 
+        self.errorValue = "diagnostic msg" 
         self.solutionKey = "altitude"
 
     def tearDown(self):
@@ -31,7 +32,7 @@ class adjustTest(unittest.TestCase):
     
     
     # -----------------------------------------------------------
-    # Acceptance Tests -----> move to dispatchTest.py and modify
+    # Acceptance Tests -----> add to dispatchTest.py and modify
     # -----------------------------------------------------------
     # 200 adjust operation
     #    Desired level of confidence: boundary value analysis
@@ -54,20 +55,20 @@ class adjustTest(unittest.TestCase):
     #                        'artificial' or 'natural', default='natural' if missing, unvalidated
     #
     #    Happy path analysis:
-    #        010    nominal input values
-    #        020    optional elements missing, set to default 
-    #        030    input extra elements, ignore
-    #        040    'observation': low bound
+    #        200_010    nominal input values
+    #        200_020    optional elements missing, set to default 
+    #        200_030    input extra elements, ignore
+    #        200_040    'observation': low bound
     #
     #    Sad path analysis:
-    #        910    missing mandatory information 'observation'
-    #        920    'altitude' already exists in the input dictionary
-    #        930    invalid 'observation'
-    #        935    invalid 'observation' .LT. 1d00.0
-    #        940    invalid 'height'
-    #        950    invalid 'horizon'
-    #        960    invalid 'temperature'
-    #        970    invalid 'pressure'
+    #        200_910    missing mandatory information 'observation'
+    #        200_920    'altitude' already exists in the input dictionary
+    #        200_930    invalid 'observation'
+    #        200_935    invalid 'observation' .LT. 1d00.0
+    #        200_940    invalid 'height'
+    #        200_950    invalid 'horizon'
+    #        200_960    invalid 'temperature'
+    #        200_970    invalid 'pressure'
     #
     #
     #

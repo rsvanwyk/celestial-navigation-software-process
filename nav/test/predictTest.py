@@ -1,15 +1,16 @@
 '''
 Created on Mar 5, 2019
-tests for predict()
+assignment 7 - tests for predict()
 @author: rs
 '''
+
+
 import unittest
-from pip._internal.utils.outdated import SELFCHECK_DATE_FMT
-#import nav.predict as nav
+import nav.predict as nav
 #import math
 
-class predictTest(unittest.TestCase):
 
+class predictTest(unittest.TestCase):
 
     def setUp(self):
         self.inputDictionary = {'op':'predict'}
@@ -25,17 +26,16 @@ class predictTest(unittest.TestCase):
     def setParm(self, key, value):
         self.inputDictionary[key] = value
         
-        
-        
-    # ----------------------------------------------------------
-    # Acceptance Tests -----> add tests for dispatchTest.py
-    # ----------------------------------------------------------
+            
+    # -----------------------------------------------------------------
+    # Acceptance Tests -----> add tests to dispatchTest.py and modify
+    # -----------------------------------------------------------------
     # 300 predict operation
-    #     Desired level of confidence: boundary value analysis
+    #     
     #     Input Analysis
     #         values: mandatory
     #                 python dictionary
-    #                 elements: 
+    #                 elements:  
     #                     'op':'predict', validated
     #                     'body': unvalidated, mandatory, case-independent string,
     #                             match the name of one of the navigable stars 
@@ -49,24 +49,33 @@ class predictTest(unittest.TestCase):
     #                         hh,mm,ss: two digit integers follow conventional rules
     #
     # Happy path analysis:
-    #     010    nominal input values
-    #     020    optional elements missing, set to default
-    #     025    
-    #     030    input extra elements, ignore
-    #     040    boundary values for 'date'
-    #     050    boundary values for 'time'
-    #     060    'long' and/or 'lat' already exist in the input values
+    #     300_010    nominal input values
+    #     300_020    optional element 'date' missing, set to default
+    #     300_025    optional element 'time' missing, set to default
+    #     300_030    input extra elements, ignore
+    #     300_040    'long' and/or 'lat' already exist in the input values
     #
     #
     # Sad path analysis:
-    #     910    missing mandatory information 'body' 
-    #     920    invalid 'body'
-    #     930    invalid 'date'
-    #     940    invalid 'time'
+    #     300_910    missing mandatory element 'body' 
+    #     300_920    invalid 'body'
+    #     300_930    invalid 'date'
+    #     300_940    invalid 'time'
     #
     #
     #
     # Happy path tests
+    
+    
+    
+    
+    
+    
+    # Sad path tests
+    def test300_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'mandatory information is missing')
     
      
 

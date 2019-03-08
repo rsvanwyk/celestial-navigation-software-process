@@ -1,12 +1,12 @@
 '''
 Created on Feb 16, 2019
-for assignment 6
+assignment 6 - operation adjust
 @author: rs
 '''
 
 import math
 
-def adjust(values = {'op':'adjust'}):
+def adjust(values = None):
     
     # Validate input values
     if (not('observation' in values)):
