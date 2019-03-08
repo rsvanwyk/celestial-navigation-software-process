@@ -44,10 +44,31 @@ def predict(values = None):
             values['error'] = 'invalid date'
             return values
         
-    # if date not in values, set to default 2001-01-01
+    # if date not in values, set to default '2001-01-01'
     yyyy = 2001
     mm = 01
     dd = 01
+    
+    # validate values['time']
+    if ('time' in values):
+        try:
+            timeList = values['time'].split(':')
+            hh = int(timeList[0])
+            mm = int(timeList[1])
+            ss = int(timeList[2])
+            if (hh < 0 or hh > 23 or mm < 0 or mm > 59 or ss < 0 or ss > 59):
+                values['error'] = 'invalid time'
+                return values
+        except Exception:
+            values['error'] = 'invalid time'
+            return values
+        
+    # if time not in values, set to default '00:00:00'
+    hh = 00
+    mm = 00
+    ss = 00
+    
+    
     
     
     
