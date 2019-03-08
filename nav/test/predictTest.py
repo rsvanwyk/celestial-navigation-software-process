@@ -77,9 +77,13 @@ class predictTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
     
-     
-
-    
+    def test300_920InvalidBodyReturnValuesWithErrorKey(self): 
+        self.setParm('body', 'unknown')
+        self.setParm('date', '2016-01-17')
+        self.setParm('time', '03:15:42')
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'star not in catalog')
     
     
     
