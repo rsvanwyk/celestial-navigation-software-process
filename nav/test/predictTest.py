@@ -115,16 +115,20 @@ class predictTest(unittest.TestCase):
                               'lat':'7d24.3',
                               'extraKey':'ignore'}  
         self.assertDictEqual(resultDict, expectedResultDict)        
-
-        
-      
-
-
-
-
      
-#     def test300_050LongAlreadyExistReturnValuesOverride(self):
-#         pass
+    def test300_050LongAlreadyExistReturnValuesOverride(self):
+        self.setParm('body', 'Betelgeuse')
+        self.setParm('date', '2016-01-17')
+        self.setParm('time', '03:15:42')
+        self.setParm('long', '60d53.6')
+        resultDict = nav.predict(self.inputDictionary)
+        expectedResultDict = {'op':'predict', 
+                              'body': 'Betelgeuse', 
+                              'date': '2016-01-17', 
+                              'time': '03:15:42', 
+                              'long':'75d53.6', 
+                              'lat':'7d24.3'}    
+        self.assertDictEqual(resultDict, expectedResultDict)        
     
     
     
