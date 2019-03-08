@@ -66,7 +66,7 @@ class predictTest(unittest.TestCase):
     #
     # Happy path tests
     def test300_010NominalInputValuesReturnValuesWithLongAndLat(self):
-        self.setParm('body', 'Betelgeuse')
+        self.setParm('body', 'Aldebaran')
         self.setParm('date', '2016-01-17')
         self.setParm('time', '03:15:42')
         resultDict = nav.predict(self.inputDictionary)
@@ -74,8 +74,8 @@ class predictTest(unittest.TestCase):
                               'body': 'Betelgeuse', 
                               'date': '2016-01-17', 
                               'time': '03:15:42', 
-                              'long':'75d53.6', 
-                              'lat':'7d24.3'}    
+                              'long':'95d41.6', 
+                              'lat':'16d32.3'}    
         self.assertDictEqual(resultDict, expectedResultDict)
     
 #     def test300_020OptionalElementDateMissingSetToDefault(self):
@@ -129,9 +129,14 @@ class predictTest(unittest.TestCase):
     
     
     
+# ----------------------------------------------------------------
+# unit tests for supporting functions of 'predict' operation    
+# ---------> DELETE after unit tests done -------------------
+    def test300_310convertAngleStrToDegreesTest(self):
+        pass
     
-    
-    
+    def test300_320convertDegreesToAngleStrTest(self):
+        pass
     
     
     
