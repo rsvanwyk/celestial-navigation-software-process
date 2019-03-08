@@ -12,5 +12,30 @@ def predict(values = None):
         values['error'] = 'mandatory information is missing'
         return values
 
-
-
+    
+    # check if values['body'] in stars catalog (list of strings)   
+    stars = ['achernar',   'acrux',         'adara',     'alcaid',          'aldebaran', 
+             'alioth',     'alnair',        'alnilam',   'alphard',         'alphecca', 
+             'alpheratz',  'altair',        'ankaa',     'antares',         'arcturus', 
+             'atria',      'avior',         'bellatrix', 'betelgeuse',      'canopus', 
+             'capella',    'deneb',         'denebola',  'diphda',          'dubhe', 
+             'elnath',     'enif',          'etamin',    'fomalhaut',       'gacrux', 
+             'gienah',     'hadar',         'hamal',     'kaus australis',  'kochab', 
+             'markab',     'menkar',        'menkent',   'miaplacidus',     'mirfak', 
+             'nunki',      'peacock',       'polaris',   'pollux',          'procyon', 
+             'rasalhague', 'regulus',       'rigel',     'rigil kentaurus', 'sabik', 
+             'schedar',    'shaula',        'sirius',    'spica',           'suhail', 
+             'vega',       'zubenelgenubi']
+    if (not(values['body'].lower() in stars)):
+        values['errors'] = 'star not in catalog'
+        return values
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
