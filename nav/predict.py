@@ -6,8 +6,11 @@ assignment 7 - operation predict
 
 
 def predict(values = None):
-    pass
-
+    
+    # validate input values
+    if (not('body' in values)):
+        values['error'] = 'mandatory information is missing'
+        return values
 
 
 
