@@ -15,7 +15,8 @@ def predict(values = None):
         values['error'] = 'mandatory information is missing'
         return values
 
-    # check if values['body'] in stars catalog (a list of strings)   
+    # check if values['body'] in stars catalog (a list of strings)
+    # ------> read in from file and store in list   
     starsList = ['achernar',   'acrux',         'adara',     'alcaid',          'aldebaran', 
                  'alioth',     'alnair',        'alnilam',   'alphard',         'alphecca', 
                  'alpheratz',  'altair',        'ankaa',     'antares',         'arcturus', 
@@ -28,6 +29,7 @@ def predict(values = None):
                  'rasalhague', 'regulus',       'rigel',     'rigil kentaurus', 'sabik', 
                  'schedar',    'shaula',        'sirius',    'spica',           'suhail', 
                  'vega',       'zubenelgenubi']
+    
     if (not(values['body'].lower() in starsList)):
         values['error'] = 'star not in catalog'
         return values
@@ -36,11 +38,11 @@ def predict(values = None):
     if ('date' in values):
         try:
             dateList = values['date'].split('-')
-            yyyy = int(dateList[0])
-            mm = int(dateList[1])
-            dd = int(dateList[2])
-            if (yyyy < 2001 or yyyy > 2100 or mm < 01 or mm > 12 
-                or dd < 01 or dd > 31):
+            year = int(dateList[0])
+            month = int(dateList[1])
+            day = int(dateList[2])
+            if (year < 2001 or year > 2100 or month < 01 or month > 12 
+                or day < 01 or day > 31):
                 values['error'] = 'invalid date'
                 return values
         except Exception:
@@ -56,10 +58,10 @@ def predict(values = None):
     if ('time' in values):
         try:
             timeList = values['time'].split(':')
-            hh = int(timeList[0])
-            mm = int(timeList[1])
-            ss = int(timeList[2])
-            if (hh < 0 or hh > 23 or mm < 0 or mm > 59 or ss < 0 or ss > 59):
+            hour = int(timeList[0])
+            minute = int(timeList[1])
+            second = int(timeList[2])
+            if (hour < 0 or hour > 23 or month < 0 or month > 59 or second < 0 or second > 59):
                 values['error'] = 'invalid time'
                 return values
         except Exception:
@@ -72,12 +74,13 @@ def predict(values = None):
     defaultSecond = 00
     
     
+    
     # --------------------------------------
     # Perform operation predict
     # --------------------------------------
     
-#     # A. Find the angular displacement of the star relative to Aries.           
-#     starIndex = starsList.index(values['body'].lower()) 
+    # A. Find the angular displacement of the star relative to Aries         
+#    starIndex = starsList.index(values['body'].lower()) 
 #     
 #     starsSHAlist = ['335d25.5', '173d07.2', '255d10.8', '152d57.8', '290d47.1', 
 #                     '166d19.4', '27d42.0',  '275d44.3', '217d54.1', '126d09.9', 
