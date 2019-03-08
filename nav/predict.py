@@ -62,7 +62,7 @@ def predict(values = None):
             hour = int(timeList[0])
             minute = int(timeList[1])
             second = int(timeList[2])
-            if (hour < 0 or hour > 23 or month < 0 or month > 59 or second < 0 or second > 59):
+            if (hour < 0 or hour > 23 or minute < 0 or minute > 59 or second < 0 or second > 59):
                 values['error'] = 'invalid time'
                 return values
         except Exception:
