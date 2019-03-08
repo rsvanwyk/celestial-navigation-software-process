@@ -100,14 +100,28 @@ class predictTest(unittest.TestCase):
                               'long':'26d50.1', 
                               'lat':'7d24.3'}  
         self.assertDictEqual(resultDict, expectedResultDict)            
+                
+    def test300_040IgnoreExtraInputElements(self):
+        self.setParm('body', 'Betelgeuse')
+        self.setParm('date', '2016-01-17')
+        self.setParm('time', '03:15:42')
+        self.setParm('extraKey', 'ignore')
+        resultDict = nav.predict(self.inputDictionary)
+        expectedResultDict = {'op':'predict', 
+                              'body':'Betelgeuse', 
+                              'date':'2016-01-17', 
+                              'time':'03:15:42', 
+                              'long':'75d53.6', 
+                              'lat':'7d24.3'}  
+        self.assertDictEqual(resultDict, expectedResultDict)        
+
         
-        
-        
-        
-#     
-#     def test300_040IgnoreExtraInputElements(self):
-#         pass
-#     
+      
+
+
+
+
+     
 #     def test300_050LongAlreadyExistReturnValuesOverride(self):
 #         pass
     
