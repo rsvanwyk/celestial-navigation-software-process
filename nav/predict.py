@@ -27,10 +27,10 @@ def predict(values = None):
              'schedar',    'shaula',        'sirius',    'spica',           'suhail', 
              'vega',       'zubenelgenubi']
     if (not(values['body'].lower() in stars)):
-        values['errors'] = 'star not in catalog'
+        values['error'] = 'star not in catalog'
         return values
     
-    
+
     
     
     
