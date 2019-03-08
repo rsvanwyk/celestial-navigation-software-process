@@ -130,9 +130,6 @@ def predict(values = None):
     baseSecond = 00
     baseAriesGHA = '100d42.6'
     baseAriesGHAdegrees = convertAngleStrToDegrees(baseAriesGHA)
-    #baseAriesGHAdegree = 100
-    #baseAriesGHAminute = 42.6
-
      
     # B.2. Determine where the prime meridian is relative to Aries for the year of the observation            
 
@@ -152,12 +149,9 @@ def predict(values = None):
 
     ariesGHAdecrease = '0d14.31667'
     ariesGHAdecreaseDegrees = convertAngleStrToDegrees(ariesGHAdecrease)
-    #ariesGHAchangeDegree = 0
-    #ariesGHAchangeMinute = -14.31667
     
     cumProgDegrees = yearDiff * ariesGHAdecreaseDegrees
-    #cumProgDegree = yearDiff * ariesGHAchangeDegree
-    #cumProgMinute = yearDiff * ariesGHAchangeMinute
+
      
     # B.2.b. Take into account leap years
     leapYearNum = yearDiff % 4
@@ -167,13 +161,9 @@ def predict(values = None):
       
     dailyRotaDegrees = abs(360.0 - rotaPeriod / clockPeriod * 360.0 )
     
-    #leapProgDegree = dailyRotaDegrees * leapYearNum 
-    #leapProgMinute = 0
     leapProgDegrees = dailyRotaDegrees * leapYearNum
     
     # B.2.c. Calculate how far the prime meridian has rotated since the beginning of the observation year
-    #beginningOfObservAriesGHAdegree = baseAriesGHAdegree + cumProgDegree + leapProgDegree
-    #beginningOfObservAriesGHAminute = baseAriesGHAminute + cumProgMinute + leapProgMinute
     beginningOfObservAriesGHAdegrees = baseAriesGHAdegrees - cumProgDegrees + leapProgDegrees
 
     # B.2.d. Calculate the angle of the earth's rotation since the beginning of the observation year
@@ -195,27 +185,18 @@ def predict(values = None):
     totalRotationDegrees = totalSeconds / rotaPeriod * 360.0 
      
     rotationDegrees = math.modf(totalRotationDegrees / 360.0)[0] * 360.0
-    #rotationDegree = math.modf(rotation)[1]
-    #rotationMinute = round(math.modf(rotation)[0] * 60.0, 1)
+
  
     # B.2.e. Calculate total
-    #observAriesGHAdegree = beginningOfObservAriesGHAdegree + rotationDegree
-    #observAriesGHAminute = beginningOfObservAriesGHAminute + rotationMinute
-    # need to adjust minute part to degree part
     observAriesGHAdegrees = beginningOfObservAriesGHAdegrees + rotationDegrees 
      
     # C.Calculate the star's GHA
     # C.1 
-    #starGHAdegree = observAriesGHAdegree + starSHAdegree
-    #starGHAminute = observAriesGHAminute + starSHAminute
     starGHAdegrees = observAriesGHAdegrees + starSHAdegrees    
   
     # C.2 clean up
-    #starGHAdegree = starGHAdegree + int(math.modf(starGHAminute/60)[1]) 
-    #starGHAminute = round(starGHAminute % 60.0, 1)
     starGHAdegrees %= 360.0
-    
-    #starGHA = str(starGHAdegree) + 'd' + str(starGHAminute)     
+        
     starGHA = convertDegreesToAngleStr(starGHAdegrees)
 
     values['long'] = starGHA

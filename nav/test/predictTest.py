@@ -78,8 +78,16 @@ class predictTest(unittest.TestCase):
                               'lat':'16d32.3'}    
         self.assertDictEqual(resultDict, expectedResultDict)
     
-#     def test300_020OptionalElementDateMissingSetToDefault(self):
-#         pass
+    def test300_020OptionalElementDateMissingSetToDefault(self):
+        self.setParm('body', 'Betelgeuse')
+        self.setParm('time', '03:15:42')
+        resultDict = nav.predict(self.inputDictionary)
+        expectedResultDict = {'op':'predict', 
+                              'body': 'Betelgeuse', 
+                              'time': '03:15:42', 
+                              'long':'60d45.3', 
+                              'lat':'7d24.3'}  
+        self.assertDictEqual(resultDict, expectedResultDict)        
 #     
 #     def test300_030OptionalElementTimeMissingSetToDefault(self):
 #         pass
