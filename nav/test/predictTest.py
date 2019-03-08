@@ -133,12 +133,22 @@ class predictTest(unittest.TestCase):
 # unit tests for supporting functions of 'predict' operation    
 # ---------> DELETE after unit tests done -------------------
     def test300_310convertAngleStrToDegreesTest(self):
-        pass
+        angle = '0d14.31667'
+        degrees = nav.convertAngleStrToDegrees(angle)
+        
+        expectedDegrees = 0.2386
+        
+        self.assertAlmostEqual(degrees, expectedDegrees, places = 3)
+        
+        
     
     def test300_320convertDegreesToAngleStrTest(self):
-        pass
+        degrees = 290.785
+        angle = nav.convertDegreesToAngleStr(degrees)
+        
+        expectedAngle = '290d47.1'
     
-    
+        self.assertAlmostEqual(angle, expectedAngle, places = 3)
     
     
     

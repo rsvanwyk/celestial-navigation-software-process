@@ -150,12 +150,12 @@ def predict(values = None):
 
     yearDiff = observYear - referenceYear
 
-    ariesGHAchange = '-0d14.31667'
-    ariesGHAchangeDegrees = convertAngleStrToDegrees(ariesGHAchange)
+    ariesGHAdecrease = '0d14.31667'
+    ariesGHAdecreaseDegrees = convertAngleStrToDegrees(ariesGHAdecrease)
     #ariesGHAchangeDegree = 0
     #ariesGHAchangeMinute = -14.31667
     
-    cumProgDegrees = yearDiff * ariesGHAchangeDegrees
+    cumProgDegrees = yearDiff * ariesGHAdecreaseDegrees
     #cumProgDegree = yearDiff * ariesGHAchangeDegree
     #cumProgMinute = yearDiff * ariesGHAchangeMinute
      
@@ -174,7 +174,7 @@ def predict(values = None):
     # B.2.c. Calculate how far the prime meridian has rotated since the beginning of the observation year
     #beginningOfObservAriesGHAdegree = baseAriesGHAdegree + cumProgDegree + leapProgDegree
     #beginningOfObservAriesGHAminute = baseAriesGHAminute + cumProgMinute + leapProgMinute
-    beginningOfObservAriesGHAdegrees = baseAriesGHAdegrees + cumProgDegrees + leapProgDegrees
+    beginningOfObservAriesGHAdegrees = baseAriesGHAdegrees - cumProgDegrees + leapProgDegrees
 
     # B.2.d. Calculate the angle of the earth's rotation since the beginning of the observation year
     if ('time' not in values):
@@ -231,9 +231,21 @@ def predict(values = None):
 # supporting function for predict
 # ------------------------------------------------------
   
+# def convertAngleStrToMinutes(angleStr = None):
+#     
+#     # ------> validate angleStr to be a string in form xdy.y
+#     
+#     degreePortion = int(angleStr.split('d')[0])
+#     minutePortion = float(angleStr.split('d')[1])
+# 
+#     minutes = degreePortion * 60.0 + minutePortion
+#     
+#     return minutes 
+  
 def convertAngleStrToDegrees(angleStr = None): 
        
     # ---> validate angleStr to be a string in form xdy.y
+    # note: doesn't work for x < 0
     
     degreePortion = int(angleStr.split('d')[0])
     minutePortion = float(angleStr.split('d')[1])
