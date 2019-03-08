@@ -97,7 +97,7 @@ class predictTest(unittest.TestCase):
         expectedResultDict = {'op':'predict', 
                               'body': 'Betelgeuse', 
                               'date': '2016-01-17', 
-                              'long':'26d50.8', 
+                              'long':'26d50.1', 
                               'lat':'7d24.3'}  
         self.assertDictEqual(resultDict, expectedResultDict)            
         
