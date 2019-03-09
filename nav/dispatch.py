@@ -12,6 +12,10 @@ def dispatch(values=None):
     if (not('op' in values)):
         values['error'] = 'no op is specified'
         return values
+    
+    if ('error' in values):
+        del values['error']
+    
 
     #Perform designated function
     if(values['op'] == 'adjust'):
