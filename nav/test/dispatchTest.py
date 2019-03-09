@@ -147,7 +147,7 @@ class DispatchTest(unittest.TestCase):
  
  
  
- # Acceptance tests for predict operation ------>transfer more from predictTest.py
+# Acceptance tests for predict operation ------>transfer more from predictTest.py
     def test300_010NominalInputValuesReturnValuesWithLongAndLat(self):
         self.setParm('op', 'predict')
         self.setParm('body', 'Aldebaran')
