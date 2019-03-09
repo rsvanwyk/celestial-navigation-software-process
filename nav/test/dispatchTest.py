@@ -119,13 +119,65 @@ class DispatchTest(unittest.TestCase):
 
    
 
-  
+# Acceptance tests for adjust operation ---> transfer more from adjustTest.py  
+    def test200_010NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
+        self.setParm('op', 'adjust')
+        self.setParm('observation', '30d1.5')
+        self.setParm('height', '19')
+        self.setParm('pressure', '1000')
+        self.setParm('horizon', 'artificial')
+        self.setParm('temperature', '85')
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        expectedResultDict = {'op': 'adjust',
+                              'observation': '30d1.5', 
+                              'height': '19', 
+                              'pressure': '1000', 
+                              'horizon': 'artificial',  
+                              'temperature': '85',
+                              'altitude':'29d59.9',}
+        self.assertDictEqual(expectedResultDict, resultDict)                
+    
     def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
         self.setParm('op', 'adjust')    
         result = self.microservice()
         resultDict = self.string2dict(result)
         self.assertTrue(resultDict.has_key('error'), True)
         
+ 
+ 
+ 
+ # Acceptance tests for predict operation ------>transfer more from predictTest.py
+    def test300_010NominalInputValuesReturnValuesWithLongAndLat(self):
+        self.setParm('op', 'predict')
+        self.setParm('body', 'Aldebaran')
+        self.setParm('date', '2016-01-17')
+        self.setParm('time', '03:15:42')
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        expectedResultDict = {'op':'predict', 
+                              'body': 'Aldebaran', 
+                              'date': '2016-01-17', 
+                              'time': '03:15:42', 
+                              'long':'95d41.6', 
+                              'lat':'16d32.3'}    
+        self.assertDictEqual(resultDict, expectedResultDict)
+ 
+ 
+    def test300_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
+        self.setParm('op', 'predict')
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'mandatory information is missing')
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
         
         
 
