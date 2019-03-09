@@ -75,17 +75,17 @@ class DispatchTest(unittest.TestCase):
     #                        -- return {'error':'dictionary is missing'}
     # Happy path
 
-    def test100_010ShouldReturnUnchangedValuesWithOperationAdjust(self):
-        self.setParm('op','adjust')
-        result = self.microservice()
-        resultDictionary = self.string2dict(result)
-        self.assertDictEqual(self.inputDictionary, resultDictionary)
+#     def test100_010ShouldReturnUnchangedValuesWithOperationAdjust(self):
+#         self.setParm('op','adjust')
+#         result = self.microservice()
+#         resultDictionary = self.string2dict(result)
+#         self.assertDictEqual(self.inputDictionary, resultDictionary)
  
-    def test100_020ShouldReturnUnchangedValuesWithOperationPredict(self):
-        self.setParm('op','predict')
-        result = self.microservice()
-        resultDictionary = self.string2dict(result)
-        self.assertDictEqual(self.inputDictionary, resultDictionary)
+#     def test100_020ShouldReturnUnchangedValuesWithOperationPredict(self):
+#         self.setParm('op','predict')
+#         result = self.microservice()
+#         resultDictionary = self.string2dict(result)
+#         self.assertDictEqual(self.inputDictionary, resultDictionary)
   
     def test100_030ShouldReturnUnchangedValuesWithOperationCorrect(self):
         self.setParm('op','correct')
@@ -119,13 +119,12 @@ class DispatchTest(unittest.TestCase):
 
    
 
-
-    
-#     def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
-#         self.setParm('op', 'adjust')    
-#         result = self.microservice()
-#         resultDict = self.string2dict(result)
-#         self.assertTrue(resultDict.has_key('error'), True)
+  
+    def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
+        self.setParm('op', 'adjust')    
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        self.assertTrue(resultDict.has_key('error'), True)
         
         
         

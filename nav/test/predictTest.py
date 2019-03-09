@@ -51,9 +51,9 @@ class predictTest(unittest.TestCase):
     # Happy path analysis:
     #     300_010    nominal input values
     #     300_020    optional element 'date' missing, set to default
-    #     300_025    optional element 'time' missing, set to default
-    #     300_030    input extra elements, ignore
-    #     300_040    'long' and/or 'lat' already exist in the input values
+    #     300_030    optional element 'time' missing, set to default
+    #     300_040    input extra elements, ignore
+    #     300_050    'long' and/or 'lat' already exist in the input values
     #
     #
     # Sad path analysis:
@@ -180,8 +180,6 @@ class predictTest(unittest.TestCase):
         
         self.assertAlmostEqual(degrees, expectedDegrees, places = 3)
         
-        
-    
     def test300_320convertDegreesToAngleStrTest(self):
         degrees = 290.785
         angle = nav.convertDegreesToAngleStr(degrees)
@@ -189,7 +187,6 @@ class predictTest(unittest.TestCase):
         expectedAngle = '290d47.1'
     
         self.assertAlmostEqual(angle, expectedAngle, places = 3)
-    
     
     def test300_330findIndexOfStarTest(self):
         starName = 'ada'

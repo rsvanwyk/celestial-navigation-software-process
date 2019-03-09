@@ -64,6 +64,7 @@ class adjustTest(unittest.TestCase):
     #        200_910    missing mandatory information 'observation'
     #        200_920    'altitude' already exists in the input dictionary
     #        200_930    invalid 'observation'
+    #        200_931    invalid 'observation' not in form xdy.y
     #        200_935    invalid 'observation' .LT. 1d00.0
     #        200_940    invalid 'height'
     #        200_950    invalid 'horizon'
@@ -75,14 +76,14 @@ class adjustTest(unittest.TestCase):
     # Happy path tests
     def test200_010NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
         self.setParm('observation', '30d1.5')
-        self.setParm('height', '19.0')
+        self.setParm('height', '19')
         self.setParm('pressure', '1000')
         self.setParm('horizon', 'artificial')
         self.setParm('temperature', '85')
         resultDict = nav.adjust(self.inputDictionary)
         expectedResultDict = {'op': 'adjust',
                               'observation': '30d1.5', 
-                              'height': '19.0', 
+                              'height': '19', 
                               'pressure': '1000', 
                               'horizon': 'artificial',  
                               'temperature': '85',
@@ -109,14 +110,14 @@ class adjustTest(unittest.TestCase):
     
     def test200_040ObservationLowBound(self):
         self.setParm('observation', '1d0.0')
-        self.setParm('height', '19.0')
+        self.setParm('height', '19')
         self.setParm('pressure', '1000')
         self.setParm('horizon', 'artificial')
         self.setParm('temperature', '85')
         resultDict = nav.adjust(self.inputDictionary)
         expectedResultDict =  {'altitude': '0d8.6', 
                                'observation': '1d0.0', 
-                               'height': '19.0', 
+                               'height': '19', 
                                'pressure': '1000', 
                                'horizon': 'artificial', 
                                'op': 'adjust', 
@@ -131,12 +132,13 @@ class adjustTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
-    def test200_920AltitudeAlreadyExistReturnValuesWithErrorKey(self):
-        self.setParm('altitude', '13d42.3')
-        self.setParm('observation', '30d1.5')        
-        resultDict = nav.adjust(self.inputDictionary)
-        self.assertTrue(resultDict.has_key('error'), True)
-        self.assertEqual(resultDict['error'], 'altitude already exists in the input')
+# ---------> change of requirment: if 'altitude' already exist then override its value
+#     def test200_920AltitudeAlreadyExistReturnValuesWithErrorKey(self):
+#         self.setParm('altitude', '13d42.3')
+#         self.setParm('observation', '30d1.5')        
+#         resultDict = nav.adjust(self.inputDictionary)
+#         self.assertTrue(resultDict.has_key('error'), True)
+#         self.assertEqual(resultDict['error'], 'altitude already exists in the input')
      
     def test200_930InvalidObservationReturnValuesWithErrorKey(self):    
         self.setParm('observation', '101d15.2')
@@ -147,6 +149,27 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
+
+    def test200_931InvalidObservationReturnValuesWithErrorKey(self):    
+        self.setParm('observation', '101')
+        self.setParm('height', '6')
+        self.setParm('pressure', '1010')
+        self.setParm('horizon', 'natural')
+        self.setParm('temperature', '71')
+        resultDict = nav.adjust(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'observation is invalid')
+
+    def test200_932InvalidObservationReturnValuesWithErrorKey(self):    
+        self.setParm('observation', '')
+        self.setParm('height', '6')
+        self.setParm('pressure', '1010')
+        self.setParm('horizon', 'natural')
+        self.setParm('temperature', '71')
+        resultDict = nav.adjust(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'observation is invalid')
+
     
     #935    invalid 'observation' .LT. 1d00.0
     def test200_935InvalidObservationReturnValueWithErrorKey2(self):

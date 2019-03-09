@@ -8,28 +8,38 @@ import math
 
 def adjust(values = None):
     
-    # Validate input values
+    # Validate mandatory information 'observation
     if (not('observation' in values)):
         values['error'] = 'mandatory information is missing'
         return values
     
-    if ('altitude' in values):
-        values['error'] = 'altitude already exists in the input'
-        return values
+# -----> requirement change: if 'altitude' already exist then override its value    
+#     if ('altitude' in values):
+#         values['error'] = 'altitude already exists in the input'
+#         return values
      
-    # parse values['observation']  ---> extract to support function: parseObservation()
-    # ---------> use try except to check if observation in format 'xdy.y'
-    degreeX = int(values['observation'].split('d')[0])
-    minuteY = float(values['observation'].split('d')[1])
-    if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
-        values['error'] = 'observation is invalid'
-        return values   
 
-    # parse values['height']
+    # validate observation in format 'xdy.y'
+    try:
+        degreeX = int(values['observation'].split('d')[0])
+        minuteY = float(values['observation'].split('d')[1])
+        if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
+            values['error'] = 'observation is invalid'
+            return values   
+    except Exception:
+        values['error'] = 'observation is invalid'     
+        return values
+
+    # validate values['height']
     if ('height' in values):
         try:
-            heightValue = float(values['height']) 
-            if (heightValue<0.0):
+            if ('.' in values['height']):
+                values['error'] = 'height is invalid'
+                return values
+            
+            heightValue = int(values['height']) 
+            
+            if (heightValue<0):
                 values['error'] = 'height is invalid'    
                 return values
         except Exception:
@@ -133,6 +143,26 @@ def adjust(values = None):
     
     return values
 
+
+
+
+
+
+# ------------------------------------------------------
+# supporting function for adjust
+# ------------------------------------------------------
+  
+def convertAngleStrToDegrees(angleStr = None): 
+       
+    # ---> validate angleStr to be a string in form xdy.y
+    # note: doesn't work for x < 0
+    
+    degreePortion = int(angleStr.split('d')[0])
+    minutePortion = float(angleStr.split('d')[1])
+    
+    degrees = degreePortion + minutePortion / 60.0
+    
+    return degrees
 
 
 
