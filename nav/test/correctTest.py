@@ -95,7 +95,7 @@ class correctTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')   
         
-    def test400_920InvalidLatXReturnValueWithErrorKey(self):
+    def test400_920InvalidLatXnotIntReturnValueWithErrorKey(self):
         self.setParm('lat', '16.0d32.3')
         self.setParm('long', '95.41.6')
         self.setParm('altitude', '13d42.3')

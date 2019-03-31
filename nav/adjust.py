@@ -10,18 +10,18 @@ import math
 
 def adjust(values = None):
     
-    # Validate mandatory information 'observation
+    # check if mandatory element 'observation' exist in input values
     if (not('observation' in values)):
         values['error'] = 'mandatory information is missing'
         return values
     
-# -----> requirement change: if 'altitude' already exist then override its value    
+# ---> requirement change: if 'altitude' already exist then override its value    
 #     if ('altitude' in values):
 #         values['error'] = 'altitude already exists in the input'
 #         return values
      
 
-    # validate observation in format 'xdy.y'
+    # validate 'observation' in format 'xdy.y'
     try:
         degreeX = int(values['observation'].split('d')[0])
         minuteY = float(values['observation'].split('d')[1])
