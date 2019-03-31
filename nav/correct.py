@@ -66,7 +66,14 @@ def correct(values = None):
         return values    
 
     # validate 'assumedLat'
+    if (not isValidAngleStrFormat(values['assumedLat'])):
+        values['error'] = 'invalid assumedLat'
+        return values    
 
+    assumedLatDegrees = convertAngleStrToDegrees(values['assumedLat'])
+    if (assumedLatDegrees <= -90.0 or assumedLatDegrees >= 90.0):
+        values['error'] = 'invalid assumedLatDegrees'
+        return values 
 
 
 
