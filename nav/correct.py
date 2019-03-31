@@ -34,7 +34,7 @@ def correct(values = None):
         return values
 
 
-    # validate 'lat' ---> extract method: validateAngleStr()
+    # validate 'lat' ---> extract method: isValidAngleStrFormat()
     try:
         # validate x: degree portion of the angle
         degreeXstr = values['lat'].split('d')[0]
@@ -58,6 +58,45 @@ def correct(values = None):
         return values    
 
     # validate 'long'
+
+
+# ------------------------------------------------------
+# supporting functions
+# ------------------------------------------------------
+def isValidAngleStrFormat(angleStr = None):     
+    try:
+        # validate x: degree portion of the angle
+        degreeXstr = angleStr.split('d')[0]
+        int(degreeXstr)
+        
+        # validate y.y: minute portion of the angle
+        minuteYdotYstr = angleStr.split('d')[1]
+        minuteYdotY = float(minuteYdotYstr)
+        if (minuteYdotY < 0.0 or minuteYdotY >= 60.0):
+            return False
+        
+        intPartYdotYstr = minuteYdotYstr.split('.')[0]        
+        fractPartYdotYstr = minuteYdotYstr.split('.')[1]
+        if (len(intPartYdotYstr) == 0 or len(fractPartYdotYstr) == 0):
+            return False
+    
+        return True
+    
+    except Exception:
+        return False    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
