@@ -12,33 +12,29 @@
 
 def correct(values = None):
     
-    # validate mandatory element 'lat'
+    # check if mandatory elements exist in input values
     if (not('lat') in values):
         values['error'] = 'mandatory information is missing'
         return values
     
-    # validate mandatory element 'long'
     if (not('long') in values):
         values['error'] = 'mandatory information is missing'
         return values
 
-    # validate mandatory element 'altitude'
     if (not('altitude') in values):
         values['error'] = 'mandatory information is missing'
         return values
 
-    # validate mandatory element 'assumedLat'
     if (not('assumedLat') in values):
         values['error'] = 'mandatory information is missing'
         return values
 
-    # validate mandatory element 'assumedLong'
     if (not('assumedLong') in values):
         values['error'] = 'mandatory information is missing'
         return values
 
 
-
+    # validate 
 
 
 
