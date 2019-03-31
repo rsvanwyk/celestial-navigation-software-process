@@ -52,18 +52,12 @@ def correct(values = None):
         if (len(intPartYdotYstr) == 0 or len(fractPartYdotYstr) == 0):
             values['error'] = 'invalid lat'
             return values     
-        
-        
-        
-        
-
-
     
     except Exception:
         values['error'] = 'invalid lat'
         return values    
 
-
+    # validate 'long'
 
 
 

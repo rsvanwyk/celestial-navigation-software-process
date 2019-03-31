@@ -66,8 +66,8 @@ class correctTest(unittest.TestCase):
     # Sad path analysis:
     #     400_910    missing all mandatory elements
     #     400_915    missing mandatory 'lat'
-    #     400_920    invalid 'lat' (degree portion x invalid: '16.0d32.3') 
-    #     400_925    invalid 'lat' (minute portion y.y invalid: '16d60.0')
+    #     400_920    invalid 'lat' (degree portion x not int: '16.0d32.3') 
+    #     400_925    invalid 'lat' (minute portion y.y out of range: '16d60.0')
     #     400_930    invalid 'long' (not in the form 'xdy.y': '95.41.6) 
     #     400_940    invalid 'altitude'
     #     400_950    invalid 'assumedLat' (out of range: '-153d38.4')
@@ -115,9 +115,15 @@ class correctTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid lat')   
     
-    
-           
-#   not in format xdy.y  
+    def test400_930InvalidLongWrongFormatReturnValueWithErrorKey(self):
+        self.setParm('lat', '16d32.3')
+        self.setParm('long', '95.41.6')
+        self.setParm('altitude', '13d42.3')
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', ' 74d35.3')
+        resultDict = nav.correct(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid long') 
     
     
     
