@@ -86,9 +86,16 @@ class correctTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')   
     
-    
-    
-    
+    def test400_915MissingMandatoryInfoReturnValueWithErrorKey(self):
+        self.setParm('long', '95.41.6')
+        self.setParm('altitude', '13d42.3')
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', ' 74d35.3')
+        resultDict = nav.correct(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'mandatory information is missing')   
+        
+
     
     
     
