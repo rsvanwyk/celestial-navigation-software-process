@@ -59,6 +59,8 @@ class correctTest(unittest.TestCase):
     #
     # Happy path analysis:
     #     400_010    nominal input values
+    #     400_011    nominal input values
+    #     400_012    nominal input values
     #     400_020    input extra elements, ignore
     #     400_030    'long' degree portion x has leading zero
     #     400_040    boundary values for --->
@@ -72,11 +74,25 @@ class correctTest(unittest.TestCase):
     #     400_940    invalid 'altitude'
     #     400_950    invalid 'assumedLat' (out of range: '-153d38.4')
     #     400_960    invalid 'assumedLong'
-    #
-    #
+
+
     # Happy path tests
-
-
+    def test400_010NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
+        self.setParm('lat', '16d32.3')        
+        self.setParm('long', '95d41.6')
+        self.setParm('altitude', '13d42.3')
+        self.setParm('assumedLat', '53d38.4')
+        self.setParm('assumedLong', ' 350d35.3')
+        resultDict = nav.correct(self.inputDictionary)
+        expectedResultDict = {'op':'correct', 
+                              'lat':'16d32.3', 
+                              'long':'95d41.6', 
+                              'altitude':'13d42.3',  
+                              'assumedLat':'53d38.4', 
+                              'assumedLong':' 350d35.3', 
+                              'correctedDistance':'104', 
+                              'correctedAzimuth':'262d55.6'}
+        self.assertDictEqual(resultDict, expectedResultDict)
 
 
 

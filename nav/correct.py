@@ -75,6 +75,21 @@ def correct(values = None):
         values['error'] = 'invalid assumedLat'
         return values 
 
+    # validate 'assumedLong'
+    if (not isValidAngleStrFormat(values['assumedLong'])):
+        values['error'] = 'invalid assumedLong'
+        return values    
+
+    assumedLongDegrees = convertAngleStrToDegrees(values['assumedLong'])
+    if (assumedLongDegrees < 0.0 or assumedLongDegrees >= 360.0):
+        values['error'] = 'invalid assumedLong'
+        return values 
+
+
+    # --------------------------------------
+    # Perform operation correct
+    # --------------------------------------
+
 
 
 
