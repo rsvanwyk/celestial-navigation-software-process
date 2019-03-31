@@ -72,7 +72,7 @@ def correct(values = None):
 
     assumedLatDegrees = convertAngleStrToDegrees(values['assumedLat'])
     if (assumedLatDegrees <= -90.0 or assumedLatDegrees >= 90.0):
-        values['error'] = 'invalid assumedLatDegrees'
+        values['error'] = 'invalid assumedLat'
         return values 
 
 
