@@ -5,6 +5,7 @@
     
     @author: Rong Song
 '''
+from nav.adjust import convertAngleStrToDegrees
 
 
 
@@ -39,8 +40,10 @@ def correct(values = None):
         values['error'] = 'invalid lat'
         return values
     
-    
-
+    latDegrees = convertAngleStrToDegrees(values['lat'])
+    if (latDegrees <= -90.0 or latDegrees >= 90.0):
+        values['error'] = 'invalid lat'
+        return values        
 
     # validate 'long'
     if (not isValidAngleStrFormat(values['long'])):
