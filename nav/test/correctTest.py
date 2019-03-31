@@ -125,8 +125,6 @@ class correctTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid lat')   
 
-
-    
     def test400_930InvalidLongWrongFormatReturnValueWithErrorKey(self):
         self.setParm('lat', '16d32.3')
         self.setParm('long', '95.41.6')
@@ -137,6 +135,15 @@ class correctTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid long') 
     
+    def test400_950InvalidAssumedLatOutOfRangeReturnValueWithErrorKey(self):
+        self.setParm('lat', '16d32.3')
+        self.setParm('long', '95d41.6')
+        self.setParm('altitude', '13d42.3')
+        self.setParm('assumedLat', '-153d38.4')
+        self.setParm('assumedLong', ' 74d35.3')
+        resultDict = nav.correct(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid assumedLat') 
     
     
     

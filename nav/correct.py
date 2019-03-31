@@ -50,6 +50,31 @@ def correct(values = None):
         values['error'] = 'invalid long'
         return values
 
+    longDegrees = convertAngleStrToDegrees(values['long'])
+    if (longDegrees < 0.0 or longDegrees >= 360.0):
+        values['error'] = 'invalid long'
+        return values        
+
+    # validate 'altitude'
+    if (not isValidAngleStrFormat(values['altitude'])):
+        values['error'] = 'invalid altitude'
+        return values    
+
+    altitudeDegrees = convertAngleStrToDegrees(values['altitude'])
+    if (altitudeDegrees <= 0.0 or altitudeDegrees >= 90.0):
+        values['error'] = 'invalid altitude'
+        return values    
+
+    # validate 'assumedLat'
+
+
+
+
+
+
+
+
+
 
 # ------------------------------------------------------
 # supporting functions
