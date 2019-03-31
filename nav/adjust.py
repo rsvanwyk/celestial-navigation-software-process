@@ -1,7 +1,9 @@
 '''
-Created on Feb 16, 2019
-assignment 6 - operation adjust
-@author: rs
+    Assignment 6 - operation 'adjust'
+
+    Created on Feb 16, 2019
+
+    @author: Rong Song
 '''
 
 import math

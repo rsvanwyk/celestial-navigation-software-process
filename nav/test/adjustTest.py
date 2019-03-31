@@ -1,7 +1,9 @@
 '''
-Created on Feb 16, 2019
-assignment 6 - tests for adjust()
-@author: rs
+    assignment 6 - tests for operation 'adjust'
+
+    Created on Feb 16, 2019
+
+    @author: Rong Song
 '''
 
 

@@ -1,7 +1,9 @@
 '''
-Created on Mar 5, 2019
-assignment 7 - tests for predict()
-@author: rs
+    Assignment 7 - tests for operation 'predict'
+
+    Created on Mar 5, 2019
+
+    @author: Rong Song
 '''
 
 
