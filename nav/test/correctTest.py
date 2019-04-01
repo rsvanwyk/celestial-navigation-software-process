@@ -111,6 +111,22 @@ class correctTest(unittest.TestCase):
 #                               'correctedAzimuth':'77d6.9'}
 #         self.assertDictEqual(resultDict, expectedResultDict)
 
+    def test400_012NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
+        self.setParm('lat', '89d20.1')        
+        self.setParm('long', '155d4.4')
+        self.setParm('altitude', '37d15.6')
+        self.setParm('assumedLat', '33d59.7')
+        self.setParm('assumedLong', '74d35.3')
+        resultDict = nav.correct(self.inputDictionary)
+        expectedResultDict = {'op':'correct', 
+                              'lat':'89d20.1', 
+                              'long':'155d4.4', 
+                              'altitude':'37d15.6',  
+                              'assumedLat':'33d59.7', 
+                              'assumedLong':'74d35.3', 
+                              'correctedDistance':'222', 
+                              'correctedAzimuth':'0d36.5'}
+        self.assertDictEqual(resultDict, expectedResultDict)
 
 
 
