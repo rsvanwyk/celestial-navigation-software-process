@@ -5,9 +5,10 @@
     
     @author: Rong Song
 '''
+
 from nav.adjust import convertAngleStrToDegrees
-
-
+import math
+from nav.predict import convertDegreesToAngleStr
 
 
 
@@ -90,11 +91,43 @@ def correct(values = None):
     # Perform operation correct
     # --------------------------------------
 
+    # step A. Calculate the local hour angle of the navigator
+    lhaDegrees = longDegrees + assumedLatDegrees
 
-
-
-
-
+    # step B. ---> ? extract method calcCorrectedAltitude()
+    latRadians = latDegrees * math.pi / 180
+    assumedLatRadians = assumedLatDegrees * math.pi / 180
+    lhaRadians = lhaDegrees * math.pi / 180
+    
+    intermediateDistance = (math.sin(latRadians) * math.sin(assumedLatRadians)) + \
+        (math.cos(latRadians) * math.cos(assumedLatRadians) * math.cos(lhaRadians))
+                                                      
+    correctedAltitudeRadians = math.asin(intermediateDistance)
+    
+    correctedAltitudeDegrees = correctedAltitudeRadians * 180 / math.pi
+     
+    # step C. Calculate correctedDistance in arc-minutes and round to the nearest 1 arc-minute
+    correctedDistance = (altitudeDegrees - correctedAltitudeDegrees) * 60
+    correctedDistance = int(round(correctedDistance))
+    
+    # step D. 
+    correctedAzimuthRadians = math.acos(
+        (math.sin(latRadians) - (math.sin(assumedLatRadians) * intermediateDistance))/
+        (math.cos(assumedLatRadians) * math.cos(correctedAltitudeRadians))
+        )
+    correctedAzimuthDegrees = correctedAzimuthRadians * 180 / math.pi
+    
+    # step E. normalize if
+    if (correctedDistance < 0):
+        correctedDistance = math.fabs(correctedDistance)
+        correctedAzimuthDegrees = (correctedAzimuthDegrees + 180) % 360
+    
+    # step F. 
+    correctedAzimuthStr = convertDegreesToAngleStr(correctedAzimuthDegrees)
+    values['correctedAzimuth'] = correctedAzimuthStr
+    values['correctedDistance'] = str(correctedDistance)
+    
+    return values
 
 
 
