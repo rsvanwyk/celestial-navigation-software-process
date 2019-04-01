@@ -119,7 +119,7 @@ def correct(values = None):
     
     # step E. normalize if
     if (correctedDistance < 0):
-        correctedDistance = math.fabs(correctedDistance)
+        correctedDistance = int(math.fabs(correctedDistance))
         correctedAzimuthDegrees = (correctedAzimuthDegrees + 180) % 360
     
     # step F. 
