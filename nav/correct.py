@@ -92,7 +92,7 @@ def correct(values = None):
     # --------------------------------------
 
     # step A. Calculate the local hour angle of the navigator
-    lhaDegrees = longDegrees + assumedLatDegrees
+    lhaDegrees = longDegrees + assumedLongDegrees
 
     # step B. ---> ? extract method calcCorrectedAltitude()
     latRadians = latDegrees * math.pi / 180
