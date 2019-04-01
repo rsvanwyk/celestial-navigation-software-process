@@ -89,7 +89,7 @@ class correctTest(unittest.TestCase):
                               'long':'95d41.6', 
                               'altitude':'13d42.3',  
                               'assumedLat':'53d38.4', 
-                              'assumedLong':' 350d35.3', 
+                              'assumedLong':'350d35.3', 
                               'correctedDistance':'104', 
                               'correctedAzimuth':'262d55.6'}
         self.assertDictEqual(resultDict, expectedResultDict)
@@ -106,7 +106,7 @@ class correctTest(unittest.TestCase):
                               'long':'95d41.6', 
                               'altitude':'13d42.3',  
                               'assumedLat':'-53d38.4', 
-                              'assumedLong':' 350d35.3', 
+                              'assumedLong':'350d35.3', 
                               'correctedDistance':'1488', 
                               'correctedAzimuth':'77d6.9'}
         self.assertDictEqual(resultDict, expectedResultDict)
@@ -117,7 +117,7 @@ class correctTest(unittest.TestCase):
         self.setParm('long', '95d41.6')
         self.setParm('altitude', '13d42.3')
         self.setParm('assumedLat', '53d38.4')
-        self.setParm('assumedLong', ' 350d35.3')
+        self.setParm('assumedLong', '350d35.3')
         self.setParm('extraKey', 'ignore')
         resultDict = nav.correct(self.inputDictionary)
         expectedResultDict = {'op':'correct', 
@@ -136,7 +136,7 @@ class correctTest(unittest.TestCase):
         self.setParm('long', '95d41.6')
         self.setParm('altitude', '13d42.3')
         self.setParm('assumedLat', '53d38.4')
-        self.setParm('assumedLong', ' 350d35.3')
+        self.setParm('assumedLong', '350d35.3')
         resultDict = nav.correct(self.inputDictionary)
         expectedResultDict = {'op':'correct', 
                               'lat':'016d32.3', 
