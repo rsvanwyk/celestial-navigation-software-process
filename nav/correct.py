@@ -11,7 +11,6 @@ import math
 from nav.predict import convertDegreesToAngleStr
 
 
-
 def correct(values = None):
     
     # check if mandatory elements exist in input values
@@ -22,15 +21,15 @@ def correct(values = None):
     if (not('long') in values):
         values['error'] = 'mandatory information is missing'
         return values
-
+  
     if (not('altitude') in values):
         values['error'] = 'mandatory information is missing'
         return values
-
+  
     if (not('assumedLat') in values):
         values['error'] = 'mandatory information is missing'
         return values
-
+  
     if (not('assumedLong') in values):
         values['error'] = 'mandatory information is missing'
         return values
