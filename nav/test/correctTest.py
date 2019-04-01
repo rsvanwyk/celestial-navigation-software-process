@@ -82,7 +82,7 @@ class correctTest(unittest.TestCase):
         self.setParm('long', '95d41.6')
         self.setParm('altitude', '13d42.3')
         self.setParm('assumedLat', '53d38.4')
-        self.setParm('assumedLong', ' 350d35.3')
+        self.setParm('assumedLong', '350d35.3')
         resultDict = nav.correct(self.inputDictionary)
         expectedResultDict = {'op':'correct', 
                               'lat':'16d32.3', 
@@ -93,6 +93,24 @@ class correctTest(unittest.TestCase):
                               'correctedDistance':'104', 
                               'correctedAzimuth':'262d55.6'}
         self.assertDictEqual(resultDict, expectedResultDict)
+
+    def test400_011NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
+        self.setParm('lat', '16d32.3')        
+        self.setParm('long', '95d41.6')
+        self.setParm('altitude', '13d42.3')
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        resultDict = nav.correct(self.inputDictionary)
+        expectedResultDict = {'op':'correct', 
+                              'lat':'16d32.3', 
+                              'long':'95d41.6', 
+                              'altitude':'13d42.3',  
+                              'assumedLat':'-53d38.4', 
+                              'assumedLong':' 350d35.3', 
+                              'correctedDistance':'1488', 
+                              'correctedAzimuth':'77d6.9'}
+        self.assertDictEqual(resultDict, expectedResultDict)
+
 
     def test400_020InputValuesContainExtraElementIgnored(self):
         self.setParm('lat', '16d32.3')        
@@ -107,7 +125,7 @@ class correctTest(unittest.TestCase):
                               'long':'95d41.6', 
                               'altitude':'13d42.3',  
                               'assumedLat':'53d38.4', 
-                              'assumedLong':' 350d35.3', 
+                              'assumedLong':'350d35.3', 
                               'correctedDistance':'104', 
                               'correctedAzimuth':'262d55.6',
                               'extraKey':'ignore'}
@@ -125,12 +143,10 @@ class correctTest(unittest.TestCase):
                               'long':'95d41.6', 
                               'altitude':'13d42.3',  
                               'assumedLat':'53d38.4', 
-                              'assumedLong':' 350d35.3', 
+                              'assumedLong':'350d35.3', 
                               'correctedDistance':'104', 
                               'correctedAzimuth':'262d55.6'}
         self.assertDictEqual(resultDict, expectedResultDict)
-
-
 
 
 
