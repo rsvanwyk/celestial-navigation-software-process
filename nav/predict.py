@@ -13,28 +13,36 @@ import math
 
 def predict(values = None):
     
-    # validate mandatory information 'body'
+    # check if mandatory information 'body' exist in input values
     if (not('body' in values)):
         values['error'] = 'mandatory information is missing'
         return values
     
     starIndex = findIndexOfStar(values['body'])
-    
     if (starIndex == -1):
         values['error'] = 'star not in catalog'
         return values
     
-    # validate values['date']
+    # validate elem 'date'
     if ('date' in values):
         try:
-            dateList = values['date'].split('-')
-            year = int(dateList[0])
-            month = int(dateList[1])
-            day = int(dateList[2])
+            dateStrList = values['date'].split('-')
+            yearStr = dateStrList[0]
+            monthStr = dateStrList[1]
+            dayStr = dateStrList[2]
+            if (len(yearStr)!=4 or len(monthStr)!=2 or len(dayStr)!=2):
+                values['error'] ='invalid date'
+            
+            # -----> need to be exact day count for each month (leap year or not)
+            year = int(yearStr)
+            month = int(monthStr)
+            day = int(dayStr)
             if (year < 2001 or year > 2100 or month < 01 or month > 12 
                 or day < 01 or day > 31):
                 values['error'] = 'invalid date'
                 return values
+        
+        
         except Exception:
             values['error'] = 'invalid date'
             return values

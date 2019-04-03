@@ -9,7 +9,6 @@
 
 import unittest
 import nav.predict as nav
-#import math
 
 
 class predictTest(unittest.TestCase):
@@ -63,9 +62,8 @@ class predictTest(unittest.TestCase):
     #     300_920    invalid 'body'
     #     300_930    invalid 'date'
     #     300_940    invalid 'time'
-    #
-    #
-    #
+    
+    
     # Happy path tests
     def test300_010NominalInputValuesReturnValuesWithLongAndLat(self):
         self.setParm('body', 'Aldebaran')
@@ -134,11 +132,8 @@ class predictTest(unittest.TestCase):
     
     
     
-    
-    
-    
     # Sad path tests
-    def test300_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
+    def test300_910MissingMandatoryInfoBodyReturnValuesWithErrorKey(self):
         resultDict = nav.predict(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
@@ -158,6 +153,10 @@ class predictTest(unittest.TestCase):
         resultDict = nav.predict(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid date')
+        
+    # ---> add more tests for invalid date    
+        
+        
     
     def test300_940InvalidTimeReturnValuesWithErrorKey(self): 
         self.setParm('body', 'Betelgeuse')
@@ -166,6 +165,10 @@ class predictTest(unittest.TestCase):
         resultDict = nav.predict(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid time')    
+    
+    # ---> add more tests for invalid time
+    
+    
     
     
     
