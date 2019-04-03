@@ -5,7 +5,7 @@ import correct
 
 def dispatch(values=None):
 
-    #Validate parm
+    # Validate parm
     if(values == None):
         return {'error': 'parameter is missing'}
     if(not(isinstance(values,dict))):
@@ -18,7 +18,7 @@ def dispatch(values=None):
         del values['error']
     
 
-    #Perform designated function
+    # Perform designated function
     if(values['op'] == 'adjust'):
         result = adjust.adjust(values)
         return result    

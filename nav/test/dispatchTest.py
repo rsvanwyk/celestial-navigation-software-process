@@ -3,7 +3,7 @@ import httplib
 from urllib import urlencode
 import json
 
-import nav.dispatch as nav
+
 
 class DispatchTest(unittest.TestCase):
     
@@ -49,6 +49,7 @@ class DispatchTest(unittest.TestCase):
         return result
 
 
+
     # -----------------------------------------------------------------------
     # ---- Acceptance Tests
     # 100 dispatch operation
@@ -73,8 +74,10 @@ class DispatchTest(unittest.TestCase):
     #                        -- return {'error':'op is not a legal operation'}
     #                     missing dictionary            dispatch()
     #                        -- return {'error':'dictionary is missing'}
+    
+    
+    
     # Happy path
-
 #     def test100_010ShouldReturnUnchangedValuesWithOperationAdjust(self):
 #         self.setParm('op','adjust')
 #         result = self.microservice()
@@ -87,11 +90,11 @@ class DispatchTest(unittest.TestCase):
 #         resultDictionary = self.string2dict(result)
 #         self.assertDictEqual(self.inputDictionary, resultDictionary)
   
-    def test100_030ShouldReturnUnchangedValuesWithOperationCorrect(self):
-        self.setParm('op','correct')
-        result = self.microservice()
-        resultDictionary = self.string2dict(result)
-        self.assertDictEqual(self.inputDictionary, resultDictionary)
+#     def test100_030ShouldReturnUnchangedValuesWithOperationCorrect(self):
+#         self.setParm('op','correct')
+#         result = self.microservice()
+#         resultDictionary = self.string2dict(result)
+#         self.assertDictEqual(self.inputDictionary, resultDictionary)
          
     def test100_040ShouldReturnUnchangedValuesWithOperationLocate(self):
         self.setParm('op','locate')
@@ -99,6 +102,7 @@ class DispatchTest(unittest.TestCase):
         resultDictionary = self.string2dict(result)
         self.assertDictEqual(self.inputDictionary, resultDictionary)
   
+       
     # Sad path
     def test100_910_ShouldReturnValuesWithErrorKeyWhenNoOpSpecified(self):
         result = self.microservice()
@@ -119,7 +123,11 @@ class DispatchTest(unittest.TestCase):
 
    
 
-# Acceptance tests for adjust operation ---> transfer more from adjustTest.py  
+    ####################################################################################
+    # Acceptance tests related to operation 'adjust' ---> adapted from adjustTest.py  
+    ####################################################################################
+    
+    # Happy path
     def test200_010NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
         self.setParm('op', 'adjust')
         self.setParm('observation', '30d1.5')
@@ -138,6 +146,8 @@ class DispatchTest(unittest.TestCase):
                               'altitude':'29d59.9',}
         self.assertDictEqual(expectedResultDict, resultDict)                
     
+    
+    # Sad path
     def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
         self.setParm('op', 'adjust')    
         result = self.microservice()
@@ -146,8 +156,11 @@ class DispatchTest(unittest.TestCase):
         
  
  
- 
-# Acceptance tests for predict operation ------>transfer more from predictTest.py
+    #####################################################################################
+    # Acceptance tests related to operation 'predict' ---> adapted from predictTest.py
+    #####################################################################################
+    
+    # Happy path
     def test300_010NominalInputValuesReturnValuesWithLongAndLat(self):
         self.setParm('op', 'predict')
         self.setParm('body', 'Aldebaran')
@@ -163,7 +176,7 @@ class DispatchTest(unittest.TestCase):
                               'lat':'16d32.3'}    
         self.assertDictEqual(resultDict, expectedResultDict)
  
- 
+    # Sad path
     def test300_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
         self.setParm('op', 'predict')
         result = self.microservice()
@@ -173,7 +186,15 @@ class DispatchTest(unittest.TestCase):
 
  
  
+    #####################################################################################
+    # Acceptance tests related to operation 'correct' ---> adapted from correctTest.py
+    #####################################################################################
  
+    # Happy path
+    
+    
+    
+    # Sad path
  
  
  
