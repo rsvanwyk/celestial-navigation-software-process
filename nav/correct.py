@@ -137,8 +137,8 @@ def correct(values = None):
 def isValidAngleStrFormat(angleStr = None):     
     try:
         # validate x: degree portion of the angle
-        #degreeXstr = angleStr.split('d')[0]
-        #degreeX = int(degreeXstr)
+        degreeXstr = angleStr.split('d')[0]
+        degreeX = int(degreeXstr)
         
         # validate y.y: minute portion of the angle
         minuteYdotYstr = angleStr.split('d')[1]

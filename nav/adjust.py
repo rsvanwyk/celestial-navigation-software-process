@@ -25,7 +25,7 @@ def adjust(values = None):
     try:
         degreeX = int(values['observation'].split('d')[0])
         minuteYdotY = float(values['observation'].split('d')[1])
-        if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
+        if (degreeX<1 or degreeX>=90 or minuteYdotY<0.0 or minuteYdotY>=60.0):
             values['error'] = 'observation is invalid'
             return values   
     except Exception:
