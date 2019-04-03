@@ -136,7 +136,7 @@ class adjustTest(unittest.TestCase):
 #         self.assertTrue(resultDict.has_key('error'), True)
 #         self.assertEqual(resultDict['error'], 'altitude already exists in the input')
      
-    def test200_930InvalidObservationReturnValuesWithErrorKey(self):    
+    def test200_930InvalidObservationXoutOfRangeReturnValuesWithErrorKey(self):    
         self.setParm('observation', '101d15.2')
         self.setParm('height', '6')
         self.setParm('pressure', '1010')
@@ -146,7 +146,7 @@ class adjustTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
 
-    def test200_931InvalidObservationReturnValuesWithErrorKey(self):    
+    def test200_931InvalidObservationWrongFormatReturnValuesWithErrorKey(self):    
         self.setParm('observation', '101')
         self.setParm('height', '6')
         self.setParm('pressure', '1010')
