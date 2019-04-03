@@ -213,11 +213,18 @@ class predictTest(unittest.TestCase):
     def test300_941InvalidTimeHourHas1DigitReturnValuesWithErrorKey(self): 
         self.setParm('body', 'Betelgeuse')
         self.setParm('date', '2016-01-17')
-        self.setParm('time', '3:15:99')
+        self.setParm('time', '3:15:59')
         resultDict = nav.predict(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid time')    
 
+    def test300_942InvalidTimeMinuteHas1DigitReturnValuesWithErrorKey(self): 
+        self.setParm('body', 'Betelgeuse')
+        self.setParm('date', '2016-01-17')
+        self.setParm('time', '03:1:59')
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid time')    
     
     
     
