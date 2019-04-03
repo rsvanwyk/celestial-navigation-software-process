@@ -166,7 +166,6 @@ class adjustTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
 
-
     def test200_932InvalidObservationReturnValuesWithErrorKey(self):    
         self.setParm('observation', '')
         self.setParm('height', '6')
@@ -177,7 +176,6 @@ class adjustTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
 
-    
     #935    invalid 'observation' .LT. 1d00.0
     def test200_935InvalidObservationReturnValueWithErrorKey2(self):
         self.setParm('observation', '0d15.2')
@@ -189,7 +187,6 @@ class adjustTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
 
-         
     def test200_940InvalidHeightReturnValuesWithErrorKey(self):
         self.setParm('observation', '45d15.2')
         self.setParm('height', 'a')
@@ -232,46 +229,6 @@ class adjustTest(unittest.TestCase):
     
     
 
-
-
-
-#<--  unit tests for supporting functions of 'adjust' operation    
-# ---------DELETE after unit tests done----------------
-    def test200_310CalculateDip(self):        
-        values = {'observation':'13d51.6',
-                  'height':'33',
-                  'temperature':'72',
-                  'pressure':'1010',
-                  'horizon':'natural'}
-          
-        if (values['horizon'].lower() == 'natural'):  
-            heightValue = float(values['height'])          
-            dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
-        else:
-            dip = 0
-  
-        expectedDip = -0.092870429    
-        self.assertAlmostEqual(dip, expectedDip, places=3)
-         
-    def test200_320CalculateRefraction(self):
-        values = {'observation':'13d51.6',
-                  'height':'33',
-                  'temperature':'72',
-                  'pressure':'1010',
-                  'horizon':'natural'}
-         
-        degreeX = int(values['observation'].split('d')[0])
-        minuteY = float(values['observation'].split('d')[1])
-        observationDegrees = degreeX + ( minuteY / 60.0)
-        observationRadians = math.radians(observationDegrees)
-        observationTan = math.tan(observationRadians)
-        temperatureF = int( values['temperature'] )
-        temperatureC = (temperatureF - 32) * 5.0 / 9.0
-        pressureValue = int( values['pressure'] )
-        refraction = (-0.00452*pressureValue) / (273+temperatureC) / observationTan           
- 
-        expectedRefraction = -0.062673129    
-        self.assertAlmostEqual(refraction, expectedRefraction, places=3)
 
 
         

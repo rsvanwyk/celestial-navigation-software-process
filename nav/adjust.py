@@ -21,7 +21,7 @@ def adjust(values = None):
 #         return values
      
 
-    # validate 'observation' in format 'xdy.y' and within range
+    # validate elem 'observation' in format 'xdy.y' and within range
     try:
         degreeX = int(values['observation'].split('d')[0])
         minuteYdotY = float(values['observation'].split('d')[1])
@@ -32,7 +32,7 @@ def adjust(values = None):
         values['error'] = 'observation is invalid'     
         return values
 
-    # validate 'height'
+    # validate elem 'height'
     if ('height' in values):
         try:
             if ('.' in values['height']):
@@ -48,7 +48,7 @@ def adjust(values = None):
             values['error'] = 'height is invalid'    
             return values
    
-    # parse values['horizon']
+    # validate elem 'horizon'
     if ('horizon' in values):
         try:
             horizonValue = values['horizon'].lower()
@@ -59,7 +59,7 @@ def adjust(values = None):
             values['error'] = 'horizon is invalid'
             return values
          
-    # parse values['temperature']
+    # validate elem 'temperature'
     if ('temperature' in values):
         try:
             temperatureF = int(values['temperature'])
@@ -70,7 +70,7 @@ def adjust(values = None):
             values['error'] = 'temperature is invalid'
             return values
                 
-    # parse values['pressure']
+    # validate elem 'pressure'
     if ('pressure' in values):
         try:
             pressureValue = int(values['pressure'])
@@ -87,7 +87,7 @@ def adjust(values = None):
     # Perform operation adjust
     # ------------------------------
     
-    # step 1: tested ---> extract to support function: calculateDip()
+    # step 1: tested ---> extract to support function calcDip()
     if (not('horizon' in values)):
         horizonValue = 'natural'
     else:
@@ -103,13 +103,13 @@ def adjust(values = None):
         dip = 0
 
     
-    # step 2: tested ---> extract to support function: calculateRefraction()
+    # step 2: tested ---> extract to support function calcRefraction()
     
     # parse values['observation']  ---> extract to support function: parseObservation()
     degreeX = int(values['observation'].split('d')[0])
-    minuteY = float(values['observation'].split('d')[1])
+    minuteYdotY = float(values['observation'].split('d')[1])
     # calculate tangent of observation angle ---> extract to support function
-    observationDegrees = degreeX + ( minuteY / 60.0)
+    observationDegrees = degreeX + ( minuteYdotY / 60.0)
     observationRadians = math.radians(observationDegrees)
     observationTan = math.tan(observationRadians)
      
@@ -136,6 +136,7 @@ def adjust(values = None):
     # round altitude to the nearest 0.1 arc-minute
     degreePortion = int(math.modf(altitudeDegrees)[1])
     minutePortion = round(math.modf(altitudeDegrees)[0] * 60.0, 1)
+    
     # convert altitude to a string with the format xdyy.y     
     altitudeString = str(degreePortion) + 'd' + str(minutePortion)
 
@@ -169,6 +170,13 @@ def convertAngleStrToDegrees(angleStr = None):
       
     return degrees
 
-
+# def convertDegreesToAngleStr(degrees = None):
+#     
+#     degreePortion = int(math.modf(degrees)[1])
+#     minutePortion = round(math.modf(degrees)[0] * 60.0, 1)
+#     
+#     angleStr = str(degreePortion) + 'd' + str(minutePortion)
+#     
+#     return angleStr 
 
 
