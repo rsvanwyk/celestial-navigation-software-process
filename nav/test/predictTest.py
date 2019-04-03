@@ -154,7 +154,6 @@ class predictTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid date')
         
-    # ---> add more tests for invalid date    
     def test300_931InvalidDateMonthOnlyOneDigitReturnValuesWithErrorKey(self):
         self.setParm('body', 'Aldebaran')
         self.setParm('date', '2016-1-17')
@@ -202,10 +201,8 @@ class predictTest(unittest.TestCase):
         resultDict = nav.predict(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid date')
-
-        
     
-    def test300_940InvalidTimeReturnValuesWithErrorKey(self): 
+    def test300_940InvalidTimeSecondOutOfRangeReturnValuesWithErrorKey(self): 
         self.setParm('body', 'Betelgeuse')
         self.setParm('date', '2016-01-17')
         self.setParm('time', '03:15:99')
@@ -213,7 +210,14 @@ class predictTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid time')    
     
-    # ---> add more tests for invalid time
+    def test300_941InvalidTimeHourHas1DigitReturnValuesWithErrorKey(self): 
+        self.setParm('body', 'Betelgeuse')
+        self.setParm('date', '2016-01-17')
+        self.setParm('time', '3:15:99')
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid time')    
+
     
     
     

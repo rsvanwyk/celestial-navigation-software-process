@@ -45,14 +45,23 @@ def predict(values = None):
             values['error'] = 'invalid date'
             return values
     
-    # validate values['time']
+    # validate elem 'time'
     if ('time' in values):
         try:
-            timeList = values['time'].split(':')
-            hour = int(timeList[0])
-            minute = int(timeList[1])
-            second = int(timeList[2])
-            if (hour < 0 or hour > 23 or minute < 0 or minute > 59 or second < 0 or second > 59):
+            # validate 'time' string format 'hh:mm:ss'
+            timeStrList = values['time'].split(':')
+            hourStr = timeStrList[0]
+            minuteStr = timeStrList[1]
+            secondStr = timeStrList[2]
+            if (len(hourStr)!=2 or len(minuteStr)!=2 or len(secondStr)!=2):
+                values['error'] = 'invalid time'
+                return values                
+            
+            # validate hour, minute, second range
+            hour = int(hourStr)
+            minute = int(minuteStr)
+            second = int(secondStr)
+            if (hour<0 or hour>23 or minute<0 or minute>59 or second<0 or second>59):
                 values['error'] = 'invalid time'
                 return values
         except Exception:
