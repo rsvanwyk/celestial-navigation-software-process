@@ -179,6 +179,13 @@ class predictTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid date')
 
+    def test300_934InvalidDateFebHasLeapDayWhenNotLeapYearReturnValuesWithErrorKey(self):
+        self.setParm('body', 'Aldebaran')
+        self.setParm('date', '2017-02-29')
+        self.setParm('time', '03:15:42')
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid date')
         
         
     
