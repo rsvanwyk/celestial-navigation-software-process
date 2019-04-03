@@ -26,6 +26,7 @@ def predict(values = None):
     # validate elem 'date'
     if ('date' in values):
         try:
+            # validate 'date' string format 'yyyy-mm-dd'
             dateStrList = values['date'].split('-')
             yearStr = dateStrList[0]
             monthStr = dateStrList[1]
@@ -33,15 +34,12 @@ def predict(values = None):
             if (len(yearStr)!=4 or len(monthStr)!=2 or len(dayStr)!=2):
                 values['error'] ='invalid date'
             
-            # -----> need to be exact day count for each month (leap year or not)
-            year = int(yearStr)
-            month = int(monthStr)
-            day = int(dayStr)
-            if (year < 2001 or year > 2100 or month < 01 or month > 12 
-                or day < 01 or day > 31):
+            # validate year, month, day range
+            year = int(yearStr)         
+            if (year < 2001 or year > 2100):
                 values['error'] = 'invalid date'
                 return values
-        
+            datetime.datetime.strptime(values['date'], '%Y-%m-%d')
         
         except Exception:
             values['error'] = 'invalid date'

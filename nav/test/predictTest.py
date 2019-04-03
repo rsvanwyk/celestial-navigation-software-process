@@ -170,6 +170,15 @@ class predictTest(unittest.TestCase):
         resultDict = nav.predict(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid date')
+
+    def test300_933InvalidDateDayOutOfRangeReturnValuesWithErrorKey(self):
+        self.setParm('body', 'Aldebaran')
+        self.setParm('date', '2016-01-32')
+        self.setParm('time', '03:15:42')
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid date')
+
         
         
     
