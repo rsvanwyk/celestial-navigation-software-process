@@ -187,6 +187,15 @@ class predictTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid date')
         
+    def test300_935InvalidDateFebHas30DaysReturnValuesWithErrorKey(self):
+        self.setParm('body', 'Aldebaran')
+        self.setParm('date', '2016-02-30')
+        self.setParm('time', '03:15:42')
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid date')
+
+
         
     
     def test300_940InvalidTimeReturnValuesWithErrorKey(self): 
