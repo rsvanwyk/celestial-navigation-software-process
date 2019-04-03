@@ -94,22 +94,22 @@ class correctTest(unittest.TestCase):
                               'correctedAzimuth':'262d55.6'}
         self.assertDictEqual(resultDict, expectedResultDict)
  
-#     def test400_011NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
-#         self.setParm('lat', '16d32.3')        
-#         self.setParm('long', '95d41.6')
-#         self.setParm('altitude', '13d42.3')
-#         self.setParm('assumedLat', '-53d38.4')
-#         self.setParm('assumedLong', '350d35.3')
-#         resultDict = nav.correct(self.inputDictionary)
-#         expectedResultDict = {'op':'correct', 
-#                               'lat':'16d32.3', 
-#                               'long':'95d41.6', 
-#                               'altitude':'13d42.3',  
-#                               'assumedLat':'-53d38.4', 
-#                               'assumedLong':'350d35.3', 
-#                               'correctedDistance':'1488', 
-#                               'correctedAzimuth':'77d6.9'}
-#         self.assertDictEqual(resultDict, expectedResultDict)
+    def test400_011NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
+        self.setParm('lat', '16d32.3')        
+        self.setParm('long', '95d41.6')
+        self.setParm('altitude', '13d42.3')
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        resultDict = nav.correct(self.inputDictionary)
+        expectedResultDict = {'op':'correct', 
+                              'lat':'16d32.3', 
+                              'long':'95d41.6', 
+                              'altitude':'13d42.3',  
+                              'assumedLat':'-53d38.4', 
+                              'assumedLong':'350d35.3', 
+                              'correctedDistance':'1488', 
+                              'correctedAzimuth':'77d6.9'}
+        self.assertDictEqual(resultDict, expectedResultDict)
  
     def test400_012NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
         self.setParm('lat', '89d20.1')        
