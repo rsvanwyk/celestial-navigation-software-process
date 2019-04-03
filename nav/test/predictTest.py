@@ -146,7 +146,7 @@ class predictTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'star not in catalog')
     
-    def test300_930InvalidDateReturnValuesWithErrorKey(self): 
+    def test300_930InvalidDateMonthOutOfRangeReturnValuesWithErrorKey(self): 
         self.setParm('body', 'Betelgeuse')
         self.setParm('date', '2016-99-17')
         self.setParm('time', '03:15:42')
@@ -155,6 +155,14 @@ class predictTest(unittest.TestCase):
         self.assertEqual(resultDict['error'], 'invalid date')
         
     # ---> add more tests for invalid date    
+    def test300_931InvalidDateMonthOnlyOneDigitReturnValuesWithErrorKey(self):
+        self.setParm('body', 'Aldebaran')
+        self.setParm('date', '2016-1-17')
+        self.setParm('time', '03:15:42')
+        resultDict = nav.predict(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid date')
+
         
         
     
