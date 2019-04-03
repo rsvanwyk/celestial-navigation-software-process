@@ -32,7 +32,7 @@ def adjust(values = None):
         values['error'] = 'observation is invalid'     
         return values
 
-    # validate values['height']
+    # validate 'height'
     if ('height' in values):
         try:
             if ('.' in values['height']):
