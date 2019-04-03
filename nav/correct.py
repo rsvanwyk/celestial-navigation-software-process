@@ -100,11 +100,14 @@ def correct(values = None):
     
     intermediateDistance = (math.sin(latRadians) * math.sin(assumedLatRadians)) + \
         (math.cos(latRadians) * math.cos(assumedLatRadians) * math.cos(lhaRadians))
-                                                      
-    correctedAltitudeRadians = math.asin(intermediateDistance)
+
     
+    #print(intermediateDistance)                                                  
+    correctedAltitudeRadians = math.asin(intermediateDistance)
+    #print(correctedAltitudeRadians)
     correctedAltitudeDegrees = correctedAltitudeRadians * 180 / math.pi
-     
+    #print(correctedAltitudeDegrees) 
+    
     # step C. Calculate correctedDistance in arc-minutes and round to the nearest 1 arc-minute
     correctedDistance = (altitudeDegrees - correctedAltitudeDegrees) * 60
     correctedDistance = int(round(correctedDistance))

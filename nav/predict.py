@@ -98,12 +98,15 @@ def predict(values = None):
 def convertAngleStrToDegrees(angleStr = None): 
        
     # ---> validate angleStr to be a string in form xdy.y
-    # note: doesn't work for x < 0
+    # note: doesn't work for x < 0 ---> modified on 2019-04-02, should work for x<0
     
     degreePortion = int(angleStr.split('d')[0])
     minutePortion = float(angleStr.split('d')[1])
     
-    degrees = degreePortion + minutePortion / 60.0
+    if (degreePortion >= 0):
+        degrees = degreePortion + minutePortion / 60.0
+    else:
+        degrees = degreePortion - minutePortion / 60.0
     
     return degrees
     

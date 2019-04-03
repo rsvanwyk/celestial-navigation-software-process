@@ -93,7 +93,7 @@ class correctTest(unittest.TestCase):
                               'correctedDistance':'104', 
                               'correctedAzimuth':'262d55.6'}
         self.assertDictEqual(resultDict, expectedResultDict)
-
+ 
 #     def test400_011NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
 #         self.setParm('lat', '16d32.3')        
 #         self.setParm('long', '95d41.6')
@@ -110,7 +110,7 @@ class correctTest(unittest.TestCase):
 #                               'correctedDistance':'1488', 
 #                               'correctedAzimuth':'77d6.9'}
 #         self.assertDictEqual(resultDict, expectedResultDict)
-
+ 
     def test400_012NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
         self.setParm('lat', '89d20.1')        
         self.setParm('long', '155d4.4')
@@ -127,9 +127,9 @@ class correctTest(unittest.TestCase):
                               'correctedDistance':'222', 
                               'correctedAzimuth':'0d36.5'}
         self.assertDictEqual(resultDict, expectedResultDict)
-
-
-
+ 
+ 
+ 
     def test400_020InputValuesContainExtraElementIgnored(self):
         self.setParm('lat', '16d32.3')        
         self.setParm('long', '95d41.6')
@@ -148,7 +148,7 @@ class correctTest(unittest.TestCase):
                               'correctedAzimuth':'262d55.6',
                               'extraKey':'ignore'}
         self.assertDictEqual(resultDict, expectedResultDict)
-
+ 
     def test400_030ValidLatXcontainLeadingZero(self):
         self.setParm('lat', '016d32.3')        
         self.setParm('long', '95d41.6')
@@ -165,16 +165,16 @@ class correctTest(unittest.TestCase):
                               'correctedDistance':'104', 
                               'correctedAzimuth':'262d55.6'}
         self.assertDictEqual(resultDict, expectedResultDict)
-
-
-
-
+ 
+ 
+ 
+ 
     # Sad path tests
     def test400_910MissingAllMandatoryInfoReturnValuesWithErrorKey(self):
         resultDict = nav.correct(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')   
-    
+     
     def test400_915MissingMandatoryInfoReturnValueWithErrorKey(self):
         self.setParm('long', '95d41.6')
         self.setParm('altitude', '13d42.3')
@@ -183,7 +183,7 @@ class correctTest(unittest.TestCase):
         resultDict = nav.correct(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')   
-        
+         
     def test400_920InvalidLatXnotIntReturnValueWithErrorKey(self):
         self.setParm('lat', '16.0d32.3')
         self.setParm('long', '95d41.6')
@@ -193,7 +193,7 @@ class correctTest(unittest.TestCase):
         resultDict = nav.correct(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid lat')   
-
+ 
     def test400_925InvalidLatYdotYoutOfRangeReturnValueWithErrorKey(self):
         self.setParm('lat', '16d60.0')
         self.setParm('long', '95d41.6')
@@ -203,7 +203,7 @@ class correctTest(unittest.TestCase):
         resultDict = nav.correct(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid lat')   
-
+ 
     def test400_926InvalidLatOutOfRangeReturnValueWithErrorKey(self):
         self.setParm('lat', '90d0.0')
         self.setParm('long', '95d41.6')
@@ -213,7 +213,7 @@ class correctTest(unittest.TestCase):
         resultDict = nav.correct(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid lat')   
-
+ 
     def test400_930InvalidLongWrongFormatReturnValueWithErrorKey(self):
         self.setParm('lat', '16d32.3')
         self.setParm('long', '95.41.6')
@@ -223,7 +223,7 @@ class correctTest(unittest.TestCase):
         resultDict = nav.correct(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid long') 
-    
+     
     def test400_950InvalidAssumedLatOutOfRangeReturnValueWithErrorKey(self):
         self.setParm('lat', '16d32.3')
         self.setParm('long', '95d41.6')
@@ -238,7 +238,43 @@ class correctTest(unittest.TestCase):
     
     
     
-    
+    #########################################
+    # unit tests for support functions
+    # -----> delete after unit tests done
+    #########################################
+#     def test400_310calcLHA(self):
+#         values = {'op':'correct',
+#                   'lat':'16d32.3',
+#                   'long':'95d41.6',
+#                   'altitude':'13d42.3',
+#                   'assumedLat':'-53d38.4',
+#                   'assumedLong':'350d35.3'}
+#         nav.correct(values)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
 
 
