@@ -21,10 +21,10 @@ def adjust(values = None):
 #         return values
      
 
-    # validate 'observation' in format 'xdy.y'
+    # validate 'observation' in format 'xdy.y' and within range
     try:
         degreeX = int(values['observation'].split('d')[0])
-        minuteY = float(values['observation'].split('d')[1])
+        minuteYdotY = float(values['observation'].split('d')[1])
         if (degreeX<1 or degreeX>=90 or minuteY<0.0 or minuteY>=60.0):
             values['error'] = 'observation is invalid'
             return values   

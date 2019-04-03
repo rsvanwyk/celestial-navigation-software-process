@@ -75,8 +75,7 @@ class DispatchTest(unittest.TestCase):
     #                     missing dictionary            dispatch()
     #                        -- return {'error':'dictionary is missing'}
     
-    
-    
+     
     # Happy path
 #     def test100_010ShouldReturnUnchangedValuesWithOperationAdjust(self):
 #         self.setParm('op','adjust')
@@ -191,10 +190,32 @@ class DispatchTest(unittest.TestCase):
     #####################################################################################
  
     # Happy path
-    
-    
+    def test400_010NominalInputValuesReturnValuesWithDistanceAndAzimuthCorrected(self):
+        self.inputDictionary = {'op':'correct', 
+                                'lat':'16d32.3', 
+                                'long':'95d41.6', 
+                                'altitude':'13d42.3',  
+                                'assumedLat':'53d38.4', 
+                                'assumedLong':'350d35.3'}
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        expectedResultDict = {'op':'correct', 
+                              'lat':'16d32.3', 
+                              'long':'95d41.6', 
+                              'altitude':'13d42.3',  
+                              'assumedLat':'53d38.4', 
+                              'assumedLong':'350d35.3', 
+                              'correctedDistance':'104', 
+                              'correctedAzimuth':'262d55.6'}
+        self.assertDictEqual(resultDict, expectedResultDict)
     
     # Sad path
+    def test400_910MissingAllMandatoryInfoReturnValuesWithErrorKey(self):
+        self.setParm('op', 'correct')
+        result = self.microservice()
+        resultDict = self.string2dict(result)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'mandatory information is missing')   
  
  
  

@@ -27,15 +27,10 @@ class adjustTest(unittest.TestCase):
     def setParm(self, key, value):
         self.inputDictionary[key] = value
 
-
-#     def testName(self):
-#         pass  #<--  unit tests for adjust go here
-
     
-    
-    # -----------------------------------------------------------
-    # Acceptance Tests -----> add to dispatchTest.py and modify
-    # -----------------------------------------------------------
+    # -------------------------------------------------------------
+    # Acceptance Tests --->  modify and add to dispatchTest.py 
+    # -------------------------------------------------------------
     # 200 adjust operation
     #    Desired level of confidence: boundary value analysis
     #    Input Analysis
@@ -72,9 +67,8 @@ class adjustTest(unittest.TestCase):
     #        200_950    invalid 'horizon'
     #        200_960    invalid 'temperature'
     #        200_970    invalid 'pressure'
-    #
-    #
-    #
+
+
     # Happy path tests
     def test200_010NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
         self.setParm('observation', '30d1.5')
@@ -134,7 +128,7 @@ class adjustTest(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
 
-# ---------> change of requirment: if 'altitude' already exist then override its value
+# ---------> change of requirement: if 'altitude' already exist then override its value
 #     def test200_920AltitudeAlreadyExistReturnValuesWithErrorKey(self):
 #         self.setParm('altitude', '13d42.3')
 #         self.setParm('observation', '30d1.5')        
