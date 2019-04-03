@@ -2,6 +2,7 @@
     Assignment 7 - tests for operation 'predict'
 
     Created on Mar 5, 2019
+    Updated on April 3, 2019
 
     @author: Rong Song
 '''

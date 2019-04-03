@@ -2,6 +2,7 @@
     Assignment 6 - operation 'adjust'
 
     Created on Feb 16, 2019
+    Updated on April 3, 2019 
 
     @author: Rong Song
 '''

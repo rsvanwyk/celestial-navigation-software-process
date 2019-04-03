@@ -2,6 +2,7 @@
     assignment 6 - tests for operation 'adjust'
 
     Created on Feb 16, 2019
+    Updated on April 3, 2019
 
     @author: Rong Song
 '''
@@ -9,7 +10,6 @@
 
 import unittest
 import nav.adjust as nav
-import math
 
 
 class adjustTest(unittest.TestCase):

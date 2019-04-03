@@ -2,12 +2,13 @@
     Assignment 8 - operation 'correct'
     
     Created on Mar 27, 2019
+    Updated on April 3, 2019
     
     @author: Rong Song
 '''
 
-from nav.adjust import convertAngleStrToDegrees
 import math
+from nav.adjust import convertAngleStrToDegrees
 from nav.predict import convertDegreesToAngleStr
 
 
