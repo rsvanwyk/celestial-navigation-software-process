@@ -86,22 +86,22 @@ class adjustTest(unittest.TestCase):
                               'altitude':'29d59.9',}
         self.assertDictEqual(resultDict, expectedResultDict)
 
-#     def test200_011NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
-#         self.setParm('observation', '37d21.7')
-#         self.setParm('height', '25')
-#         self.setParm('pressure', '1010')
-#         self.setParm('horizon', 'artificial')
-#         self.setParm('temperature', '65')
-#         resultDict = nav.adjust(self.inputDictionary)
-#         expectedResultDict = {'op': 'adjust',
-#                               'observation': '37d21.7', 
-#                               'height': '25', 
-#                               'pressure': '1010', 
-#                               'horizon': 'artificial',  
-#                               'temperature': '65',
-#                               'altitude':'37d15.6',}
-#                           --->'altitude':'37d20.5'
-#         self.assertDictEqual(resultDict, expectedResultDict)
+    def test200_011NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
+        self.setParm('observation', '37d21.7')
+        self.setParm('height', '25')
+        self.setParm('pressure', '1010')
+        self.setParm('horizon', 'artificial')
+        self.setParm('temperature', '65')
+        resultDict = nav.adjust(self.inputDictionary)
+        expectedResultDict = {'op': 'adjust',
+                              'observation': '37d21.7', 
+                              'height': '25', 
+                              'pressure': '1010', 
+                              'horizon': 'artificial',  
+                              'temperature': '65',
+                              'altitude':'37d15.6',}
+                          #--->'altitude':'37d20.5'
+        self.assertDictEqual(resultDict, expectedResultDict)
 
 
     
