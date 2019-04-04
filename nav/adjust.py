@@ -191,8 +191,6 @@ def convertAngleStrToDegrees(angleStr = None):
         degrees = degreePortion + minutePortion / 60.0
        
       
-      
-      
     return degrees
 
 # def convertDegreesToAngleStr(degrees = None):
