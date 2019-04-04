@@ -10,7 +10,6 @@
 
 import datetime
 import math
-from gtk.keysyms import degree
 
 
 def predict(values = None):
