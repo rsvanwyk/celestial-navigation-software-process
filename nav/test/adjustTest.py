@@ -85,6 +85,25 @@ class adjustTest(unittest.TestCase):
                               'temperature': '85',
                               'altitude':'29d59.9',}
         self.assertDictEqual(resultDict, expectedResultDict)
+
+#     def test200_011NominalInputValuesReturnValuesWithAltitudeAdjusted(self):
+#         self.setParm('observation', '37d21.7')
+#         self.setParm('height', '25')
+#         self.setParm('pressure', '1010')
+#         self.setParm('horizon', 'artificial')
+#         self.setParm('temperature', '65')
+#         resultDict = nav.adjust(self.inputDictionary)
+#         expectedResultDict = {'op': 'adjust',
+#                               'observation': '37d21.7', 
+#                               'height': '25', 
+#                               'pressure': '1010', 
+#                               'horizon': 'artificial',  
+#                               'temperature': '65',
+#                               'altitude':'37d15.6',}
+#                           --->'altitude':'37d20.5'
+#         self.assertDictEqual(resultDict, expectedResultDict)
+
+
     
     def test200_020OptionalElementsMissingSetToDefaul(self):
         self.setParm('observation', '42d0.0')
@@ -93,7 +112,7 @@ class adjustTest(unittest.TestCase):
                               'observation': '42d0.0',  
                               'op': 'adjust'}
         self.assertDictEqual(resultDict, expectedResultDict)
-    
+     
     def test200_030IgnoreExtraInputElements(self):
         self.setParm('observation', '42d0.0')
         self.setParm('extraKey', 'ignore')
@@ -103,7 +122,7 @@ class adjustTest(unittest.TestCase):
                               'op': 'adjust', 
                               'extraKey':'ignore'}
         self.assertDictEqual(resultDict, expectedResultDict)
-    
+     
     def test200_040ObservationLowBound(self):
         self.setParm('observation', '1d0.0')
         self.setParm('height', '19')
@@ -119,15 +138,15 @@ class adjustTest(unittest.TestCase):
                                'op': 'adjust', 
                                'temperature': '85'}
         self.assertDictEqual(resultDict, expectedResultDict)
-        
-        
-    
+         
+         
+     
     # Sad path tests
     def test200_910MissingMandatoryInfoReturnValuesWithErrorKey(self):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'mandatory information is missing')
-
+ 
 # ---------> change of requirement: if 'altitude' already exist then override its value
 #     def test200_920AltitudeAlreadyExistReturnValuesWithErrorKey(self):
 #         self.setParm('altitude', '13d42.3')
@@ -135,7 +154,7 @@ class adjustTest(unittest.TestCase):
 #         resultDict = nav.adjust(self.inputDictionary)
 #         self.assertTrue(resultDict.has_key('error'), True)
 #         self.assertEqual(resultDict['error'], 'altitude already exists in the input')
-     
+      
     def test200_930InvalidObservationXoutOfRangeReturnValuesWithErrorKey(self):    
         self.setParm('observation', '101d15.2')
         self.setParm('height', '6')
@@ -145,7 +164,7 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
-
+ 
     def test200_931InvalidObservationWrongFormatReturnValuesWithErrorKey(self):    
         self.setParm('observation', '101')
         self.setParm('height', '6')
@@ -155,7 +174,7 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
-
+ 
     def test200_932InvalidObservationYReturnValuesWithErrorKey(self):    
         self.setParm('observation', '45d45')
         self.setParm('height', '6')
@@ -165,8 +184,8 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
-
-
+ 
+ 
     def test200_933InvalidObservationEmptyStrReturnValuesWithErrorKey(self):    
         self.setParm('observation', '')
         self.setParm('height', '6')
@@ -176,7 +195,7 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
-
+ 
     #935 ---> change of requirement: invalid 'observation' .LT. 1d00.0
     def test200_935InvalidObservationOutOfRangeReturnValueWithErrorKey2(self):
         self.setParm('observation', '0d15.2')
@@ -187,7 +206,7 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'observation is invalid')
-
+ 
     def test200_940InvalidHeightReturnValuesWithErrorKey(self):
         self.setParm('observation', '45d15.2')
         self.setParm('height', 'a')
@@ -197,7 +216,7 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)        
         self.assertEqual(resultDict['error'], 'height is invalid')
-    
+     
     def test200_950InvalidHorizonReturnValuesWithErrorKey(self):
         self.setParm('observation', '45d15.2')
         self.setParm('height', '6')
@@ -207,7 +226,7 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)        
         self.assertEqual(resultDict['error'], 'horizon is invalid')
-        
+         
     def test200_960InvalidTemperatureReturnValuesWithErrorKey(self):
         self.setParm('observation', '45d15.2')
         self.setParm('height', '6')
@@ -217,7 +236,7 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)        
         self.assertEqual(resultDict['error'], 'temperature is invalid')
-    
+     
     def test200_970InvalidPressureReturnValuesWithErrorKey(self):
         self.setParm('observation', '45d15.2')
         self.setParm('height', '6')
@@ -227,8 +246,8 @@ class adjustTest(unittest.TestCase):
         resultDict = nav.adjust(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)        
         self.assertEqual(resultDict['error'], 'pressure is invalid')
-    
-    
+     
+     
 
 
 

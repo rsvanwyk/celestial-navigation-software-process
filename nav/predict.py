@@ -10,6 +10,7 @@
 
 import datetime
 import math
+from gtk.keysyms import degree
 
 
 def predict(values = None):
@@ -86,7 +87,6 @@ def predict(values = None):
   
     # Step B. Calculate the ariesGHA for the date and time of the observation. 
     observAriesGHAdegrees = calculateAriesGHA(values)
-   
 
     # Step C. Calculate the star's GHA
     # C.1 
@@ -118,12 +118,19 @@ def convertAngleStrToDegrees(angleStr = None):
     
     degreePortion = int(angleStr.split('d')[0])
     minutePortion = float(angleStr.split('d')[1])
-    
-    if (degreePortion >= 0):
-        degrees = degreePortion + minutePortion / 60.0
-    else:
+
+    if (degreePortion == 0 and ('-' in angleStr)):
         degrees = degreePortion - minutePortion / 60.0
+ 
+    if (degreePortion == 0 and ( not('-' in angleStr) )       ):
+        degrees = degreePortion + minutePortion / 60.0    
+ 
+    if (degreePortion < 0):
+        degrees = degreePortion - minutePortion / 60.0       
     
+    if (degreePortion > 0):
+        degrees = degreePortion + minutePortion / 60.0
+ 
     return degrees
     
 def convertDegreesToAngleStr(degrees = None):
@@ -208,6 +215,7 @@ def calculateAriesGHA(values = None):
     baseSecond = 00
     baseAriesGHA = '100d42.6'
     baseAriesGHAdegrees = convertAngleStrToDegrees(baseAriesGHA)
+    
      
     # B.2. Determine where the prime meridian is relative to Aries for the year of the observation            
     # B.2.a. Determine angular difference for each year
@@ -225,14 +233,14 @@ def calculateAriesGHA(values = None):
 
     yearDiff = observYear - referenceYear
 
-    ariesGHAdecrease = '0d14.31667'
+    ariesGHAdecrease = '-0d14.31667'
     ariesGHAdecreaseDegrees = convertAngleStrToDegrees(ariesGHAdecrease)
     
     cumProgDegrees = yearDiff * ariesGHAdecreaseDegrees
-  
+    
     # B.2.b. Take into account leap years
-    leapYearNum = yearDiff % 4
-
+    leapYearNum = yearDiff / 4
+    
     rotaPeriod = 86164.1
     clockPeriod = 86400
       
@@ -241,8 +249,8 @@ def calculateAriesGHA(values = None):
     leapProgDegrees = dailyRotaDegrees * leapYearNum
     
     # B.2.c. Calculate how far the prime meridian has rotated since the beginning of the observation year
-    beginningOfObservAriesGHAdegrees = baseAriesGHAdegrees - cumProgDegrees + leapProgDegrees
-
+    beginningOfObservAriesGHAdegrees = baseAriesGHAdegrees + cumProgDegrees + leapProgDegrees
+    
     # B.2.d. Calculate the angle of the earth's rotation since the beginning of the observation year
     if ('time' not in values):
         observHour = 00

@@ -115,18 +115,14 @@ def adjust(values = None):
         dip = ( -0.97 * math.sqrt( heightValue ) ) / 60
     else:
         dip = 0
-
     
     # step 2: tested ---> extract to support function calcRefraction()
     
-    # parse values['observation']  ---> extract to support function: parseObservation()
-    degreeX = int(values['observation'].split('d')[0])
-    minuteYdotY = float(values['observation'].split('d')[1])
     # calculate tangent of observation angle ---> extract to support function
-    observationDegrees = degreeX + ( minuteYdotY / 60.0)
+    observationDegrees = convertAngleStrToDegrees(values['observation'])    
     observationRadians = math.radians(observationDegrees)
     observationTan = math.tan(observationRadians)
-     
+    
     # convertToCelcius()
     if (not('temperature' in values)):
         temperatureF = 72
@@ -140,11 +136,11 @@ def adjust(values = None):
         pressureValue = int( values['pressure'] )
        
     refraction = (-0.00452*pressureValue) / (273+temperatureC) / observationTan           
-       
+
 
     # step 3: tested  
     altitudeDegrees = observationDegrees + dip + refraction
-      
+         
      
     # step 4:    ---> extract to support function
     # round altitude to the nearest 0.1 arc-minute
@@ -154,6 +150,7 @@ def adjust(values = None):
     # convert altitude to a string with the format xdyy.y     
     altitudeString = str(degreePortion) + 'd' + str(minutePortion)
 
+    
     # step 5
     values['altitude'] = altitudeString
     
@@ -175,10 +172,26 @@ def convertAngleStrToDegrees(angleStr = None):
     degreePortion = int(angleStr.split('d')[0])
     minutePortion = float(angleStr.split('d')[1])
     
-    if (degreePortion >= 0):
-        degrees = degreePortion + minutePortion / 60.0
-    else:
+#     if (degreePortion >= 0):
+#         degrees = degreePortion + minutePortion / 60.0
+#     else:
+#         degrees = degreePortion - minutePortion / 60.0
+      
+      
+    if (degreePortion == 0 and ('-' in angleStr)):
         degrees = degreePortion - minutePortion / 60.0
+ 
+    if (degreePortion == 0 and ( not('-' in angleStr) )       ):
+        degrees = degreePortion + minutePortion / 60.0    
+ 
+    if (degreePortion < 0):
+        degrees = degreePortion - minutePortion / 60.0       
+    
+    if (degreePortion > 0):
+        degrees = degreePortion + minutePortion / 60.0
+       
+      
+      
       
     return degrees
 
