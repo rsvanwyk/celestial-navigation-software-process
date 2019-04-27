@@ -15,13 +15,13 @@ def locate(values = None):
     
     # check if mandatory elements exist in input values
     if (not("assumedLat") in values):
-        values['error'] = 'mandatory information is missing'
+        values['error'] = 'assumedLat is missing'
         return values
     if (not("assumedLong") in values):
-        values['error'] = 'mandatory information is missing'
+        values['error'] = 'assumedLong is missing'
         return values
     if (not("corrections") in values):
-        values['error'] = 'mandatory information is missing'
+        values['error'] = 'corrections is missing'
         return values
     
     # validate 'assumedLat'
@@ -37,12 +37,12 @@ def locate(values = None):
     if (not isValidAngleStrFormat(values['assumedLong'])):
         values['error'] = 'invalid assumedLong'
         return values    
-
     assumedLongDegrees = convertAngleStrToDegrees(values['assumedLong'])
     if (assumedLongDegrees < 0.0 or assumedLongDegrees >= 360.0):
         values['error'] = 'invalid assumedLong'
         return values     
     
+    # validate 'corrections'
     
     
     

@@ -73,13 +73,21 @@ class Test(unittest.TestCase):
     # Sad path tests
     
     
+    def test500_911MissingMandatoryInfoReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'corrections is missing')   
+    
+    
     
     def test500_920MissingMandatoryInfoReturnValueWithErrorKey(self):
         self.setParm('assumedLong', '350d35.3')
         self.setParm('corrections', '[]')
         resultDict = nav.locate(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
-        self.assertEqual(resultDict['error'], 'mandatory information is missing')   
+        self.assertEqual(resultDict['error'], 'assumedLat is missing')   
    
     def test500_930InvalidAssumedLatXnotIntReturnValueWithErrorKey(self):
         self.setParm('assumedLat', '4.5d38.4')
