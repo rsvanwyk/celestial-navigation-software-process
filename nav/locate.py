@@ -6,6 +6,9 @@
     @author: Rong Song
 '''
 
+from nav.correct import isValidAngleStrFormat
+from nav.adjust import convertAngleStrToDegrees
+
 
 
 def locate(values = None):
@@ -20,6 +23,26 @@ def locate(values = None):
     if (not("corrections") in values):
         values['error'] = 'mandatory information is missing'
         return values
+    
+    # validate 'assumedLat'
+    if (not isValidAngleStrFormat(values['assumedLat'])):
+        values['error'] = 'invalid assumedLat'
+        return values
+#     assumedLatDegrees = convertAngleStrToDegrees(values['assumedLat'])
+#     if (assumedLatDegrees <= -90.0 or assumedLatDegrees >= 90.0):
+#         values['error'] = 'invalid assumedLat'
+#         return values
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 
