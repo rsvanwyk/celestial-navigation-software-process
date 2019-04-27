@@ -89,6 +89,13 @@ class Test(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid assumedLat')   
 
+    def test500_935InvalidAssumedLatYdotYoutOfRangeReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d68.4')
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[[100,1d0.0]]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid assumedLat')   
 
 
 
