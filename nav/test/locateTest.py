@@ -71,9 +71,15 @@ class Test(unittest.TestCase):
     
     
     # Sad path tests
-    
-    
-    def test500_911MissingMandatoryInfoReturnValueWithErrorKey(self):
+    def test500_910EmptyCorrectionsReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'corrections can not be empty')   
+        
+    def test500_911MissingMandatoryCorrectionsReturnValueWithErrorKey(self):
         self.setParm('assumedLat', '-53d38.4')
         self.setParm('assumedLong', '350d35.3')
         resultDict = nav.locate(self.inputDictionary)
@@ -82,7 +88,7 @@ class Test(unittest.TestCase):
     
     
     
-    def test500_920MissingMandatoryInfoReturnValueWithErrorKey(self):
+    def test500_920MissingMandatoryAssumedLatReturnValueWithErrorKey(self):
         self.setParm('assumedLong', '350d35.3')
         self.setParm('corrections', '[]')
         resultDict = nav.locate(self.inputDictionary)
