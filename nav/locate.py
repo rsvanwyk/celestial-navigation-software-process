@@ -62,6 +62,17 @@ def locate(values = None):
         values['error'] = 'invalid corrections'
         return values  
     
+    # check for invalid corrected azimuth
+#     try:
+#         for l in correctionsList:
+#             crtAzimuth
+    
+    
+    
+    
+    
+    
+    
     
     
     
