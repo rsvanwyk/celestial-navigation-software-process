@@ -91,7 +91,8 @@ def locate(values = None):
     
 
     # Step B. Estimate the precision
-    
+    precisionStr = estimatePrecision(correctionsList)
+    values['precision'] = precisionStr
     
     return values
     
@@ -153,7 +154,38 @@ def calcPresentPosition(correctionsList = None, assumedLatDegrees = None, assume
         
 # Step B. Estimate the precision of the present position
 def estimatePrecision(correctionsList = None):
-    pass        
+
+    nsCorrectionSum = 0.0
+    ewCorrectionSum = 0.0
+    n = len(correctionsList)
+    
+    precisionSum = 0
+    
+    for l in correctionsList:
+        crtDistanceStr = l[0]        
+        crtAzimuthStr = l[1]
+        
+        crtDistance = int(crtDistanceStr)
+        crtAzimuthDegrees = convertAngleStrToDegrees(crtAzimuthStr)
+        crtAzimuthRadians = crtAzimuthDegrees * math.pi / 180
+        
+        nsCorrectionSum += crtDistance * math.cos(crtAzimuthRadians)
+        ewCorrectionSum += crtDistance * math.sin(crtAzimuthRadians)
+       
+        nsCorrection = nsCorrectionSum / n
+        ewCorrection = ewCorrectionSum / n 
+        
+        precisionSum += math.sqrt( (crtDistance*math.cos(crtAzimuthRadians)-nsCorrection)**2 + \
+                                   (crtDistance*math.sin(crtAzimuthRadians)-ewCorrection)**2     )
+        precisionInt = int(precisionSum/n)
+        
+    precisionStr = str(precisionInt)
+    
+    return precisionStr    
+        
+            
+    
+    
          
         
 
