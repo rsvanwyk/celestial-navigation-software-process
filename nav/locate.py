@@ -89,14 +89,14 @@ def locate(values = None):
     values['presentLat'] = presentLatStr
     values['presentLong'] = presentLongStr
     
-    return values
 
+    # Step B. Estimate the precision
     
     
+    return values
     
-    # Step B. 
     
-    
+    # Step C.
     
     
 # -------------------------------
@@ -151,15 +151,11 @@ def calcPresentPosition(correctionsList = None, assumedLatDegrees = None, assume
     return presentPositionList    
         
         
-        
+# Step B. Estimate the precision of the present position
+def estimatePrecision(correctionsList = None):
+    pass        
          
         
-        
-        # presentLat = assumedLat + nsCorrection
-        # presentLong = assumeLong + ewCorrection
-        
-        # return 
-
 
 
     
