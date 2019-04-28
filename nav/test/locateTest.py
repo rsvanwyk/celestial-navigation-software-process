@@ -65,7 +65,7 @@ class Test(unittest.TestCase):
     
     
     # Happy path tests
-    def tes500_010NominalInputValuesReturnValuesAfterStepA(self):
+    def test500_010NominalInputValuesReturnValuesAfterStepA(self):
         self.inputDictionary = {'op':'locate',
                                 'assumedLat':'-53d38.4', 
                                 'assumedLong':'350d35.3',
