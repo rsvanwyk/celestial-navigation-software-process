@@ -65,6 +65,19 @@ class Test(unittest.TestCase):
     
     
     # Happy path tests
+    def tes500_010NominalInputValuesReturnValuesAfterStepA(self):
+        self.inputDictionary = {'op':'locate',
+                                'assumedLat':'-53d38.4', 
+                                'assumedLong':'350d35.3',
+                                'corrections':'[[100,1d0.0]]'}    
+        resultDict = nav.locate(self.inputDictionary)
+        expectedResultDict = {'op':'locate', 
+                              'assumedLat':'-53d38.4', 
+                              'assumedLong':'350d35.3', 
+                              'corrections':'[[100,1d0.0]]',
+                              'presentLat':'-51d58.4', 
+                              'presentLong':'350d37.0'}
+        self.assertDictEqual(resultDict, expectedResultDict)
     
     
     
@@ -101,13 +114,6 @@ class Test(unittest.TestCase):
         resultDict = nav.locate(self.inputDictionary)
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'invalid corrections') 
-        
-        
-        
-        
-        
-                    
-        
         
     
     def test500_920MissingMandatoryAssumedLatReturnValueWithErrorKey(self):

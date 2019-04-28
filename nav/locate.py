@@ -43,16 +43,16 @@ def locate(values = None):
         return values     
     
     
-    # convert 'corrections' string to list of lists
+    # convert 'corrections' string to list of lists and validate
     correctionsStr = values['corrections']
     correctionsList = parseCorrections(correctionsStr)
     
-    # check for empty list
+    # validate: check for empty list
     if (correctionsList[0][0] == ''):
         values['error'] = 'corrections can not be empty'
         return values
     
-    # check for invalid corrected distance
+    # validate: check for invalid corrected distance
     try:
         for l in correctionsList:
             crtDistanceStr = l[0]
@@ -64,7 +64,7 @@ def locate(values = None):
         values['error'] = 'invalid corrections'
         return values  
     
-    # check for invalid corrected azimuth
+    # validate: check for invalid corrected azimuth
     for l in correctionsList:
         crtAzimuthStr = l[1]
         if (not isValidAngleStrFormat(crtAzimuthStr)):
@@ -76,8 +76,17 @@ def locate(values = None):
     
     
     
+    # -----------------------------
+    # Perform operation locate
+    # -----------------------------
+    
+    # Step A. Calculate the present position
+    # calcPresentPosition()
     
     
+    
+    
+    # Step B. 
     
     
     
