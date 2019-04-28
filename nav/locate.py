@@ -90,14 +90,19 @@ def locate(values = None):
     values['presentLong'] = presentLongStr
     
 
-    # Step B. Estimate the precision
+    # Step B. Estimate the precision of the present position
     precisionStr = estimatePrecision(correctionsList)
     values['precision'] = precisionStr
+    
+    
+    # Step C. Estimate accuracy of the present position
+    accuracyStr = estimateAccuracy(correctionsList)
+    
+    values['accuracy'] = accuracyStr
     
     return values
     
     
-    # Step C.
     
     
 # -------------------------------
@@ -184,8 +189,25 @@ def estimatePrecision(correctionsList = None):
     return precisionStr    
         
             
+# Step C. Estimate accuracy of the present position
+def estimateAccuracy(correctionsList = None):
+    
+    accuracy = 0.0
+     
+    n = len(correctionsList)
+    if (n < 3):
+        accuracyStr = 'NA'
+        return accuracyStr
+    
+    # ---> calculate accuracy 
     
     
+    
+    accuracyInt = int(accuracy)
+        
+    accuracyStr = str(accuracyInt)     
+    
+    return accuracyStr
          
         
 
