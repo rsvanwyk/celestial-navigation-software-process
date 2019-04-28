@@ -43,6 +43,12 @@ def locate(values = None):
         return values     
     
     # validate 'corrections'
+    correctionsStr = values['corrections']
+    correctionsList = parseCorrections(correctionsStr)
+    
+    if (correctionsList[0][0] == ''):
+        values['error'] = 'corrections can not be empty'
+        return values
     
     
     
@@ -51,6 +57,33 @@ def locate(values = None):
     
     
     
+# -------------------------------
+# supporting functions
+# -------------------------------
+
+# convert corrections string to corrections list
+def parseCorrections(correctionsStr = None):
+    
+    list1 = correctionsStr.replace('[', '').split('],')
+    
+    # list2 is a list of strings, each string represents one set of correction data    
+    list2 = [s.replace(']', '') for s in list1]
+    
+    # correctionsList is a list of lists, each list consists of two string elements
+    # the first string element represents corrected distance
+    # the second string element represents corrected azimuth 
+    correctionsList = [s.split(',') for s in list2]
+    
+    return correctionsList
+    
+    
+
+        
+    
+
+
+
+
     
     
 
