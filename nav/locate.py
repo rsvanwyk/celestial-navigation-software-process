@@ -8,7 +8,8 @@
 
 from nav.correct import isValidAngleStrFormat
 from nav.adjust import convertAngleStrToDegrees
-
+import math
+from nav.predict import convertDegreesToAngleStr
 
 
 def locate(values = None):
@@ -81,8 +82,15 @@ def locate(values = None):
     # -----------------------------
     
     # Step A. Calculate the present position
-    # calcPresentPosition()
+    presentPositionList = calcPresentPosition(correctionsList, assumedLatDegrees, assumedLongDegrees)
+    presentLatStr = presentPositionList[0]
+    presentLongStr = presentPositionList[1]
     
+    values['presentLat'] = presentLatStr
+    values['presentLong'] = presentLongStr
+    
+    return values
+
     
     
     
@@ -111,10 +119,46 @@ def parseCorrections(correctionsStr = None):
     return correctionsList
     
     
-
-        
+# Step A. calculate present position (correctionsList validated)
+def calcPresentPosition(correctionsList = None, assumedLatDegrees = None, assumedLongDegrees = None):
     
-
+    nsCorrectionSum = 0.0
+    ewCorrectionSum = 0.0
+    n = len(correctionsList)
+    
+    for l in correctionsList:
+        crtDistanceStr = l[0]        
+        crtAzimuthStr = l[1]
+        
+        crtDistance = int(crtDistanceStr)
+        crtAzimuthDegrees = convertAngleStrToDegrees(crtAzimuthStr)
+        crtAzimuthRadians = crtAzimuthDegrees * math.pi / 180
+        
+        nsCorrectionSum += crtDistance * math.cos(crtAzimuthRadians)
+        ewCorrectionSum += crtDistance * math.sin(crtAzimuthRadians)
+       
+        nsCorrection = nsCorrectionSum / n
+        ewCorrection = ewCorrectionSum / n 
+        
+    presentLatDegrees = assumedLatDegrees + nsCorrection / 60
+    presentLongDegrees = assumedLongDegrees + ewCorrection / 60
+    
+    presentLatStr = convertDegreesToAngleStr(presentLatDegrees)
+    presentLongStr = convertDegreesToAngleStr(presentLongDegrees)
+    
+    presentPositionList = [presentLatStr, presentLongStr]
+    
+    return presentPositionList    
+        
+        
+        
+         
+        
+        
+        # presentLat = assumedLat + nsCorrection
+        # presentLong = assumeLong + ewCorrection
+        
+        # return 
 
 
 
