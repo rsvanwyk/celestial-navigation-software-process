@@ -58,14 +58,17 @@ def locate(values = None):
             crtDistance = int(l[0])
             if (crtDistance <= 0):
                 values['error'] = 'invalid corrections'
+                return values
     except Exception:
         values['error'] = 'invalid corrections'
         return values  
     
     # check for invalid corrected azimuth
-#     try:
-#         for l in correctionsList:
-#             crtAzimuth
+    for l in correctionsList:
+        crtAzimuth = l[1]
+        if (not isValidAngleStrFormat(crtAzimuth)):
+            values['error'] = "invalid corrections"
+            return values
     
     
     
