@@ -86,7 +86,17 @@ class Test(unittest.TestCase):
         self.assertTrue(resultDict.has_key('error'), True)
         self.assertEqual(resultDict['error'], 'corrections is missing')   
     
-    
+    def test500_912InvalidCorrectionsDistanceNotIntReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[[100.3,1d0.1]]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid corrections')   
+        
+        
+        
+        
     
     def test500_920MissingMandatoryAssumedLatReturnValueWithErrorKey(self):
         self.setParm('assumedLong', '350d35.3')

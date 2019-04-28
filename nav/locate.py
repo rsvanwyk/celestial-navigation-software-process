@@ -42,10 +42,12 @@ def locate(values = None):
         values['error'] = 'invalid assumedLong'
         return values     
     
-    # validate 'corrections'
+    
+    # convert 'corrections' string to list of lists
     correctionsStr = values['corrections']
     correctionsList = parseCorrections(correctionsStr)
     
+    # check for empty list
     if (correctionsList[0][0] == ''):
         values['error'] = 'corrections can not be empty'
         return values
