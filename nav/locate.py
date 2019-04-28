@@ -52,9 +52,15 @@ def locate(values = None):
         values['error'] = 'corrections can not be empty'
         return values
     
-    
-    
-    
+    # check for invalid corrected distance
+    try:
+        for l in correctionsList:
+            crtDistance = int(l[0])
+            if (crtDistance <= 0):
+                values['error'] = 'invalid corrections'
+    except Exception:
+        values['error'] = 'invalid corrections'
+        return values  
     
     
     
