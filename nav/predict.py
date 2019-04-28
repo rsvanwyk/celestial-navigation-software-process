@@ -136,6 +136,8 @@ def convertDegreesToAngleStr(degrees = None):
     
     degreePortion = int(math.modf(degrees)[1])
     minutePortion = round(math.modf(degrees)[0] * 60.0, 1)
+    #updated 2019-04-28
+    minutePortion = abs(minutePortion)
     
     angleStr = str(degreePortion) + 'd' + str(minutePortion)
     
