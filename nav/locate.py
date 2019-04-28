@@ -70,7 +70,9 @@ def locate(values = None):
         if (not isValidAngleStrFormat(crtAzimuthStr)):
             values['error'] = "invalid corrections"
             return values
-            
+        crtAzimuthDegrees = convertAngleStrToDegrees(crtAzimuthStr)
+        if (crtAzimuthDegrees < 0.0 or crtAzimuthDegrees >= 360.0):
+            values['error'] = "invalid corrections"    
     
     
     
