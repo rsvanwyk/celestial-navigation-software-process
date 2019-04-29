@@ -69,7 +69,7 @@ class Test(unittest.TestCase):
     
     
     
-    
+    # passed    
 #     def test500_310NominalInputValuesReturnValuesAfterStepA(self):
 #         self.inputDictionary = {'op':'locate',
 #                                 'assumedLat':'-53d38.4', 
@@ -87,7 +87,7 @@ class Test(unittest.TestCase):
     
     
      
-    #---> use sample calcuations for input values to test stepA
+    #---> use sample calculations for input values to test stepA
 #     def test500_315NominalInputValuesReturnValuesAfterStepA(self):
 #         self.inputDictionary = {'op':'locate',
 #                                 'assumedLat':'32d36.5', 
@@ -102,7 +102,7 @@ class Test(unittest.TestCase):
 #                               'presentLong':'350d37.0'}
 #         self.assertDictEqual(resultDict, expectedResultDict)
 
-
+    # passed    
 #     def test500_320NominalInputValuesReturnValuesAfterStepB(self):
 #         self.inputDictionary = {'op':'locate',
 #                                 'assumedLat':'-53d38.4', 
