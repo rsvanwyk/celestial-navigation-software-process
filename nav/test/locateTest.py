@@ -73,8 +73,7 @@ class Test(unittest.TestCase):
                                 'assumedLong':'350d35.3',
                                 'corrections':'[[100,1d0.0]]'}
         resultDict = nav.locate(self.inputDictionary)
-        expectedResultDict = {'op':'locate', 
-                              'lat':'16d32.3',  
+        expectedResultDict = {'op':'locate',   
                               'assumedLat':'-53d38.4', 
                               'assumedLong':'350d35.3', 
                               'corrections':'[[100,1d0.0]]', 
