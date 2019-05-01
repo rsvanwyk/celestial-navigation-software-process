@@ -83,6 +83,23 @@ class Test(unittest.TestCase):
                               'accuracy':'NA'}
         self.assertDictEqual(resultDict, expectedResultDict)
         
+    def test500_020InputValuesContainExtraElementIgnored(self):
+        self.inputDictionary = {'op':'locate',  
+                                'assumedLat':'-53d38.4', 
+                                'assumedLong':'350d35.3',
+                                'corrections':'[[100,1d0.0]]',
+                                'extraKey':'ignore'}
+        resultDict = nav.locate(self.inputDictionary)
+        expectedResultDict = {'op':'locate',   
+                              'assumedLat':'-53d38.4', 
+                              'assumedLong':'350d35.3', 
+                              'corrections':'[[100,1d0.0]]', 
+                              'presentLat':'-51d58.4',
+                              'presentLong':'350d37.0',
+                              'precision':'0',
+                              'accuracy':'NA',
+                              'extraKey':'ignore'}
+        self.assertDictEqual(resultDict, expectedResultDict)
 
 
 
