@@ -96,9 +96,9 @@ def locate(values = None):
     
     
     # Step C. Estimate accuracy of the present position
-    #accuracyStr = estimateAccuracy(correctionsList)
+    accuracyStr = estimateAccuracy(correctionsList)
     
-    #values['accuracy'] = accuracyStr
+    values['accuracy'] = accuracyStr
     
     return values
     
