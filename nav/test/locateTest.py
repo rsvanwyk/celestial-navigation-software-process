@@ -117,75 +117,71 @@ class Test(unittest.TestCase):
                               'accuracy':'NA'}
         self.assertDictEqual(resultDict, expectedResultDict)
 
-
-
-  
-    
     
     
 #     # Sad path tests (all passed)
-#     def test500_910EmptyCorrectionsReturnValueWithErrorKey(self):
-#         self.setParm('assumedLat', '-53d38.4')
-#         self.setParm('assumedLong', '350d35.3')
-#         self.setParm('corrections', '[]')
-#         resultDict = nav.locate(self.inputDictionary)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         self.assertEqual(resultDict['error'], 'corrections can not be empty')   
-#         
-#     def test500_911MissingMandatoryCorrectionsReturnValueWithErrorKey(self):
-#         self.setParm('assumedLat', '-53d38.4')
-#         self.setParm('assumedLong', '350d35.3')
-#         resultDict = nav.locate(self.inputDictionary)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         self.assertEqual(resultDict['error'], 'corrections is missing')   
-#     
-#     def test500_912InvalidCorrectionsDistanceNotIntReturnValueWithErrorKey(self):
-#         self.setParm('assumedLat', '-53d38.4')
-#         self.setParm('assumedLong', '350d35.3')
-#         self.setParm('corrections', '[[100.3,1d0.1]]')
-#         resultDict = nav.locate(self.inputDictionary)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         self.assertEqual(resultDict['error'], 'invalid corrections')   
-#         
-#     def test500_913InvalidCorrectionsAzimuthWrongFormatReturnValueWithErrorKey(self):
-#         self.setParm('assumedLat', '-53d38.4')
-#         self.setParm('assumedLong', '350d35.3')
-#         self.setParm('corrections', '[[100,1.0.1]]')
-#         resultDict = nav.locate(self.inputDictionary)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         self.assertEqual(resultDict['error'], 'invalid corrections') 
-#         
-#     
-#     def test500_920MissingMandatoryAssumedLatReturnValueWithErrorKey(self):
-#         self.setParm('assumedLong', '350d35.3')
-#         self.setParm('corrections', '[]')
-#         resultDict = nav.locate(self.inputDictionary)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         self.assertEqual(resultDict['error'], 'assumedLat is missing')   
-#    
-#     def test500_930InvalidAssumedLatXnotIntReturnValueWithErrorKey(self):
-#         self.setParm('assumedLat', '4.5d38.4')
-#         self.setParm('assumedLong', '350d35.3')
-#         self.setParm('corrections', '[[100,1d0.0]]')
-#         resultDict = nav.locate(self.inputDictionary)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         self.assertEqual(resultDict['error'], 'invalid assumedLat')   
-# 
-#     def test500_935InvalidAssumedLatYdotYoutOfRangeReturnValueWithErrorKey(self):
-#         self.setParm('assumedLat', '-53d68.4')
-#         self.setParm('assumedLong', '350d35.3')
-#         self.setParm('corrections', '[[100,1d0.0]]')
-#         resultDict = nav.locate(self.inputDictionary)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         self.assertEqual(resultDict['error'], 'invalid assumedLat')   
-# 
-#     def test500_940InvalidAssumedLongWrongFormatReturnValueWithErrorKey(self):
-#         self.setParm('assumedLat', '-53d38.4')
-#         self.setParm('assumedLong', '350.35.3')
-#         self.setParm('corrections', '[[100,1d0.0]]')
-#         resultDict = nav.locate(self.inputDictionary)
-#         self.assertTrue(resultDict.has_key('error'), True)
-#         self.assertEqual(resultDict['error'], 'invalid assumedLong') 
+    def test500_910EmptyCorrectionsReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'corrections can not be empty')   
+         
+    def test500_911MissingMandatoryCorrectionsReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'corrections is missing')   
+     
+    def test500_912InvalidCorrectionsDistanceNotIntReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[[100.3,1d0.1]]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid corrections')   
+         
+    def test500_913InvalidCorrectionsAzimuthWrongFormatReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[[100,1.0.1]]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid corrections') 
+         
+     
+    def test500_920MissingMandatoryAssumedLatReturnValueWithErrorKey(self):
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'assumedLat is missing')   
+    
+    def test500_930InvalidAssumedLatXnotIntReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '4.5d38.4')
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[[100,1d0.0]]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid assumedLat')   
+ 
+    def test500_935InvalidAssumedLatYdotYoutOfRangeReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d68.4')
+        self.setParm('assumedLong', '350d35.3')
+        self.setParm('corrections', '[[100,1d0.0]]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid assumedLat')   
+ 
+    def test500_940InvalidAssumedLongWrongFormatReturnValueWithErrorKey(self):
+        self.setParm('assumedLat', '-53d38.4')
+        self.setParm('assumedLong', '350.35.3')
+        self.setParm('corrections', '[[100,1d0.0]]')
+        resultDict = nav.locate(self.inputDictionary)
+        self.assertTrue(resultDict.has_key('error'), True)
+        self.assertEqual(resultDict['error'], 'invalid assumedLong') 
 
 
 
@@ -278,7 +274,7 @@ class Test(unittest.TestCase):
 #         expectedAccuracy = '2878'
 #         self.assertEqual(accuracyStr, expectedAccuracy)    
 
-
+# -------> expectedAccuracy should be 3184
 
 
 
