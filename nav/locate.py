@@ -76,7 +76,6 @@ def locate(values = None):
             values['error'] = "invalid corrections"    
     
     
-    
     # -----------------------------
     # Perform operation locate
     # -----------------------------
@@ -85,19 +84,15 @@ def locate(values = None):
     presentPositionList = calcPresentPosition(correctionsList, assumedLatDegrees, assumedLongDegrees)
     presentLatStr = presentPositionList[0]
     presentLongStr = presentPositionList[1]
-    
     values['presentLat'] = presentLatStr
     values['presentLong'] = presentLongStr
     
-
     # Step B. Estimate the precision of the present position
     precisionStr = estimatePrecision(correctionsList)
     values['precision'] = precisionStr
     
-    
     # Step C. Estimate accuracy of the present position
     accuracyStr = estimateAccuracy(correctionsList)
-    
     values['accuracy'] = accuracyStr
     
     return values
@@ -200,7 +195,7 @@ def estimatePrecision(correctionsList = None):
         
             
 # Step C. Estimate accuracy of the present position
-# 
+# tested for n < 3
 def estimateAccuracy(correctionsList = None):
     
     n = len(correctionsList)
