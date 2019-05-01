@@ -101,6 +101,21 @@ class Test(unittest.TestCase):
                               'extraKey':'ignore'}
         self.assertDictEqual(resultDict, expectedResultDict)
 
+    def test500_030ValidAssumedLatXcontainLeadingZero(self):
+        self.inputDictionary = {'op':'locate',  
+                                'assumedLat':'-0053d38.4', 
+                                'assumedLong':'350d35.3',
+                                'corrections':'[[100,1d0.0]]'}
+        resultDict = nav.locate(self.inputDictionary)
+        expectedResultDict = {'op':'locate',   
+                              'assumedLat':'-0053d38.4', 
+                              'assumedLong':'350d35.3', 
+                              'corrections':'[[100,1d0.0]]', 
+                              'presentLat':'-51d58.4',
+                              'presentLong':'350d37.0',
+                              'precision':'0',
+                              'accuracy':'NA'}
+        self.assertDictEqual(resultDict, expectedResultDict)
 
 
 
