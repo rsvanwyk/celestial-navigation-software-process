@@ -96,9 +96,9 @@ def locate(values = None):
     
     
     # Step C. Estimate accuracy of the present position
-    accuracyStr = estimateAccuracy(correctionsList)
+    #accuracyStr = estimateAccuracy(correctionsList)
     
-    values['accuracy'] = accuracyStr
+    #values['accuracy'] = accuracyStr
     
     return values
     
@@ -126,6 +126,7 @@ def parseCorrections(correctionsStr = None):
     
     
 # Step A. calculate present position (correctionsList validated)
+# unit tested
 def calcPresentPosition(correctionsList = None, assumedLatDegrees = None, assumedLongDegrees = None):
     
     nsCorrectionSum = 0.0
@@ -143,8 +144,8 @@ def calcPresentPosition(correctionsList = None, assumedLatDegrees = None, assume
         nsCorrectionSum += crtDistance * math.cos(crtAzimuthRadians)
         ewCorrectionSum += crtDistance * math.sin(crtAzimuthRadians)
        
-        nsCorrection = nsCorrectionSum / n
-        ewCorrection = ewCorrectionSum / n 
+    nsCorrection = nsCorrectionSum / n
+    ewCorrection = ewCorrectionSum / n 
         
     presentLatDegrees = assumedLatDegrees + nsCorrection / 60
     presentLongDegrees = assumedLongDegrees + ewCorrection / 60
@@ -158,6 +159,7 @@ def calcPresentPosition(correctionsList = None, assumedLatDegrees = None, assume
         
         
 # Step B. Estimate the precision of the present position
+# unit tested
 def estimatePrecision(correctionsList = None):
 
     nsCorrectionSum = 0.0
@@ -168,21 +170,29 @@ def estimatePrecision(correctionsList = None):
     
     for l in correctionsList:
         crtDistanceStr = l[0]        
-        crtAzimuthStr = l[1]
-        
+        crtAzimuthStr = l[1]       
         crtDistance = int(crtDistanceStr)
         crtAzimuthDegrees = convertAngleStrToDegrees(crtAzimuthStr)
         crtAzimuthRadians = crtAzimuthDegrees * math.pi / 180
+        #math.radians function--->try
         
         nsCorrectionSum += crtDistance * math.cos(crtAzimuthRadians)
         ewCorrectionSum += crtDistance * math.sin(crtAzimuthRadians)
        
-        nsCorrection = nsCorrectionSum / n
-        ewCorrection = ewCorrectionSum / n 
+    nsCorrection = nsCorrectionSum / n
+    ewCorrection = ewCorrectionSum / n 
         
+    for l in correctionsList:
+        crtDistanceStr = l[0]        
+        crtAzimuthStr = l[1]       
+        crtDistance = int(crtDistanceStr)
+        crtAzimuthDegrees = convertAngleStrToDegrees(crtAzimuthStr)
+        crtAzimuthRadians = crtAzimuthDegrees * math.pi / 180
+               
         precisionSum += math.sqrt( (crtDistance*math.cos(crtAzimuthRadians)-nsCorrection)**2 + \
                                    (crtDistance*math.sin(crtAzimuthRadians)-ewCorrection)**2     )
-        precisionInt = int(precisionSum/n)
+        
+    precisionInt = int(precisionSum/n)
         
     precisionStr = str(precisionInt)
     
@@ -190,22 +200,85 @@ def estimatePrecision(correctionsList = None):
         
             
 # Step C. Estimate accuracy of the present position
+# 
 def estimateAccuracy(correctionsList = None):
     
-    accuracy = 0.0
-     
     n = len(correctionsList)
+    
     if (n < 3):
         accuracyStr = 'NA'
         return accuracyStr
     
-    # ---> calculate accuracy 
+    # otherwise, determine the value of "accuracy" as follows
     
-    
-    
-    accuracyInt = int(accuracy)
+    # build points list, each point in the list is a tuple 
+    pointsList = []
+    for l in correctionsList:
+        crtDistanceStr = l[0]        
+        crtAzimuthStr = l[1]
+        crtDistance = int(crtDistanceStr)
+        crtAzimuthDegrees = convertAngleStrToDegrees(crtAzimuthStr)
+        crtAzimuthRadians = crtAzimuthDegrees * math.pi / 180
         
-    accuracyStr = str(accuracyInt)     
+        x = crtDistance * math.cos(crtAzimuthRadians)
+        y = crtDistance * math.sin(crtAzimuthRadians)
+        point = (x,y) 
+        pointsList.append(point) 
+     
+    # Andrew's monotone chain convex hull algorithm:
+    #    Constructs the convex hull of a set of 2-dimensional points in O(n log n) time.
+    # Input: 
+    #    A list of points (tuple) in the plane.
+    # Precondition: 
+    #    There must be at least 3 points.
+    
+    # 1. sort the points by x-coordinate, in case of a tie, sort by y-coordinate
+    pointsList.sort()
+
+    # 2. initialize empty lists to hold the vertices of upper and lower hulls respectively
+    upper = []
+    lower = []
+    
+     
+    # calculate 2d cross product of OA and OB vectors
+    #    return positive value, if OAB makes a counter-clockwise turn
+    #    return negative value, if OAB makes a clockwise turn
+    #    return zero, if points OAB are collinear 
+    def cross(pO, pA, pB):
+        return (pA[0] - pO[0]) * (pB[1] - pO[1]) - (pA[1] - pO[1]) * (pB[0] - pO[0])
+        
+    # 3. build the lower hull points list    
+    for p in pointsList:
+        while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:
+            lower.pop()
+        lower.append(p)    
+    
+    # 4. build the upper hull points list 
+    for p in reversed(pointsList):
+        while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0:
+            upper.pop()
+        upper.append(p)
+            
+    # 5. remove the last point of each list 
+    #    it's the same as the first point of the other list 
+    upper = upper[:-1]
+    lower = lower[:-1]
+    
+    # 6. concatenate the upper list and the lower list to obtain the convex hull list
+    #    points in the result will be listed in counter-clockwise order
+    convexHullList = upper + lower 
+    
+    # Calculate accuracy as the area of the polygon circumscribed by convex hull list
+    num = len(convexHullList)
+    area = 0.0
+    for i in range(num):
+        j = (i+1) % num
+        area += convexHullList[i][0] * convexHullList[j][1]
+        area -= convexHullList[j][0] * convexHullList[i][1]
+    area = abs(area) / 2.0    
+    
+    accuracy = int(area)
+    accuracyStr = str(accuracy)     
     
     return accuracyStr
          

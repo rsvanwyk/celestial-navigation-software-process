@@ -8,6 +8,8 @@
 
 import unittest
 import nav.locate as nav
+from nav.locate import calcPresentPosition, estimatePrecision, estimateAccuracy
+from nav.adjust import convertAngleStrToDegrees
 
 
 class Test(unittest.TestCase):
@@ -65,77 +67,28 @@ class Test(unittest.TestCase):
     
     
     # Happy path tests
-    
-    
-    
-    
-    # passed    
-#     def test500_310NominalInputValuesReturnValuesAfterStepA(self):
-#         self.inputDictionary = {'op':'locate',
-#                                 'assumedLat':'-53d38.4', 
-#                                 'assumedLong':'350d35.3',
-#                                 'corrections':'[[100,1d0.0]]'}    
-#         resultDict = nav.locate(self.inputDictionary)
-#         expectedResultDict = {'op':'locate', 
-#                               'assumedLat':'-53d38.4', 
-#                               'assumedLong':'350d35.3', 
-#                               'corrections':'[[100,1d0.0]]',
-#                               'presentLat':'-51d58.4', 
-#                               'presentLong':'350d37.0'}
-#         self.assertDictEqual(resultDict, expectedResultDict)
-    
-    
-    
-     
-    #---> use sample calculations for input values to test stepA
-#     def test500_315NominalInputValuesReturnValuesAfterStepA(self):
-#         self.inputDictionary = {'op':'locate',
-#                                 'assumedLat':'32d36.5', 
-#                                 'assumedLong':'274d31.1',
-#                                 'corrections':'[[100,1d0.0]]'}    
-#         resultDict = nav.locate(self.inputDictionary)
-#         expectedResultDict = {'op':'locate', 
-#                               'assumedLat':'-53d38.4', 
-#                               'assumedLong':'350d35.3', 
-#                               'corrections':'[[100,1d0.0]]',
-#                               'presentLat':'-51d58.4', 
-#                               'presentLong':'350d37.0'}
-#         self.assertDictEqual(resultDict, expectedResultDict)
-
-    # passed    
-#     def test500_320NominalInputValuesReturnValuesAfterStepB(self):
-#         self.inputDictionary = {'op':'locate',
-#                                 'assumedLat':'-53d38.4', 
-#                                 'assumedLong':'350d35.3',
-#                                 'corrections':'[[100,1d0.0]]'}    
-#         resultDict = nav.locate(self.inputDictionary)
-#         expectedResultDict = {'op':'locate', 
-#                               'assumedLat':'-53d38.4', 
-#                               'assumedLong':'350d35.3', 
-#                               'corrections':'[[100,1d0.0]]',
-#                               'presentLat':'-51d58.4', 
-#                               'presentLong':'350d37.0',
-#                               'precision':'0'}
-#         self.assertDictEqual(resultDict, expectedResultDict)
-
-    def test500_330NominalInputValuesReturnValuesAfterStepC(self):
-        self.inputDictionary = {'op':'locate',
+    def test500_010NominalInputValues(self):
+        self.inputDictionary = {'op':'locate',  
                                 'assumedLat':'-53d38.4', 
                                 'assumedLong':'350d35.3',
-                                'corrections':'[[100,1d0.0]]'}    
+                                'corrections':'[[100,1d0.0]]'}
         resultDict = nav.locate(self.inputDictionary)
         expectedResultDict = {'op':'locate', 
+                              'lat':'16d32.3',  
                               'assumedLat':'-53d38.4', 
                               'assumedLong':'350d35.3', 
-                              'corrections':'[[100,1d0.0]]',
-                              'presentLat':'-51d58.4', 
+                              'corrections':'[[100,1d0.0]]', 
+                              'presentLat':'-51d58.4',
                               'presentLong':'350d37.0',
                               'precision':'0',
                               'accuracy':'NA'}
         self.assertDictEqual(resultDict, expectedResultDict)
+        
 
 
-    
+
+
+  
     
     
     
@@ -206,57 +159,93 @@ class Test(unittest.TestCase):
 
 
 
-# ###################################
-# # unit tests for support functions
-# ###################################
-# def calcPresentPositionTest(self):
-#     correctionsList = [['100','1d0.0']]
-#     
-#     assumedLatStr = '-53d38.4'
-#     assumedLongStr = '350d35.3'
+##############################################
+# unit tests for support functions
+##############################################
+
+# tests for step A (all passed)
+#     def test500_310calcPresentPositionTest(self):
 #         
-#     assumedLatDegrees = convertAngleStrToDegrees(assumedLatStr)
-#     assumedLongDegrees = convertAngleStrToDegrees(assumedLongStr)
-# 
+#         correctionsList = [['100','1d0.0']]
 #         
-#     nsCorrectionSum = 0.0
-#     ewCorrectionSum = 0.0
-#     n = len(correctionsList)
-#     print n
+#         assumedLatStr = '-53d38.4'
+#         assumedLatDegrees = convertAngleStrToDegrees(assumedLatStr)
 #         
-#     for l in correctionsList:
-#         crtDistanceStr = l[0]        
-#         crtAzimuthStr = l[1]
+#         assumedLongStr = '350d35.3'
+#         assumedLongDegrees = convertAngleStrToDegrees(assumedLongStr)
+#         
+#         presentPositionList = calcPresentPosition(correctionsList, assumedLatDegrees, assumedLongDegrees)
+#         presentLatStr = presentPositionList[0]
+#         presentLongStr = presentPositionList[1]
+#         
+#         expectedPresentLat = '-51d58.4'
+#         expectedPresentLong = '350d37.0'
+#         
+#         self.assertEqual(presentLatStr, expectedPresentLat)
+#         self.assertEqual(presentLongStr, expectedPresentLong)
 #     
-#         crtDistance = int(crtDistanceStr)
-#         crtAzimuthDegrees = convertAngleStrToDegrees(crtAzimuthStr)
-#         crtAzimuthRadians = crtAzimuthDegrees * math.pi / 180
-#         print crtDistance
-#         print crtAzimuthDegrees
-#         print crtAzimuthRadians
-#     
-#         nsCorrectionSum += crtDistance * math.cos(crtAzimuthRadians)
-#         ewCorrectionSum += crtDistance * math.sin(crtAzimuthRadians)
-#    
-#         nsCorrection = nsCorrectionSum / n
-#         ewCorrection = ewCorrectionSum / n 
-#     
-#         print nsCorrection
-#         print ewCorrection
-#     
-#         presentLatDegrees = assumedLatDegrees + nsCorrection / 60
-#         presentLongDegrees = assumedLongDegrees + ewCorrection / 60
-# 
-#         print presentLatDegrees
-#         print presentLongDegrees
-# 
-# #         presentLatStr = convertDegreesToAngleStr(presentLatDegrees)
-# #         presentLongStr = convertDegreesToAngleStr(presentLongDegrees)
-# 
-#         presentPositionList = [presentLatDegrees, presentLongDegrees]
-# 
-#         return presentPositionList       
+#     def test500_311calcPresentPositionTest(self):
+#         
+#         correctionsList = [['50','45d0.0'],
+#                            ['75','60d42.0'],
+#                            ['100','300d11.2'],
+#                            ['42','42d12.3'],
+#                            ['70','60d45.0'],
+#                            ['10','280d0.0']]
+#         
+#         assumedLatStr = '32d36.5'
+#         assumedLatDegrees = convertAngleStrToDegrees(assumedLatStr)
+#         
+#         assumedLongStr = '274d31.1'
+#         assumedLongDegrees = convertAngleStrToDegrees(assumedLongStr)
+#         
+#         presentPositionList = calcPresentPosition(correctionsList, assumedLatDegrees, assumedLongDegrees)
+#         presentLatStr = presentPositionList[0]
+#         presentLongStr = presentPositionList[1]
+#         
+#         expectedPresentLat = '33d8.1'
+#         expectedPresentLong = '274d46.7'
+#         
+#         self.assertEqual(presentLatStr, expectedPresentLat)
+#         self.assertEqual(presentLongStr, expectedPresentLong)        
+
         
+# tests for step B (all passed)       
+#     def test500_320estimatePrecisionTest(self):
+#         correctionsList = [['100','1d0.0']]
+#         precisionStr = estimatePrecision(correctionsList)
+#         expectedPrecision = '0'
+#         self.assertEqual(precisionStr, expectedPrecision)    
+#      
+#     def test500_321estimatePrecisionTest(self):
+#         correctionsList = [['50','45d0.0'],
+#                            ['75','60d42.0'],
+#                            ['100','300d11.2'],
+#                            ['42','42d12.3'],
+#                            ['70','60d45.0'],
+#                            ['10','280d0.0']]
+#         precisionStr = estimatePrecision(correctionsList)
+#         expectedPrecision = '45'
+#         self.assertEqual(precisionStr, expectedPrecision)    
+    
+    
+# tests for step C    
+#     def test500_330estimateAccuracyTest(self):
+#         correctionsList = [['100','1d0.0']]
+#         accuracyStr = estimateAccuracy(correctionsList)
+#         expectedAccuracy = 'NA'
+#         self.assertEqual(accuracyStr, expectedAccuracy)    
+# 
+#     def test500_331estimateAccuracyTest(self):
+#         correctionsList = [['50','45d0.0'],
+#                            ['75','60d42.0'],
+#                            ['100','300d11.2'],
+#                            ['42','42d12.3'],
+#                            ['70','60d45.0'],
+#                            ['10','280d0.0']]
+#         accuracyStr = estimateAccuracy(correctionsList)
+#         expectedAccuracy = '2878'
+#         self.assertEqual(accuracyStr, expectedAccuracy)    
 
 
 
