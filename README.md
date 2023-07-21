@@ -1,2 +1,2 @@
 # nav
-celestial navigation work
+celestial navigation project for Software Process.
